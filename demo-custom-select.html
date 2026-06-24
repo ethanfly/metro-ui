@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Metro UI - 自定义下拉框组件</title>
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/motion.css">
+  <style>
+    body {
+      font-family: var(--metro-font-family);
+      background: var(--metro-bg);
+      color: var(--metro-fg);
+      padding: 40px;
+      line-height: 1.6;
+    }
+
+    .demo-section {
+      max-width: 800px;
+      margin: 0 auto 60px;
+    }
+
+    .demo-title {
+      font-size: 32px;
+      font-weight: 300;
+      margin-bottom: 16px;
+      color: var(--metro-fg);
+    }
+
+    .demo-subtitle {
+      font-size: 14px;
+      color: var(--metro-fg-secondary);
+      margin-bottom: 32px;
+    }
+
+    .demo-card {
+      background: var(--metro-bg-soft);
+      border: 2px solid var(--metro-line);
+      padding: 32px;
+      margin-bottom: 40px;
+    }
+
+    .demo-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--metro-fg);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .demo-row {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .demo-row > * {
+      flex: 1;
+    }
+
+    .result-box {
+      background: var(--metro-bg);
+      border: 2px solid var(--metro-line);
+      padding: 16px;
+      margin-top: 16px;
+      font-size: 14px;
+    }
+
+    .result-box strong {
+      color: var(--metro-accent);
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-section">
+    <h1 class="demo-title">自定义下拉框组件</h1>
+    <p class="demo-subtitle">完全自定义的下拉框,支持单选、多选、级联选择器,不依赖原生 select 元素</p>
+
+    <!-- 基础单选下拉框 -->
+    <div class="demo-card">
+      <label class="demo-label">基础单选下拉框</label>
+      <div class="metro-select" id="demo-basic">
+        <div class="metro-select-trigger" tabindex="0">
+          <span class="placeholder">请选择...</span>
+          <svg class="metro-select-arrow" width="12" height="12" viewBox="0 0 12 12">
+            <path d="M6 8L1 3h10L6 8z" fill="currentColor"/>
+          </svg>
+        </div>
+        <div class="metro-select-panel">
+          <div class="metro-option" data-value="option1">选项 1</div>
+          <div class="metro-option" data-value="option2">选项 2</div>
+          <div class="metro-option" data-value="option3">选项 3</div>
+          <div class="metro-option" data-value="option4">选项 4</div>
+          <div class="metro-option" data-value="option5">选项 5</div>
+        </div>
+      </div>
+      <div class="result-box">
+        选中的值: <strong id="result-basic">无</strong>
+      </div>
+    </div>
+
+    <!-- 带搜索的下拉框 -->
+    <div class="demo-card">
+      <label class="demo-label">带搜索的下拉框</label>
+      <div class="metro-select" id="demo-search">
+        <div class="metro-select-trigger" tabindex="0">
+          <span class="placeholder">搜索并选择...</span>
+          <svg class="metro-select-arrow" width="12" height="12" viewBox="0 0 12 12">
+            <path d="M6 8L1 3h10L6 8z" fill="currentColor"/>
+          </svg>
+        </div>
+        <div class="metro-select-panel">
+          <div class="metro-select-search">
+            <input type="text" placeholder="输入关键词搜索...">
+          </div>
+          <div class="metro-option" data-value="apple">苹果 (Apple)</div>
+          <div class="metro-option" data-value="banana">香蕉 (Banana)</div>
+          <div class="metro-option" data-value="orange">橙子 (Orange)</div>
+          <div class="metro-option" data-value="grape">葡萄 (Grape)</div>
+          <div class="metro-option" data-value="watermelon">西瓜 (Watermelon)</div>
+          <div class="metro-option" data-value="strawberry">草莓 (Strawberry)</div>
+          <div class="metro-option" data-value="blueberry">蓝莓 (Blueberry)</div>
+        </div>
+      </div>
+      <div class="result-box">
+        选中的值: <strong id="result-search">无</strong>
+      </div>
+    </div>
+
+    <!-- 下拉多选 -->
+    <div class="demo-card">
+      <label class="demo-label">下拉多选 (带标签显示)</label>
+      <div class="metro-select metro-select-multi" id="demo-multi">
+        <div class="metro-select-trigger" tabindex="0">
+          <div class="selected-tags"></div>
+          <span class="placeholder">选择多个选项...</span>
+          <svg class="metro-select-arrow" width="12" height="12" viewBox="0 0 12 12">
+            <path d="M6 8L1 3h10L6 8z" fill="currentColor"/>
+          </svg>
+        </div>
+        <div class="metro-select-panel">
+          <div class="metro-option" data-value="react">
+            <span class="metro-checkbox"></span>
+            React
+          </div>
+          <div class="metro-option" data-value="vue">
+            <span class="metro-checkbox"></span>
+            Vue
+          </div>
+          <div class="metro-option" data-value="angular">
+            <span class="metro-checkbox"></span>
+            Angular
+          </div>
+          <div class="metro-option" data-value="svelte">
+            <span class="metro-checkbox"></span>
+            Svelte
+          </div>
+          <div class="metro-option" data-value="solid">
+            <span class="metro-checkbox"></span>
+            Solid
+          </div>
+        </div>
+      </div>
+      <div class="result-box">
+        选中的值: <strong id="result-multi">无</strong>
+      </div>
+    </div>
+
+    <!-- 级联选择器 -->
+    <div class="demo-card">
+      <label class="demo-label">级联选择器 (省份 → 城市)</label>
+      <div class="demo-row">
+        <div class="metro-select" id="demo-province">
+          <div class="metro-select-trigger" tabindex="0">
+            <span class="placeholder">选择省份</span>
+            <svg class="metro-select-arrow" width="12" height="12" viewBox="0 0 12 12">
+              <path d="M6 8L1 3h10L6 8z" fill="currentColor"/>
+            </svg>
+          </div>
+          <div class="metro-select-panel">
+            <div class="metro-option" data-value="guangdong">广东省</div>
+            <div class="metro-option" data-value="zhejiang">浙江省</div>
+            <div class="metro-option" data-value="jiangsu">江苏省</div>
+            <div class="metro-option" data-value="shanghai">上海市</div>
+            <div class="metro-option" data-value="beijing">北京市</div>
+          </div>
+        </div>
+
+        <div class="metro-select" id="demo-city" data-disabled="true">
+          <div class="metro-select-trigger" tabindex="0">
+            <span class="placeholder">选择城市</span>
+            <svg class="metro-select-arrow" width="12" height="12" viewBox="0 0 12 12">
+              <path d="M6 8L1 3h10L6 8z" fill="currentColor"/>
+            </svg>
+          </div>
+          <div class="metro-select-panel">
+            <!-- 动态填充 -->
+          </div>
+        </div>
+      </div>
+      <div class="result-box">
+        选中的地区: <strong id="result-cascade">无</strong>
+      </div>
+    </div>
+
+    <!-- 分组下拉框 -->
+    <div class="demo-card">
+      <label class="demo-label">分组下拉框</label>
+      <div class="metro-select" id="demo-grouped">
+        <div class="metro-select-trigger" tabindex="0">
+          <span class="placeholder">选择编程语言...</span>
+          <svg class="metro-select-arrow" width="12" height="12" viewBox="0 0 12 12">
+            <path d="M6 8L1 3h10L6 8z" fill="currentColor"/>
+          </svg>
+        </div>
+        <div class="metro-select-panel">
+          <div class="metro-option-group">前端</div>
+          <div class="metro-option" data-value="javascript">JavaScript</div>
+          <div class="metro-option" data-value="typescript">TypeScript</div>
+          <div class="metro-option-group">后端</div>
+          <div class="metro-option" data-value="python">Python</div>
+          <div class="metro-option" data-value="java">Java</div>
+          <div class="metro-option" data-value="go">Go</div>
+          <div class="metro-option-group">系统</div>
+          <div class="metro-option" data-value="rust">Rust</div>
+          <div class="metro-option" data-value="cpp">C++</div>
+        </div>
+      </div>
+      <div class="result-box">
+        选中的值: <strong id="result-grouped">无</strong>
+      </div>
+    </div>
+  </div>
+
+  <script src="scripts/metro.js"></script>
+  <script>
+    // 基础单选
+    const basicSelect = document.getElementById('demo-basic');
+    const basicResult = document.getElementById('result-basic');
+    basicSelect.addEventListener('metro-select-change', (e) => {
+      basicResult.textContent = e.detail.value + ' (' + e.detail.label + ')';
+    });
+
+    // 带搜索
+    const searchSelect = document.getElementById('demo-search');
+    const searchResult = document.getElementById('result-search');
+    searchSelect.addEventListener('metro-select-change', (e) => {
+      searchResult.textContent = e.detail.value + ' (' + e.detail.label + ')';
+    });
+
+    // 多选
+    const multiSelect = document.getElementById('demo-multi');
+    const multiResult = document.getElementById('result-multi');
+    multiSelect.addEventListener('metro-select-change', (e) => {
+      if (e.detail.values.length === 0) {
+        multiResult.textContent = '无';
+      } else {
+        multiResult.textContent = e.detail.values.map(v => v.label).join(', ');
+      }
+    });
+
+    // 级联选择器
+    const cityData = {
+      guangdong: [
+        { value: 'guangzhou', label: '广州市' },
+        { value: 'shenzhen', label: '深圳市' },
+        { value: 'dongguan', label: '东莞市' },
+        { value: 'foshan', label: '佛山市' }
+      ],
+      zhejiang: [
+        { value: 'hangzhou', label: '杭州市' },
+        { value: 'ningbo', label: '宁波市' },
+        { value: 'wenzhou', label: '温州市' }
+      ],
+      jiangsu: [
+        { value: 'nanjing', label: '南京市' },
+        { value: 'suzhou', label: '苏州市' },
+        { value: 'wuxi', label: '无锡市' }
+      ],
+      shanghai: [
+        { value: 'shanghai', label: '上海市' }
+      ],
+      beijing: [
+        { value: 'beijing', label: '北京市' }
+      ]
+    };
+
+    const provinceSelect = document.getElementById('demo-province');
+    const citySelect = document.getElementById('demo-city');
+    const cascadeResult = document.getElementById('result-cascade');
+
+    let selectedProvince = '';
+    let selectedCity = '';
+
+    provinceSelect.addEventListener('metro-select-change', (e) => {
+      selectedProvince = e.detail.label;
+      const cities = cityData[e.detail.value] || [];
+
+      // 更新城市下拉框
+      const cityPanel = citySelect.querySelector('.metro-select-panel');
+      cityPanel.innerHTML = cities.map(city =>
+        `<div class="metro-option" data-value="${city.value}">${city.label}</div>`
+      ).join('');
+
+      // 启用城市下拉框
+      citySelect.removeAttribute('data-disabled');
+
+      // 重新初始化城市下拉框
+      if (window.MetroSelect && window.MetroSelect.instances) {
+        window.MetroSelect.instances.delete(citySelect);
+        window.MetroSelect.init(citySelect);
+      }
+
+      // 重置城市选择
+      selectedCity = '';
+      citySelect.querySelector('.placeholder').textContent = '选择城市';
+      updateCascadeResult();
+    });
+
+    citySelect.addEventListener('metro-select-change', (e) => {
+      selectedCity = e.detail.label;
+      updateCascadeResult();
+    });
+
+    function updateCascadeResult() {
+      if (selectedProvince && selectedCity) {
+        cascadeResult.textContent = selectedProvince + ' → ' + selectedCity;
+      } else if (selectedProvince) {
+        cascadeResult.textContent = selectedProvince + ' → (未选择城市)';
+      } else {
+        cascadeResult.textContent = '无';
+      }
+    }
+
+    // 分组下拉框
+    const groupedSelect = document.getElementById('demo-grouped');
+    const groupedResult = document.getElementById('result-grouped');
+    groupedSelect.addEventListener('metro-select-change', (e) => {
+      groupedResult.textContent = e.detail.value + ' (' + e.detail.label + ')';
+    });
+  </script>
+</body>
+</html>

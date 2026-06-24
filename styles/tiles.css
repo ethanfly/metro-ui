@@ -1,0 +1,236 @@
+/* =====================================================================
+   METRO UI — Tiles & Live Tiles
+   =====================================================================
+   The tile is the atom of Metro. Sizes snap to a strict unit grid so block
+   "volume" expresses content hierarchy (article: proportion is paramount).
+   Live tiles flip to surface fresh content — animation is first-class.
+   ===================================================================== */
+
+/* A tile group is the grid that tiles snap into (the Start-screen canvas).
+   On narrow viewports it scrolls horizontally — like the real Start screen. */
+.tile-group {
+  display: grid;
+  grid-auto-flow: row dense;
+  grid-auto-columns: var(--metro-tile-unit);
+  grid-auto-rows: var(--metro-tile-unit);
+  gap: var(--metro-tile-gap);
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 2px;
+}
+
+/* The tile itself — a solid color block with refined edges. */
+.tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--metro-accent);
+  color: #fff;
+  overflow: hidden;
+  cursor: pointer;
+  user-select: none;
+  /* Multi-layer border for depth: dark outer edge + light inner glow */
+  box-shadow: var(--metro-tile-shadow),
+              inset 0 1px 1px rgba(255,255,255,0.12),
+              inset 0 -1px 1px rgba(0,0,0,0.08);
+  border: 2px solid rgba(0,0,0,0.18);
+  transition: transform var(--metro-dur) var(--metro-ease),
+              box-shadow var(--metro-dur) var(--metro-ease),
+              filter var(--metro-dur) var(--metro-ease),
+              border-color var(--metro-dur) var(--metro-ease);
+}
+
+.tile:hover {
+  border-color: rgba(255,255,255,0.25);
+  box-shadow: var(--metro-tile-shadow-hover),
+              inset 0 1px 2px rgba(255,255,255,0.15),
+              inset 0 -1px 1px rgba(0,0,0,0.06);
+}
+
+/* Press: Metro tiles sink slightly — tactile feedback (Phase 2 ergonomics). */
+.tile:active { transform: scale(0.97); filter: brightness(1.08); }
+.tile:hover { filter: brightness(1.05); }
+.tile:hover.is-static { filter: none; }
+
+/* Sizes — multiples of the unit grid (small / medium / wide / large / tall). */
+.tile-sm   { grid-column: span 1; grid-row: span 1; }                                   /* 1×1  */
+.tile-md   { grid-column: span 2; grid-row: span 2; }                                  /* 2×2  */
+.tile-wide { grid-column: span 4; grid-row: span 2; }                                 /* 4×2  */
+.tile-lg   { grid-column: span 4; grid-row: span 4; }                                  /* 4×4  */
+.tile-tall { grid-column: span 2; grid-row: span 4; }                                  /* 2×4  */
+
+/* Live tile: hosts a flipping face stack. */
+.tile.live { perspective: 900px; perspective-origin: center; }
+.tile-faces {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform var(--metro-tile-flip) var(--metro-ease);
+  transform: rotateX(0deg);
+}
+.tile.live.is-flipped .tile-faces { transform: rotateX(180deg); }
+
+.tile-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  padding: 12px;
+}
+.tile-face--back { transform: rotateX(180deg); }
+
+/* Slide/peek variant — the front slides up to reveal the back from below. */
+.tile.peek .tile-face { transition: transform var(--metro-tile-flip) var(--metro-ease); }
+.tile.peek .tile-face--front { transform: translateY(0); }
+.tile.peek .tile-face--back  { transform: translateY(100%); }
+.tile.peek.is-shifted .tile-face--front { transform: translateY(-100%); }
+.tile.peek.is-shifted .tile-face--back  { transform: translateY(0); }
+
+/* ---- Tile content layout patterns ---- */
+
+.tile-face .tile-glyph {     /* large monochrome icon */
+  font-size: 28px;
+  line-height: 1;
+  opacity: 0.95;
+}
+.tile-md   .tile-glyph,
+.tile-tall .tile-glyph { font-size: 34px; }
+.tile-wide .tile-glyph { font-size: 32px; }
+.tile-lg   .tile-glyph { font-size: 54px; }
+
+.tile-icon {                  /* small icon top-left, app-list style */
+  font-size: 22px;
+  margin-bottom: auto;
+}
+
+.tile-title {
+  margin-top: auto;
+  font-size: var(--metro-fs-small);
+  font-weight: var(--metro-fw-semibold);
+  line-height: var(--metro-lh-snug);
+  letter-spacing: 0.01em;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.25);
+}
+.tile-wide .tile-title, .tile-lg .tile-title { font-size: var(--metro-fs-base); font-weight: var(--metro-fw-semibold); }
+.tile-lg .tile-title { font-size: var(--metro-fs-subtitle); font-weight: var(--metro-fw-light); }
+
+.tile-subtitle {
+  font-size: var(--metro-fs-micro);
+  font-weight: var(--metro-fw-regular);
+  opacity: 0.85;
+  letter-spacing: var(--metro-tracking-wide);
+  text-transform: uppercase;
+}
+
+/* Brand tile: oversized glyph dominates the block. */
+.tile-brand { align-items: flex-start; justify-content: flex-end; }
+.tile-brand .tile-glyph {
+  position: absolute;
+  top: 12px; left: 12px;
+  font-size: 24px;
+}
+
+/* Live data face — big numeric readout (clock / counter / weather). */
+.tile-readout {
+  margin-top: auto;
+  font-size: 40px;
+  font-weight: var(--metro-fw-light);
+  line-height: 1;
+  letter-spacing: var(--metro-tracking-tight);
+}
+.tile-lg .tile-readout { font-size: 96px; }
+.tile-wide .tile-readout { font-size: 48px; }
+.tile-readout small { font-size: 0.4em; font-weight: var(--metro-fw-regular); opacity: 0.85; }
+
+.tile-face .tile-caption {
+  margin-top: 6px;
+  font-size: var(--metro-fs-small);
+  opacity: 0.9;
+}
+
+/* Image tile — content over a photo. */
+.tile-img {
+  position: absolute; inset: 0;
+  background-size: cover;
+  background-position: center;
+}
+.tile.has-img .tile-face { background: rgba(0,0,0,0.30); }
+
+/* Badge — notification count, pinned bottom-right. */
+.tile-badge {
+  position: absolute;
+  right: 8px; bottom: 8px;
+  min-width: 18px; height: 18px;
+  padding: 0 5px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--metro-red);
+  color: #fff;
+  border-radius: 9px;
+  font-size: var(--metro-fs-small);
+  font-weight: var(--metro-fw-semibold);
+  line-height: 1;
+  z-index: 3;
+  animation: metro-badge-pop var(--metro-dur-slow) var(--metro-ease);
+}
+
+@keyframes metro-badge-pop {
+  0% { transform: scale(0.2); opacity: 0; }
+  60% { transform: scale(1.15); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Status dot — small presence indicator bottom-left. */
+.tile-status {
+  position: absolute;
+  left: 8px; bottom: 8px;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--metro-success);
+  z-index: 3;
+}
+.tile-status.away  { background: var(--metro-amber); }
+.tile-status.off   { background: var(--metro-fg-tertiary); }
+
+/* ---- Tile color modifiers (the color table, applied) ---- */
+.tile.bg-blue      { background: var(--metro-blue); }
+.tile.bg-teal      { background: var(--metro-teal); }
+.tile.bg-emerald   { background: var(--metro-emerald); }
+.tile.bg-lime      { background: var(--metro-lime); color: #1a1a00; }
+.tile.bg-amber     { background: var(--metro-amber); color: #2a1c00; }
+.tile.bg-orange    { background: var(--metro-orange); }
+.tile.bg-magenta   { background: var(--metro-magenta); }
+.tile.bg-pink      { background: var(--metro-pink); }
+.tile.bg-purple    { background: var(--metro-purple); }
+.tile.bg-violet    { background: var(--metro-violet); }
+.tile.bg-red       { background: var(--metro-red); }
+.tile.bg-crimson   { background: var(--metro-crimson); }
+.tile.bg-steel     { background: var(--metro-steel); }
+.tile.bg-graphite  { background: var(--metro-graphite); }
+.tile.bg-accent    { background: var(--metro-accent); }
+
+/* Press shade — darker variant overlay on press for non-press-tinted tiles. */
+.tile.bg-blue:active      { background: var(--metro-blue-d); }
+.tile.bg-teal:active      { background: var(--metro-teal-d); }
+.tile.bg-emerald:active   { background: var(--metro-emerald-d); }
+.tile.bg-amber:active     { background: var(--metro-amber-d); }
+.tile.bg-orange:active    { background: var(--metro-orange-d); }
+.tile.bg-magenta:active   { background: var(--metro-magenta-d); }
+.tile.bg-pink:active      { background: var(--metro-pink-d); }
+.tile.bg-purple:active    { background: var(--metro-purple-d); }
+.tile.bg-violet:active    { background: var(--metro-violet-d); }
+.tile.bg-red:active       { background: var(--metro-red-d); }
+.tile.bg-crimson:active   { background: var(--metro-crimson-d); }
+.tile.bg-steel:active     { background: var(--metro-steel-d); }
+.tile.bg-accent:active    { background: var(--metro-accent-d); }
+
+/* Secondary / outline tile (a tile that isn't a color block). */
+.tile.secondary {
+  background: transparent;
+  color: var(--metro-fg);
+  border: 1px solid var(--metro-line-strong);
+  box-shadow: none;
+}
+.tile.secondary:hover { border-color: var(--metro-fg-secondary); background: var(--metro-bg-alt); }

@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Metro UI Design System - 文档与安装指南</title>
+  <link rel="stylesheet" href="dist/metro-ui.css">
+  <style>
+    body {
+      font-family: var(--metro-font-family);
+      background: var(--metro-bg);
+      color: var(--metro-fg);
+      line-height: 1.6;
+    }
+
+    .docs-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+    .docs-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .docs-title {
+      font-size: 48px;
+      font-weight: 200;
+      margin-bottom: 16px;
+      color: var(--metro-accent);
+    }
+
+    .docs-subtitle {
+      font-size: 18px;
+      color: var(--metro-fg-secondary);
+      margin-bottom: 32px;
+    }
+
+    .badge-row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 16px;
+      background: var(--metro-bg-soft);
+      border: 2px solid var(--metro-line);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .badge--accent {
+      background: var(--metro-accent);
+      color: white;
+      border-color: var(--metro-accent);
+    }
+
+    .install-section {
+      background: var(--metro-bg-soft);
+      border: 2px solid var(--metro-line);
+      padding: 32px;
+      margin-bottom: 40px;
+    }
+
+    .install-title {
+      font-size: 24px;
+      font-weight: 300;
+      margin-bottom: 20px;
+    }
+
+    .code-block {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      padding: 20px;
+      border: 2px solid var(--metro-line);
+      margin: 16px 0;
+      overflow-x: auto;
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .code-comment { color: #6a9955; }
+    .code-keyword { color: #569cd6; }
+    .code-string { color: #ce9178; }
+    .code-tag { color: #4ec9b0; }
+    .code-attr { color: #9cdcfe; }
+
+    .section {
+      margin-bottom: 60px;
+    }
+
+    .section-title {
+      font-size: 32px;
+      font-weight: 300;
+      margin-bottom: 16px;
+      color: var(--metro-fg);
+      border-bottom: 2px solid var(--metro-accent);
+      padding-bottom: 12px;
+    }
+
+    .section-desc {
+      font-size: 16px;
+      color: var(--metro-fg-secondary);
+      margin-bottom: 32px;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .feature-card {
+      background: var(--metro-bg);
+      border: 2px solid var(--metro-line);
+      padding: 24px;
+      transition: all var(--metro-transition);
+    }
+
+    .feature-card:hover {
+      border-color: var(--metro-accent);
+      transform: translateY(-4px);
+      box-shadow: var(--metro-shadow-large);
+    }
+
+    .feature-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+
+    .feature-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .feature-desc {
+      font-size: 14px;
+      color: var(--metro-fg-secondary);
+    }
+
+    .demo-box {
+      background: var(--metro-bg);
+      border: 2px solid var(--metro-line);
+      padding: 32px;
+      margin: 24px 0;
+    }
+
+    .demo-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--metro-fg);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .demo-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .tile-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, 120px);
+      gap: 16px;
+    }
+
+    .table-responsive {
+      overflow-x: auto;
+      margin: 24px 0;
+    }
+
+    .docs-table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 2px solid var(--metro-line);
+    }
+
+    .docs-table th {
+      background: var(--metro-bg-soft);
+      padding: 12px 16px;
+      text-align: left;
+      font-weight: 600;
+      border: 2px solid var(--metro-line);
+    }
+
+    .docs-table td {
+      padding: 12px 16px;
+      border: 2px solid var(--metro-line);
+    }
+
+    .docs-table code {
+      background: var(--metro-bg-soft);
+      padding: 2px 8px;
+      border: 1px solid var(--metro-line);
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 13px;
+    }
+
+    .quickstart-steps {
+      counter-reset: step-counter;
+      list-style: none;
+      padding: 0;
+    }
+
+    .quickstart-steps li {
+      counter-increment: step-counter;
+      position: relative;
+      padding-left: 60px;
+      margin-bottom: 32px;
+    }
+
+    .quickstart-steps li::before {
+      content: counter(step-counter);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 40px;
+      height: 40px;
+      background: var(--metro-accent);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .step-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .api-section {
+      background: var(--metro-bg-soft);
+      border: 2px solid var(--metro-line);
+      padding: 24px;
+      margin: 24px 0;
+    }
+
+    .api-method {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--metro-accent);
+      margin-bottom: 12px;
+    }
+
+    .api-params {
+      margin-top: 16px;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 40px 0;
+      border-top: 2px solid var(--metro-line);
+      margin-top: 60px;
+      color: var(--metro-fg-secondary);
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin: 24px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="docs-container">
+    <!-- Header -->
+    <div class="docs-header">
+      <h1 class="docs-title">Metro UI Design System</h1>
+      <p class="docs-subtitle">现代化的 Metro 风格 UI 组件库，灵感来自 Windows 8 的 Modern UI</p>
+
+      <div class="badge-row">
+        <span class="badge badge--accent">v1.0.0</span>
+        <span class="badge">MIT License</span>
+        <span class="badge">No Dependencies</span>
+      </div>
+
+      <div class="btn-group">
+        <a href="#install" class="btn btn-primary btn-lg">快速开始</a>
+        <a href="#demos" class="btn btn-outline btn-lg">查看演示</a>
+        <a href="https://github.com/yourusername/metro-ui" class="btn btn-outline btn-lg">GitHub</a>
+      </div>
+    </div>
+
+    <!-- Features -->
+    <div class="section">
+      <h2 class="section-title">核心特性</h2>
+      <p class="section-desc">完全自定义的 UI 组件，不依赖原生 HTML 元素，提供一致的用户体验</p>
+
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🎯</div>
+          <h3 class="feature-title">Live Tiles</h3>
+          <p class="feature-desc">动态磁贴组件，支持翻转、滑动、徽章等多种动画效果</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📝</div>
+          <h3 class="feature-title">增强表单</h3>
+          <p class="feature-desc">美化的输入框、选择器、复选框等表单组件，提供更好的用户体验</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🎨</div>
+          <h3 class="feature-title">自定义下拉框</h3>
+          <p class="feature-desc">完全自定义的下拉菜单，支持单选、多选、搜索和级联选择器</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🌙</div>
+          <h3 class="feature-title">暗色模式</h3>
+          <p class="feature-desc">内置主题支持，通过 CSS 变量轻松切换亮色和暗色主题</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📱</div>
+          <h3 class="feature-title">响应式设计</h3>
+          <p class="feature-desc">移动优先的设计理念，完美适配各种屏幕尺寸</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3 class="feature-title">零依赖</h3>
+          <p class="feature-desc">纯原生实现，不依赖任何第三方库，体积小巧，加载快速</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Installation -->
+    <div class="section" id="install">
+      <h2 class="section-title">安装</h2>
+      <p class="section-desc">多种方式安装 Metro UI，选择最适合你项目的方式</p>
+
+      <div class="install-section">
+        <h3 class="install-title">方式一：通过 npm 安装（推荐）</h3>
+        <div class="code-block">
+<span class="code-comment"># 使用 npm</span>
+npm install metro-ui-design-system
+
+<span class="code-comment"># 使用 yarn</span>
+yarn add metro-ui-design-system
+
+<span class="code-comment"># 使用 pnpm</span>
+pnpm add metro-ui-design-system
+        </div>
+      </div>
+
+      <div class="install-section">
+        <h3 class="install-title">方式二：通过 CDN 引入</h3>
+        <div class="code-block">
+<span class="code-comment">&lt;!-- 在 HTML 中添加 CSS --&gt;</span>
+<span class="code-tag">&lt;link</span> <span class="code-attr">rel</span>=<span class="code-string">"stylesheet"</span> <span class="code-attr">href</span>=<span class="code-string">"https://unpkg.com/metro-ui-design-system/dist/metro-ui.min.css"</span><span class="code-tag">&gt;</span>
+
+<span class="code-comment">&lt;!-- 在 body 结束前添加 JavaScript --&gt;</span>
+<span class="code-tag">&lt;script</span> <span class="code-attr">src</span>=<span class="code-string">"https://unpkg.com/metro-ui-design-system/dist/metro-ui.min.js"</span><span class="code-tag">&gt;&lt;/script&gt;</span>
+        </div>
+      </div>
+
+      <div class="install-section">
+        <h3 class="install-title">方式三：手动下载</h3>
+        <p>从 <a href="https://github.com/yourusername/metro-ui/releases">GitHub Releases</a> 下载最新版本，将 <code>dist/metro-ui.css</code> 和 <code>dist/metro-ui.js</code> 复制到你的项目中。</p>
+      </div>
+    </div>
+
+    <!-- Quick Start -->
+    <div class="section">
+      <h2 class="section-title">快速开始</h2>
+      <p class="section-desc">按照以下步骤，5 分钟内创建你的第一个 Metro UI 应用</p>
+
+      <ol class="quickstart-steps">
+        <li>
+          <div class="step-title">创建 HTML 文件</div>
+          <div class="code-block">
+<span class="code-tag">&lt;!DOCTYPE html&gt;</span>
+<span class="code-tag">&lt;html</span> <span class="code-attr">lang</span>=<span class="code-string">"zh-CN"</span><span class="code-tag">&gt;</span>
+<span class="code-tag">&lt;head&gt;</span>
+  <span class="code-tag">&lt;meta</span> <span class="code-attr">charset</span>=<span class="code-string">"UTF-8"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;meta</span> <span class="code-attr">name</span>=<span class="code-string">"viewport"</span> <span class="code-attr">content</span>=<span class="code-string">"width=device-width, initial-scale=1.0"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;title&gt;</span>My Metro App<span class="code-tag">&lt;/title&gt;</span>
+  <span class="code-tag">&lt;link</span> <span class="code-attr">rel</span>=<span class="code-string">"stylesheet"</span> <span class="code-attr">href</span>=<span class="code-string">"node_modules/metro-ui-design-system/dist/metro-ui.min.css"</span><span class="code-tag">&gt;</span>
+<span class="code-tag">&lt;/head&gt;</span>
+<span class="code-tag">&lt;body&gt;</span>
+  <span class="code-comment">&lt;!-- 你的内容 --&gt;</span>
+  <span class="code-tag">&lt;script</span> <span class="code-attr">src</span>=<span class="code-string">"node_modules/metro-ui-design-system/dist/metro-ui.min.js"</span><span class="code-tag">&gt;&lt;/script&gt;</span>
+<span class="code-tag">&lt;/body&gt;</span>
+<span class="code-tag">&lt;/html&gt;</span>
+          </div>
+        </li>
+
+        <li>
+          <div class="step-title">添加 Live Tile</div>
+          <div class="code-block">
+<span class="code-comment">&lt;!-- 翻转磁贴 --&gt;</span>
+<span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"tile tile-medium"</span> <span class="code-attr">data-tile</span>=<span class="code-string">"flip"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"tile-face tile-face-front"</span><span class="code-tag">&gt;</span>
+    <span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"tile-icon"</span><span class="code-tag">&gt;</span>📊<span class="code-tag">&lt;/div&gt;</span>
+    <span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"tile-title"</span><span class="code-tag">&gt;</span>仪表板<span class="code-tag">&lt;/div&gt;</span>
+  <span class="code-tag">&lt;/div&gt;</span>
+  <span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"tile-face tile-face-back"</span><span class="code-tag">&gt;</span>
+    <span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"tile-content"</span><span class="code-tag">&gt;</span>查看统计<span class="code-tag">&lt;/div&gt;</span>
+  <span class="code-tag">&lt;/div&gt;</span>
+<span class="code-tag">&lt;/div&gt;</span>
+          </div>
+        </li>
+
+        <li>
+          <div class="step-title">添加自定义下拉框</div>
+          <div class="code-block">
+<span class="code-comment">&lt;!-- 自定义选择器 --&gt;</span>
+<span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"metro-select"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"metro-select-trigger"</span><span class="code-tag">&gt;</span>
+    <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"placeholder"</span><span class="code-tag">&gt;</span>选择选项<span class="code-tag">&lt;/span&gt;</span>
+    <span class="code-tag">&lt;svg</span> <span class="code-attr">class</span>=<span class="code-string">"metro-select-arrow"</span><span class="code-tag">&gt;</span>...<span class="code-tag">&lt;/svg&gt;</span>
+  <span class="code-tag">&lt;/div&gt;</span>
+  <span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"metro-select-panel"</span><span class="code-tag">&gt;</span>
+    <span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"metro-option"</span> <span class="code-attr">data-value</span>=<span class="code-string">"1"</span><span class="code-tag">&gt;</span>选项 1<span class="code-tag">&lt;/div&gt;</span>
+    <span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"metro-option"</span> <span class="code-attr">data-value</span>=<span class="code-string">"2"</span><span class="code-tag">&gt;</span>选项 2<span class="code-tag">&lt;/div&gt;</span>
+  <span class="code-tag">&lt;/div&gt;</span>
+<span class="code-tag">&lt;/div&gt;</span>
+          </div>
+        </li>
+
+        <li>
+          <div class="step-title">初始化组件</div>
+          <div class="code-block">
+<span class="code-comment">// 在页面加载后初始化</span>
+<span class="code-tag">&lt;script&gt;</span>
+  <span class="code-keyword">document</span>.addEventListener(<span class="code-string">'DOMContentLoaded'</span>, <span class="code-keyword">function</span>() {
+    MetroUI.init();
+  });
+<span class="code-tag">&lt;/script&gt;</span>
+          </div>
+        </li>
+      </ol>
+    </div>
+
+    <!-- Component Demos -->
+    <div class="section" id="demos">
+      <h2 class="section-title">组件演示</h2>
+      <p class="section-desc">交互式组件示例，点击体验各种效果</p>
+
+      <!-- Tiles Demo -->
+      <div class="demo-box">
+        <span class="demo-label">Live Tiles - 动态磁贴</span>
+        <div class="tile-grid">
+          <div class="tile tile-small bg-accent" data-tile="flip">
+            <div class="tile-face tile-face-front">
+              <div class="tile-icon">🎯</div>
+            </div>
+            <div class="tile-face tile-face-back">
+              <div class="tile-title">翻转效果</div>
+            </div>
+          </div>
+          <div class="tile tile-small bg-success">
+            <div class="tile-badge">5</div>
+            <div class="tile-icon">📧</div>
+          </div>
+          <div class="tile tile-medium bg-warning">
+            <div class="tile-title">警告信息</div>
+          </div>
+          <div class="tile tile-wide bg-error">
+            <div class="tile-title">宽磁贴</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form Demo -->
+      <div class="demo-box">
+        <span class="demo-label">Form Components - 表单组件</span>
+        <div style="max-width: 400px;">
+          <div class="input-wrapper input-enhanced" style="margin-bottom: 16px;">
+            <input type="text" class="input" placeholder="用户名">
+          </div>
+          <div class="input-wrapper input-enhanced" style="margin-bottom: 16px;">
+            <span class="input-icon">📧</span>
+            <input type="email" class="input" placeholder="邮箱地址">
+          </div>
+          <div class="toggle-wrapper" style="margin-bottom: 16px;">
+            <input type="checkbox" id="toggle1" class="toggle">
+            <label for="toggle1">启用通知</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Custom Select Demo -->
+      <div class="demo-box">
+        <span class="demo-label">Custom Select - 自定义下拉框</span>
+        <div style="max-width: 400px;">
+          <div class="metro-select" id="demo-select-1">
+            <div class="metro-select-trigger">
+              <span class="placeholder">选择编程语言</span>
+              <svg class="metro-select-arrow" width="12" height="12" viewBox="0 0 12 12">
+                <path d="M6 8L1 3h10L6 8z" fill="currentColor"/>
+              </svg>
+            </div>
+            <div class="metro-select-panel">
+              <div class="metro-option" data-value="js">JavaScript</div>
+              <div class="metro-option" data-value="py">Python</div>
+              <div class="metro-option" data-value="rust">Rust</div>
+              <div class="metro-option" data-value="go">Go</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Toast Demo -->
+      <div class="demo-box">
+        <span class="demo-label">Toast Notifications - 提示消息</span>
+        <div class="btn-group" style="justify-content: flex-start;">
+          <button class="btn btn-success" onclick="MetroUI.toast({type:'success',message:'操作成功！'})">成功</button>
+          <button class="btn btn-error" onclick="MetroUI.toast({type:'error',message:'操作失败'})">错误</button>
+          <button class="btn btn-warning" onclick="MetroUI.toast({type:'warning',message:'警告信息'})">警告</button>
+          <button class="btn btn-info" onclick="MetroUI.toast({type:'info',message:'提示信息'})">信息</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- API Reference -->
+    <div class="section">
+      <h2 class="section-title">API 参考</h2>
+      <p class="section-desc">详细的 JavaScript API 文档</p>
+
+      <div class="api-section">
+        <div class="api-method">MetroUI.init()</div>
+        <p>初始化所有 Metro UI 组件</p>
+        <div class="code-block">
+MetroUI.init(); <span class="code-comment">// 自动初始化页面上的所有组件</span>
+        </div>
+      </div>
+
+      <div class="api-section">
+        <div class="api-method">MetroUI.toast(options)</div>
+        <p>显示提示消息</p>
+        <div class="api-params">
+          <div class="table-responsive">
+            <table class="docs-table">
+              <thead>
+                <tr>
+                  <th>参数</th>
+                  <th>类型</th>
+                  <th>默认值</th>
+                  <th>说明</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>type</code></td>
+                  <td>string</td>
+                  <td>'info'</td>
+                  <td>提示类型：success / error / warning / info</td>
+                </tr>
+                <tr>
+                  <td><code>message</code></td>
+                  <td>string</td>
+                  <td>-</td>
+                  <td>提示消息内容</td>
+                </tr>
+                <tr>
+                  <td><code>duration</code></td>
+                  <td>number</td>
+                  <td>3000</td>
+                  <td>显示时长（毫秒）</td>
+                </tr>
+                <tr>
+                  <td><code>position</code></td>
+                  <td>string</td>
+                  <td>'top-right'</td>
+                  <td>位置：top-right / top-left / bottom-right / bottom-left</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="code-block">
+MetroUI.toast({
+  type: <span class="code-string">'success'</span>,
+  message: <span class="code-string">'保存成功！'</span>,
+  duration: <span class="code-keyword">5000</span>,
+  position: <span class="code-string">'top-right'</span>
+});
+        </div>
+      </div>
+
+      <div class="api-section">
+        <div class="api-method">MetroUI.modal.open(id) / MetroUI.modal.close(id)</div>
+        <p>打开或关闭模态框</p>
+        <div class="code-block">
+<span class="code-comment">// 打开模态框</span>
+MetroUI.modal.open(<span class="code-string">'my-modal'</span>);
+
+<span class="code-comment">// 关闭模态框</span>
+MetroUI.modal.close(<span class="code-string">'my-modal'</span>);
+        </div>
+      </div>
+    </div>
+
+    <!-- Theming -->
+    <div class="section">
+      <h2 class="section-title">主题定制</h2>
+      <p class="section-desc">通过 CSS 变量自定义主题颜色</p>
+
+      <div class="code-block">
+<span class="code-tag">&lt;style&gt;</span>
+<span class="code-tag">:root</span> {
+  <span class="code-comment">/* 主题颜色 */</span>
+  <span class="code-attr">--metro-accent</span>: <span class="code-string">#0078d4</span>;
+  <span class="code-attr">--metro-success</span>: <span class="code-string">#107c10</span>;
+  <span class="code-attr">--metro-warning</span>: <span class="code-string">#ff8c00</span>;
+  <span class="code-attr">--metro-error</span>: <span class="code-string">#d13438</span>;
+
+  <span class="code-comment">/* 间距 */</span>
+  <span class="code-attr">--metro-space-1</span>: <span class="code-string">4px</span>;
+  <span class="code-attr">--metro-space-2</span>: <span class="code-string">8px</span>;
+  <span class="code-attr">--metro-space-3</span>: <span class="code-string">12px</span>;
+  <span class="code-attr">--metro-space-4</span>: <span class="code-string">16px</span>;
+
+  <span class="code-comment">/* 字体 */</span>
+  <span class="code-attr">--metro-font-family</span>: <span class="code-string">'Segoe UI'</span>, system-ui, sans-serif;
+  <span class="code-attr">--metro-fs-base</span>: <span class="code-string">14px</span>;
+}
+
+<span class="code-comment">/* 暗色主题 */</span>
+[<span class="code-attr">data-theme</span>=<span class="code-string">"dark"</span>] {
+  <span class="code-attr">--metro-bg</span>: <span class="code-string">#1e1e1e</span>;
+  <span class="code-attr">--metro-fg</span>: <span class="code-string">#ffffff</span>;
+  <span class="code-attr">--metro-line</span>: <span class="code-string">#3f3f3f</span>;
+}
+<span class="code-tag">&lt;/style&gt;</span>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p>Metro UI Design System v1.0.0</p>
+      <p>使用 MIT 许可证 | 由 Metro UI 团队开发</p>
+      <div class="btn-group">
+        <a href="https://github.com/yourusername/metro-ui" class="btn btn-outline">GitHub</a>
+        <a href="https://npmjs.com/package/metro-ui-design-system" class="btn btn-outline">npm</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="dist/metro-ui.js"></script>
+  <script>
+    // Initialize Metro UI
+    document.addEventListener('DOMContentLoaded', function() {
+      MetroUI.init();
+    });
+  </script>
+</body>
+</html>

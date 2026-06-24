@@ -1,0 +1,151 @@
+/* =====================================================================
+   METRO UI — Showcase Layout
+   ===================================================================== */
+
+/* Fixed left navigation rail — the "charms" of the documentation site. */
+.rail {
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  width: var(--metro-rail-w);
+  background: var(--metro-bg-alt);
+  border-right: 1px solid var(--metro-line);
+  display: flex; flex-direction: column;
+  align-items: center;
+  padding: var(--metro-space-3) 0;
+  gap: var(--metro-space-1);
+  z-index: 60;
+}
+.rail .brand {
+  width: 40px; height: 40px;
+  background: var(--metro-accent);
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; font-weight: var(--metro-fw-bold);
+  margin-bottom: var(--metro-space-3);
+}
+.rail .rail-link {
+  width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--metro-fg-secondary);
+  background: transparent; border: 0; cursor: pointer;
+  transition: background-color var(--metro-dur) var(--metro-ease), color var(--metro-dur) var(--metro-ease);
+}
+.rail .rail-link:hover { background: var(--metro-line); color: var(--metro-fg); }
+.rail .rail-link.is-active { background: var(--metro-accent); color: #fff; }
+.rail .rail-spacer { flex: 1; }
+
+/* Main canvas offset by the rail. */
+.canvas { margin-left: var(--metro-rail-w); }
+
+/* Sticky top app bar (site header) — page title + theme toggle. */
+.topbar {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; gap: var(--metro-space-4);
+  height: 56px; padding: 0 var(--metro-space-7);
+  background: var(--metro-bg);
+  border-bottom: 1px solid var(--metro-line);
+  backdrop-filter: saturate(1.1);
+}
+.topbar .title { font-size: var(--metro-fs-subtitle); font-weight: var(--metro-fw-semilight); letter-spacing: var(--metro-tracking-tight); }
+.topbar .spacer { flex: 1; }
+
+/* Page sections — generous padding, max width for prose; full bleed for tiles. */
+.section {
+  padding: var(--metro-space-9) var(--metro-space-7);
+  border-bottom: 1px solid var(--metro-line);
+  scroll-margin-top: 56px;
+}
+.section--tight { padding-block: var(--metro-space-7); }
+.section--alt { background: var(--metro-bg-alt); }
+
+.section-eyebrow {
+  font-size: var(--metro-fs-small); font-weight: var(--metro-fw-semibold);
+  text-transform: uppercase; letter-spacing: var(--metro-tracking-wide);
+  color: var(--metro-accent);
+  margin-bottom: var(--metro-space-2);
+}
+.section-title { font-size: var(--metro-fs-section); font-weight: var(--metro-fw-light); letter-spacing: var(--metro-tracking-tight); margin-bottom: var(--metro-space-2); }
+.section-lead { font-size: var(--metro-fs-subtitle); font-weight: var(--metro-fw-light); color: var(--metro-fg-secondary); max-width: 60ch; margin-bottom: var(--metro-space-7); }
+
+/* Group header — the Metro list/hub "accent letter" divider. */
+.group-header {
+  font-size: var(--metro-fs-subtitle);
+  font-weight: var(--metro-fw-light);
+  color: var(--metro-accent);
+  margin: var(--metro-space-6) 0 var(--metro-space-3);
+}
+.group-header:first-child { margin-top: 0; }
+
+/* Generic example/demo card — flat panel with a header strip + live preview. */
+.demo { margin-bottom: var(--metro-space-7); }
+.demo-label {
+  font-size: var(--metro-fs-small); font-weight: var(--metro-fw-semibold);
+  color: var(--metro-fg-secondary); text-transform: uppercase; letter-spacing: var(--metro-tracking-wide);
+  margin-bottom: var(--metro-space-2);
+}
+.demo-pane {
+  background: var(--metro-bg);
+  border: 1px solid var(--metro-line);
+  padding: var(--metro-space-6);
+  overflow: hidden;
+}
+.demo-pane--alt { background: var(--metro-bg-alt); }
+.demo-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--metro-space-3); }
+.demo-stack { display: flex; flex-direction: column; gap: var(--metro-space-4); }
+.demo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--metro-space-7); }
+@media (max-width: 760px) { .demo-grid { grid-template-columns: 1fr; } }
+
+/* Color swatch grid. */
+.swatch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: var(--metro-space-3); }
+.swatch { border: 1px solid var(--metro-line); overflow: hidden; }
+.swatch .chip { height: 84px; }
+.swatch .meta { padding: var(--metro-space-2) var(--metro-space-3); background: var(--metro-bg); }
+.swatch .name { font-size: var(--metro-fs-small); font-weight: var(--metro-fw-semibold); }
+.swatch .hex { font-size: var(--metro-fs-micro); font-family: var(--metro-font-mono); color: var(--metro-fg-tertiary); text-transform: uppercase; }
+
+/* Type specimen. */
+.specimen { padding: var(--metro-space-4) 0; border-bottom: 1px solid var(--metro-line); }
+.specimen .label { font-size: var(--metro-fs-micro); color: var(--metro-fg-tertiary); text-transform: uppercase; letter-spacing: var(--metro-tracking-wide); margin-bottom: var(--metro-space-2); }
+
+/* Code block — flat. */
+.codeblock {
+  background: var(--metro-bg-alt);
+  border: 1px solid var(--metro-line);
+  border-left: 3px solid var(--metro-accent);
+  padding: var(--metro-space-4);
+  font-family: var(--metro-font-mono);
+  font-size: var(--metro-fs-small);
+  line-height: var(--metro-lh-base);
+  overflow-x: auto;
+  margin: var(--metro-space-4) 0;
+}
+.codeblock .c-tag { color: var(--metro-magenta); }
+.codeblock .c-attr { color: var(--metro-accent); }
+.codeblock .c-val { color: var(--metro-emerald); }
+.codeblock .c-com { color: var(--metro-fg-tertiary); font-style: italic; }
+
+/* Helpers */
+.row { display: flex; gap: var(--metro-space-3); align-items: center; flex-wrap: wrap; }
+.col { display: flex; flex-direction: column; gap: var(--metro-space-3); }
+.between { display: flex; justify-content: space-between; align-items: center; gap: var(--metro-space-3); }
+.center { display: flex; align-items: center; justify-content: center; }
+.mt-2 { margin-top: var(--metro-space-2); }
+.mt-4 { margin-top: var(--metro-space-4); }
+.mt-6 { margin-top: var(--metro-space-6); }
+.mb-4 { margin-bottom: var(--metro-space-4); }
+.mb-6 { margin-bottom: var(--metro-space-6); }
+.w-full { width: 100%; }
+.maxw-sm { max-width: 360px; }
+.maxw-md { max-width: 560px; }
+
+/* Responsive — collapse rail into a top strip on narrow viewports. */
+@media (max-width: 720px) {
+  :root { --metro-rail-w: 0px; }
+  .rail { position: sticky; top: 0; flex-direction: row; width: 100%; height: 56px; padding: 0 var(--metro-space-2); border-right: 0; border-bottom: 1px solid var(--metro-line); z-index: 60; overflow-x: auto; }
+  .rail .brand { margin: 0; flex: none; }
+  .rail .rail-spacer { display: none; }
+  .rail .rail-link { flex: none; }
+  .canvas { margin-left: 0; }
+  .topbar { display: none; }
+  .section { padding: var(--metro-space-7) var(--metro-space-4); scroll-margin-top: 56px; }
+}

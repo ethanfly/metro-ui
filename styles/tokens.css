@@ -1,0 +1,177 @@
+/* =====================================================================
+   METRO UI — Design Tokens
+   =====================================================================
+   The article insists the design starts with a systematic "color table"
+   (色表) that fixes the tonal direction: dark vs. light, warm vs. cool,
+   before a single block is painted. This file is that color table.
+
+   Tonal direction:
+     • Primary system is COOL-LEANING (sky blue accent) on a LIGHT canvas,
+       with a full DARK counterpart — the classic Windows 8/10 Metro feel.
+     • Tile accents are a deliberately mixed warm+cool set; Metro earns
+       its energy from saturated, jewel-toned color blocks.
+   ===================================================================== */
+
+:root {
+  /* -------------------------------------------------------------------
+     THEME SURFACES  (dark vs. light direction)
+     ------------------------------------------------------------------- */
+  --metro-bg:               #ffffff;
+  --metro-bg-alt:           #f2f2f2;   /* grouped section tint */
+  --metro-bg-soft:          #f9f9f9;
+  --metro-fg:               #000000;
+  --metro-fg-secondary:     rgba(0, 0, 0, 0.60);
+  --metro-fg-tertiary:      rgba(0, 0, 0, 0.40);
+  --metro-fg-disabled:      rgba(0, 0, 0, 0.28);
+  --metro-line:             rgba(0, 0, 0, 0.12);
+  --metro-line-strong:      rgba(0, 0, 0, 0.28);
+  --metro-overlay:          rgba(0, 0, 0, 0.45);
+
+  /* Metro is famously flat. We allow one whisper of depth on tiles only. */
+  --metro-tile-shadow:      0 2px 5px rgba(0, 0, 0, 0.18);
+
+  /* -------------------------------------------------------------------
+     THE COLOR TABLE — accent tile palette (warm + cool mix)
+     Authentic Windows 8/10 jewel tones, each with a darker shade for
+     press states and a tint for soft surfaces.
+     ------------------------------------------------------------------- */
+  --metro-blue:             #2d8bfc;   --metro-blue-d:    #1567d6;   --metro-blue-t:   #cfe6ff;
+  --metro-teal:             #00b7c3;   --metro-teal-d:   #00899a;   --metro-teal-t:   #c2f1f6;
+  --metro-emerald:          #00a300;   --metro-emerald-d:#007a00;   --metro-emerald-t:#cdf3cd;
+  --metro-lime:             #a4c400;   --metro-lime-d:   #7c9400;   --metro-lime-t:   #eef6c4;
+  --metro-amber:            #f0a30a;   --metro-amber-d:  #c47f00;   --metro-amber-t:  #fdecca;
+  --metro-orange:           #fa6800;   --metro-orange-d: #c44e00;   --metro-orange-t:#fdd9c2;
+  --metro-magenta:          #b91d47;   --metro-magenta-d:#8c1234;   --metro-magenta-t:#f3d3dc;
+  --metro-pink:             #e3008c;   --metro-pink-d:   #b3006f;   --metro-pink-t:   #fccfe9;
+  --metro-purple:           #5c2d91;   --metro-purple-d: #44206b;   --metro-purple-t:#e2d6f0;
+  --metro-violet:           #8c0095;   --metro-violet-d: #6a0071;   --metro-violet-t:#efc9f3;
+  --metro-red:              #e81123;   --metro-red-d:    #b00d1b;   --metro-red-t:    #f8cdd3;
+  --metro-crimson:          #a50e0e;   --metro-crimson-d:#7a0a0a;   --metro-crimson-t:#f0d0d0;
+  --metro-steel:            #525e6f;   --metro-steel-d:  #3a4350;   --metro-steel-t: #d8dde3;
+  --metro-graphite:         #4a4a4a;   --metro-graphite-d:#2f2f2f; --metro-graphite-t:#d6d6d6;
+
+  /* Semantic accent — the primary interactive color (cool direction). */
+  --metro-accent:           #0078d7;
+  --metro-accent-d:         #005a9e;
+  --metro-accent-t:         #cfe3f7;
+  --metro-accent-fg:        #ffffff;
+
+  /* Semantic status (kept saturated to match the block aesthetic). */
+  --metro-success:          #107c10;
+  --metro-warning:          #ffb900;
+  --metro-error:            #e81123;
+  --metro-error-t:           #fde7e9;
+
+  /* -------------------------------------------------------------------
+     TYPOGRAPHY SCALE  (Metro's signature light-weight hierarchy)
+     Segoe UI is the canonical Metro face. The stack degrades gracefully
+     on non-Windows platforms. Headings use light weights + tight
+     tracking — content, not chrome.
+     ------------------------------------------------------------------- */
+  --metro-font-family:      "Segoe UI", "Segoe WP", "Helvetica Neue", "Roboto", "Inter", system-ui, Arial, sans-serif;
+  --metro-font-mono:        "Cascadia Code", "Consolas", "Roboto Mono", "SFMono-Regular", Menlo, monospace;
+
+  --metro-fs-display:       72px;   /* start-screen headline */
+  --metro-fs-hero:          42px;   /* page title / hub title */
+  --metro-fs-section:       34px;   /* group header */
+  --metro-fs-subtitle:      20px;
+  --metro-fs-base:          15px;
+  --metro-fs-small:         13px;
+  --metro-fs-caption:       11px;
+  --metro-fs-micro:         10px;
+
+  --metro-fw-light:         200;
+  --metro-fw-semilight:     300;
+  --metro-fw-regular:       400;
+  --metro-fw-semibold:      600;
+  --metro-fw-bold:          700;
+
+  --metro-lh-tight:         1.0;
+  --metro-lh-snug:          1.15;
+  --metro-lh-base:          1.35;
+  --metro-lh-loose:         1.6;
+
+  --metro-tracking-tight:   -0.02em;
+  --metro-tracking-normal:  0;
+  --metro-tracking-wide:    0.04em;
+
+  /* -------------------------------------------------------------------
+     SPACING  (proportion is paramount per the article)
+     A 4px baseline grid underpins all block volumes & line spacing.
+     ------------------------------------------------------------------- */
+  --metro-space-1:  4px;
+  --metro-space-2:  8px;
+  --metro-space-3:  12px;
+  --metro-space-4:  16px;
+  --metro-space-5:  20px;
+  --metro-space-6:  24px;
+  --metro-space-7:  32px;
+  --metro-space-8:  40px;
+  --metro-space-9:  56px;
+  --metro-space-10: 80px;
+  --metro-space-11: 120px;
+
+  /* Tile sizing grid — every tile is a multiple of the base unit. */
+  --metro-tile-gap:         4px;
+  --metro-tile-unit:        70px;     /* small tile side */
+  --metro-tile-radius:     0px;      /* Metro tiles are square — no radius */
+  --metro-tile-radius-soft: 6px;      /* optional soft variant */
+
+  /* -------------------------------------------------------------------
+     MOTION  (animation is a first-class Metro concern)
+     ------------------------------------------------------------------- */
+  --metro-ease:        cubic-bezier(0.1, 0.9, 0.2, 1);   /* snappy, decisive */
+  --metro-ease-soft:  cubic-bezier(0.33, 0, 0.2, 1);
+  --metro-dur-fast:    120ms;
+  --metro-dur:         220ms;
+  --metro-dur-slow:    480ms;
+  --metro-tile-flip:   600ms;
+
+  /* -------------------------------------------------------------------
+     APP BAR + geometry
+     ------------------------------------------------------------------- */
+  --metro-appbar-h: 88px;
+  --metro-rail-w:   56px;
+}
+
+/* DARK THEME — the same table, inverted. Metro ships both. */
+:root[data-theme="dark"] {
+  --metro-bg:               #1f1f1f;
+  --metro-bg-alt:           #171717;
+  --metro-bg-soft:          #2a2a2a;
+  --metro-fg:               #ffffff;
+  --metro-fg-secondary:     rgba(255, 255, 255, 0.70);
+  --metro-fg-tertiary:      rgba(255, 255, 255, 0.45);
+  --metro-fg-disabled:      rgba(255, 255, 255, 0.30);
+  --metro-line:             rgba(255, 255, 255, 0.14);
+  --metro-line-strong:      rgba(255, 255, 255, 0.32);
+  --metro-overlay:          rgba(0, 0, 0, 0.62);
+  --metro-tile-shadow:      0 2px 8px rgba(0, 0, 0, 0.38);
+
+  --metro-accent-t:        rgba(0, 120, 215, 0.22);
+  --metro-blue-t:          rgba(45, 139, 252, 0.18);
+  --metro-teal-t:          rgba(0, 183, 195, 0.18);
+  --metro-emerald-t:       rgba(0, 163, 0, 0.18);
+  --metro-lime-t:          rgba(164, 196, 0, 0.18);
+  --metro-amber-t:         rgba(240, 163, 10, 0.18);
+  --metro-orange-t:        rgba(250, 104, 0, 0.18);
+  --metro-magenta-t:       rgba(185, 29, 71, 0.20);
+  --metro-pink-t:          rgba(227, 0, 140, 0.20);
+  --metro-purple-t:        rgba(92, 45, 145, 0.22);
+  --metro-violet-t:        rgba(140, 0, 149, 0.22);
+  --metro-red-t:           rgba(232, 17, 35, 0.22);
+  --metro-crimson-t:       rgba(165, 14, 14, 0.22);
+  --metro-steel-t:         rgba(82, 94, 111, 0.28);
+  --metro-graphite-t:      rgba(74, 74, 74, 0.28);
+  --metro-error-t:         rgba(232, 17, 35, 0.22);
+}
+
+/* Respect reduced motion — ergonomics matter in Metro (article Phase 2). */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --metro-dur-fast: 1ms;
+    --metro-dur: 1ms;
+    --metro-dur-slow: 1ms;
+    --metro-tile-flip: 1ms;
+  }
+}

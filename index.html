@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Metro UI — Design System & Showcase</title>
+  <meta name="description" content="A Metro design system inspired by Microsoft's Metro language and its Bauhaus lineage. Live tiles, typography, and a full component gallery." />
+  <link rel="stylesheet" href="styles/tokens.css" />
+  <link rel="stylesheet" href="styles/base.css" />
+  <link rel="stylesheet" href="styles/tiles.css" />
+  <link rel="stylesheet" href="styles/components.css" />
+  <link rel="stylesheet" href="styles/layout.css" />
+  <link rel="stylesheet" href="styles/motion.css" />
+</head>
+<body>
+
+<!-- =====================================================================
+     ICON SPRITE — flat single-color SVG glyphs (Metro icon language)
+     ===================================================================== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 11 L12 4 L20 11 V20 H4z"/><path d="M9.5 20 V14 H14.5 V20"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11 V16"/><circle cx="12" cy="7.6" r="0.7" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-palette" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0 0 20c1.7 0 2.2-1.1 1.6-2.2-.7-1.3.2-2.8 1.7-2.8H17a5 5 0 0 0 5-5A10 10 0 0 0 12 2z"/><circle cx="8" cy="9" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="7" r="1.3" fill="currentColor" stroke="none"/><circle cx="16" cy="9" r="1.3" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24"><path d="M4 20 L4 16 L15 5 L19 9 L8 20z"/><path d="M15 5 L18 2 L22 6 L19 9"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6.5" height="6.5"/><rect x="13.5" y="4" width="6.5" height="6.5"/><rect x="4" y="13.5" width="6.5" height="6.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5"/></symbol>
+    <symbol id="i-button" viewBox="0 0 24 24"><rect x="3" y="9" width="18" height="6"/><circle cx="7" cy="12" r="1.4" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M16 16 L20 20"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M5 12a7 7 0 0 1 12-4.9"/><path d="M17 4v4h-4"/><path d="M19 12a7 7 0 0 1-12 4.9"/><path d="M7 20v-4h4"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><path d="M4 6 H20 M4 12 H20 M4 18 H20"/><circle cx="4" cy="6" r="0.0"/></symbol>
+    <symbol id="i-tabs" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14"/><path d="M3 9 H21 M8 5 V9 M13 5 V9"/></symbol>
+    <symbol id="i-message" viewBox="0 0 24 24"><path d="M4.5 6a1.5 1.5 0 0 1 1.5-1.5h12A1.5 1.5 0 0 1 19.5 6v8A1.5 1.5 0 0 1 18 15.5H9l-4.5 4.5z"/></symbol>
+    <symbol id="i-more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.6" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.6" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12 H21"/><path d="M12 3 c-3 3-3 15 0 18 M12 3 c3 3 3 15 0 18"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5 V12 L15.5 14"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12"/><path d="M4 7.5 L12 13 L20 7.5"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15"/><path d="M3.5 9 H20.5"/><path d="M8 3 V6 M16 3 V6"/></symbol>
+    <symbol id="i-weather" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M9 3.4V5 M9 11V12.6 M4.4 8H6 M12 8h1.6 M5.5 4.5l1 1 M11.5 10.5l1 1 M5.5 11.5l1-1 M11.5 5.5l1-1"/><path d="M7 19h9.5a3.2 3.2 0 0 0 .4-6.4A4.8 4.8 0 0 0 8 10.2 3.6 3.6 0 0 0 7 19z"/></symbol>
+    <symbol id="i-music" viewBox="0 0 24 24"><circle cx="7" cy="17" r="2.5"/><circle cx="17" cy="15" r="2.5"/><path d="M9.5 17 V6 L19.5 4 V15"/></symbol>
+    <symbol id="i-photos" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14"/><circle cx="8.5" cy="10" r="1.6"/><path d="M3.5 16 L8 12 L12 15 L16 10 L20.5 14"/></symbol>
+    <symbol id="i-map" viewBox="0 0 24 24"><path d="M12 21c5-5.5 7-9 7-12a7 7 0 1 0-14 0c0 3 2 6.5 7 12z"/><circle cx="12" cy="9" r="2.4"/></symbol>
+    <symbol id="i-store" viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7z"/><path d="M9 8a3 3 0 0 1 6 0"/></symbol>
+    <symbol id="i-camera" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13"/><path d="M8 7 L9.5 4 H14.5 L16 7"/><circle cx="12" cy="13.5" r="3.2"/></symbol>
+    <symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="10" r="3"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/><circle cx="17" cy="9.5" r="2.3"/><path d="M15.5 16.5a4.5 4.5 0 0 1 5 3.5"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M12 3.5 V6 M12 18 V20.5 M3.5 12 H6 M18 12 H20.5 M6.1 6.1 L7.8 7.8 M16.2 16.2 L17.9 17.9 M6.1 17.9 L7.8 16.2 M16.2 7.8 L17.9 6.1"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4.5 6a1.5 1.5 0 0 1 1.5-1.5h12A1.5 1.5 0 0 1 19.5 6v7A1.5 1.5 0 0 1 18 14.5H9l-4.5 4.5z"/></symbol>
+    <symbol id="i-share" viewBox="0 0 24 24"><circle cx="6" cy="12" r="2.2"/><circle cx="18" cy="6" r="2.2"/><circle cx="18" cy="18" r="2.2"/><path d="M8.2 11 L15.8 7 M8.2 13 L15.8 17"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5 V19 M5 12 H19"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M5 7h14"/><path d="M9 7V5h6v2"/><path d="M6 7l1 13h10l1-13"/><path d="M10 10v8 M14 10v8"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12 L10 17 L19 7"/></symbol>
+    <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="M9 6 L15 12 L9 18"/></symbol>
+    <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="M6 9 L12 15 L18 9"/></symbol>
+    <symbol id="i-chevron-left" viewBox="0 0 24 24"><path d="M15 6 L9 12 L15 18"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4 V15"/><path d="M8 11 L12 15 L16 11"/><path d="M5 19 H19"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7-4.5-7-9.5A3.5 3.5 0 0 1 12 7a3.5 3.5 0 0 1 7 3.5C19 15.5 12 20 12 20z"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><polygon points="12,3 14.5,9.2 21,9.7 16,14 17.6,20.5 12,16.8 6.4,20.5 8,14 3,9.7 9.5,9.2"/></symbol>
+    <symbol id="i-wifi" viewBox="0 0 24 24"><path d="M2.5 8.5a16 16 0 0 1 19 0"/><path d="M5.5 12a11 11 0 0 1 13 0"/><path d="M8.5 15.5a6 6 0 0 1 7 0"/><circle cx="12" cy="19" r="1.1" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-battery" viewBox="0 0 24 24"><rect x="3" y="8" width="16" height="8"/><rect x="20" y="10.5" width="2" height="3" fill="currentColor" stroke="none"/><rect x="5" y="10" width="9" height="4" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-warning" viewBox="0 0 24 24"><polygon points="12,3 22,20 2,20"/><path d="M12 9 V14"/><circle cx="12" cy="17" r="0.7" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-error" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 9 L15 15 M15 9 L9 15"/></symbol>
+    <symbol id="i-success" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12 L11 15 L16 9"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2 1a11 11 0 0 0 5 5l1-2 5 2v4a1 1 0 0 1-1 1A17 17 0 0 1 4 5a1 1 0 0 1 1-1z"/></symbol>
+    <symbol id="i-video" viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12"/><path d="M16 10 L21 7 V17 L16 14z"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9"/><path d="M8 11 V8 a4 4 0 0 1 8 0 V11"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 3V5 M12 19V21 M3 12H5 M19 12H21 M5.6 5.6L7 7 M17 17L18.4 18.4 M5.6 18.4L7 17 M17 7L18.4 5.6"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.5A8.5 8.5 0 1 1 11.5 3a6.5 6.5 0 0 0 9.5 9.5z"/></symbol>
+    <symbol id="i-filter" viewBox="0 0 24 24"><path d="M4 5 H20 L14 12 V19 L10 17 V12z"/></symbol>
+    <symbol id="i-save" viewBox="0 0 24 24"><path d="M5 4 H16 L19 7 V20 H5z"/><path d="M8 4 V9 H15 V4 M8 20 V14 H16 V20"/></symbol>
+  </defs>
+</svg>
+
+<!-- =====================================================================
+     LEFT RAIL — section navigation
+     ===================================================================== -->
+<nav class="rail" aria-label="Sections">
+  <div class="brand" title="Metro UI">M</div>
+  <button class="rail-link is-active" data-nav="sec-hero" title="Start screen"><svg class="glyph"><use href="#i-home"/></svg></button>
+  <button class="rail-link" data-nav="sec-principles" title="Principles"><svg class="glyph"><use href="#i-info"/></svg></button>
+  <button class="rail-link" data-nav="sec-color" title="Color table"><svg class="glyph"><use href="#i-palette"/></svg></button>
+  <button class="rail-link" data-nav="sec-type" title="Typography"><svg class="glyph"><use href="#i-edit"/></svg></button>
+  <button class="rail-link" data-nav="sec-tiles" title="Live tiles"><svg class="glyph"><use href="#i-grid"/></svg></button>
+  <button class="rail-link" data-nav="sec-buttons" title="Buttons"><svg class="glyph"><use href="#i-button"/></svg></button>
+  <button class="rail-link" data-nav="sec-inputs" title="Inputs"><svg class="glyph"><use href="#i-search"/></svg></button>
+  <button class="rail-link" data-nav="sec-select" title="Select"><svg class="glyph"><use href="#i-chevron-down"/></svg></button>
+  <button class="rail-link" data-nav="sec-controls" title="Controls"><svg class="glyph"><use href="#i-settings"/></svg></button>
+  <button class="rail-link" data-nav="sec-display" title="Display"><svg class="glyph"><use href="#i-people"/></svg></button>
+  <button class="rail-link" data-nav="sec-progress" title="Progress"><svg class="glyph"><use href="#i-refresh"/></svg></button>
+  <button class="rail-link" data-nav="sec-list" title="List view"><svg class="glyph"><use href="#i-list"/></svg></button>
+  <button class="rail-link" data-nav="sec-pivot" title="Pivot"><svg class="glyph"><use href="#i-tabs"/></svg></button>
+  <button class="rail-link" data-nav="sec-overlays" title="Flyouts"><svg class="glyph"><use href="#i-message"/></svg></button>
+  <button class="rail-link" data-nav="sec-appbar" title="App bar"><svg class="glyph"><use href="#i-more"/></svg></button>
+  <button class="rail-link" data-nav="sec-hub" title="Hub"><svg class="glyph"><use href="#i-globe"/></svg></button>
+  <div class="rail-spacer"></div>
+  <button class="rail-link" data-theme-toggle title="Toggle theme"><svg class="glyph"><use href="#i-moon"/></svg></button>
+</nav>
+
+<main class="canvas">
+
+  <!-- =================================================================
+       TOP BAR
+       ================================================================= -->
+  <header class="topbar">
+    <div class="title">Metro UI — Design System</div>
+    <div class="spacer"></div>
+    <button class="btn btn--sm" data-theme-toggle><svg class="glyph"><use href="#i-moon"/></svg>&nbsp;Theme</button>
+    <button class="btn btn--sm btn--primary" data-appbar-trigger><svg class="glyph"><use href="#i-more"/></svg>&nbsp;App bar</button>
+  </header>
+
+  <!-- =================================================================
+       HERO — THE START SCREEN
+       The signature Metro surface: a grid of live tiles, each with its own
+       block volume expressing hierarchy. Right-click anywhere to summon
+       the app bar (classic Windows 8 gesture).
+       ================================================================= -->
+  <section class="section section--alt" id="sec-hero" data-section>
+    <div class="section-eyebrow">The Start Screen</div>
+    <h1 class="section-title">Metro UI</h1>
+    <p class="section-lead">A design language descended from Bauhaus — proportion over decoration, content over chrome, and color blocks that earn their place. <span class="muted">Not “just stacking a few color blocks.”</span></p>
+
+    <div class="tile-group is-animated" style="grid-template-columns: repeat(10, var(--metro-tile-unit)); grid-auto-rows: var(--metro-tile-unit);">
+
+      <!-- Clock — large live tile, flips to the time -->
+      <button class="tile tile-lg bg-blue live" style="grid-column:1/5;grid-row:1/5" aria-label="Clock live tile">
+        <div class="tile-faces">
+          <div class="tile-face tile-brand tile-face--front">
+            <span class="tile-glyph"><svg class="glyph"><use href="#i-clock"/></svg></span>
+            <div class="tile-title">Clock</div>
+          </div>
+          <div class="tile-face tile-face--back">
+            <div class="tile-readout" data-live-clock="time">--:--</div>
+            <div class="tile-caption" data-live-clock="date">—</div>
+          </div>
+        </div>
+      </button>
+
+      <!-- Weather — wide live tile -->
+      <button class="tile tile-wide bg-teal live" style="grid-column:5/9;grid-row:1/3" aria-label="Weather live tile">
+        <div class="tile-faces">
+          <div class="tile-face tile-brand tile-face--front">
+            <span class="tile-glyph"><svg class="glyph"><use href="#i-weather"/></svg></span>
+            <div class="tile-title">Weather</div>
+          </div>
+          <div class="tile-face tile-face--back">
+            <div class="tile-readout">21°<small>C</small></div>
+            <div class="tile-caption">Partly cloudy · Shanghai</div>
+          </div>
+        </div>
+      </button>
+
+      <!-- Photos — image tile -->
+      <button class="tile tile-md bg-purple has-img" style="grid-column:9/11;grid-row:1/3" aria-label="Photos">
+        <span class="tile-img" style="background-image:url('https://images.unsplash.com/photo-1506744038136-46273834b590?w=320&q=60')"></span>
+        <div class="tile-face tile-brand">
+          <span class="tile-glyph"><svg class="glyph"><use href="#i-photos"/></svg></span>
+          <div class="tile-title">Photos</div>
+        </div>
+      </button>
+
+      <!-- Mail — wide live tile with badge -->
+      <button class="tile tile-wide bg-magenta live" style="grid-column:5/9;grid-row:3/5" aria-label="Mail live tile">
+        <div class="tile-faces">
+          <div class="tile-face tile-brand tile-face--front">
+            <span class="tile-glyph"><svg class="glyph"><use href="#i-mail"/></svg></span>
+            <div class="tile-title">Mail</div>
+            <span class="tile-badge">3</span>
+          </div>
+          <div class="tile-face tile-face--back">
+            <span class="tile-glyph"><svg class="glyph"><use href="#i-mail"/></svg></span>
+            <div class="tile-caption" style="margin-top:auto">
+              <strong>Inbox</strong> · 3 unread<br>
+              <span class="muted">“Design review at 4pm —”</span>
+            </div>
+          </div>
+        </div>
+      </button>
+
+      <!-- Calendar — medium live tile -->
+      <button class="tile tile-md bg-accent live" style="grid-column:9/11;grid-row:3/5" aria-label="Calendar live tile">
+        <div class="tile-faces">
+          <div class="tile-face tile-brand tile-face--front">
+            <span class="tile-glyph"><svg class="glyph"><use href="#i-calendar"/></svg></span>
+            <div class="tile-title">Calendar</div>
+          </div>
+          <div class="tile-face tile-face--back">
+            <div class="tile-readout" style="font-size:44px">24</div>
+            <div class="tile-caption">June · Wednesday</div>
+          </div>
+        </div>
+      </button>
+
+      <!-- Row 5–6: five medium tiles -->
+      <button class="tile tile-md bg-violet" style="grid-column:1/3;grid-row:5/7" aria-label="Music">
+        <div class="tile-face tile-brand">
+          <span class="tile-glyph"><svg class="glyph"><use href="#i-music"/></svg></span>
+          <div class="tile-title">Music</div>
+          <div class="tile-caption">Now playing</div>
+        </div>
+        <span class="tile-status pulse"></span>
+      </button>
+
+      <button class="tile tile-md bg-emerald" style="grid-column:3/5;grid-row:5/7" aria-label="Messaging">
+        <div class="tile-face tile-brand">
+          <span class="tile-glyph"><svg class="glyph"><use href="#i-chat"/></svg></span>
+          <div class="tile-title">Messaging</div>
+        </div>
+        <span class="tile-badge">2</span>
+      </button>
+
+      <button class="tile tile-md bg-orange" style="grid-column:5/7;grid-row:5/7" aria-label="Maps">
+        <div class="tile-face tile-brand">
+          <span class="tile-glyph"><svg class="glyph"><use href="#i-map"/></svg></span>
+          <div class="tile-title">Maps</div>
+        </div>
+      </button>
+
+      <button class="tile tile-md bg-lime" style="grid-column:7/9;grid-row:5/7" aria-label="Store">
+        <div class="tile-face tile-brand">
+          <span class="tile-glyph"><svg class="glyph"><use href="#i-store"/></svg></span>
+          <div class="tile-title">Store</div>
+        </div>
+      </button>
+
+      <button class="tile tile-md bg-red" style="grid-column:9/11;grid-row:5/7" aria-label="Camera">
+        <div class="tile-face tile-brand">
+          <span class="tile-glyph"><svg class="glyph"><use href="#i-camera"/></svg></span>
+          <div class="tile-title">Camera</div>
+        </div>
+      </button>
+    </div>
+
+    <p class="muted mt-4" style="font-size:var(--metro-fs-small)">↑ Live tiles flip on an interval. Right-click anywhere on the page to open the app bar. Try the theme toggle in the rail.</p>
+  </section>
+
+  <!-- =================================================================
+       PRINCIPLES — the article's philosophy
+       ================================================================= -->
+  <section class="section" id="sec-principles" data-section>
+    <div class="section-eyebrow">Phase 0 · Philosophy</div>
+    <h2 class="section-title">Four principles from the source</h2>
+    <p class="section-lead">The article traces Metro to the <strong>Bauhaus</strong> of Walter Gropius and Ludwig Mies van der Rohe — “less is more,” proportion over decoration, and detail in the places you don’t feel. Metro revives that lineage for the screen.</p>
+
+    <div class="swatch-grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
+      <div class="demo-pane">
+        <span class="tile-glyph" style="font-size:34px;color:var(--metro-accent)"><svg class="glyph"><use href="#i-home"/></svg></span>
+        <div class="group-header" style="margin-top:var(--metro-space-3);margin-bottom:var(--metro-space-2)">Bauhaus lineage</div>
+        <p class="muted" style="margin:0">Not arbitrary stacking. Gropius and Mies van der Rohe treated proportion, light &amp; shadow, typography and image as a carefully matched system — Metro inherits that rigor.</p>
+      </div>
+      <div class="demo-pane">
+        <span class="tile-glyph" style="font-size:34px;color:var(--metro-teal)"><svg class="glyph"><use href="#i-grid"/></svg></span>
+        <div class="group-header" style="margin-top:var(--metro-space-3);margin-bottom:var(--metro-space-2)">Proportion first</div>
+        <p class="muted" style="margin:0">Block volume, line spacing and hierarchy are calibrated in the wireframe — <em>before</em> color. Size itself carries meaning.</p>
+      </div>
+      <div class="demo-pane">
+        <span class="tile-glyph" style="font-size:34px;color:var(--metro-magenta)"><svg class="glyph"><use href="#i-palette"/></svg></span>
+        <div class="group-header" style="margin-top:var(--metro-space-3);margin-bottom:var(--metro-space-2)">Color table first</div>
+        <p class="muted" style="margin:0">Establish the full palette up front — dark vs. light, warm vs. cool — then fill the wireframe from it. Backgrounds differentiate, not gradients.</p>
+      </div>
+      <div class="demo-pane">
+        <span class="tile-glyph" style="font-size:34px;color:var(--metro-emerald)"><svg class="glyph"><use href="#i-check"/></svg></span>
+        <div class="group-header" style="margin-top:var(--metro-space-3);margin-bottom:var(--metro-space-2)">Zero-learning</div>
+        <p class="muted" style="margin:0">Interaction must be so intuitive that users don’t need to learn it. Animation, ergonomics, tactility and sound all serve that goal.</p>
+      </div>
+    </div>
+
+    <blockquote class="mt-6" style="border-left:4px solid var(--metro-accent);padding-left:var(--metro-space-6);max-width:62ch">
+      <p style="font-size:var(--metro-fs-subtitle);font-weight:var(--metro-fw-light)">“让交互变得更简单易懂却又不简陋。”</p>
+      <p class="muted">Make interaction simpler and more understandable — yet never crude.</p>
+    </blockquote>
+  </section>
+
+  <!-- =================================================================
+       COLOR TABLE — the 色表 the article insists on first
+       ================================================================= -->
+  <section class="section section--alt" id="sec-color" data-section>
+    <div class="section-eyebrow">Phase 3 · Color</div>
+    <h2 class="section-title">The color table</h2>
+    <p class="section-lead">A cool-leaning primary on a light canvas, with a full dark counterpart. Tile accents are a deliberately mixed warm + cool set of jewel tones — Metro’s energy comes from saturated blocks, not gradients.</p>
+
+    <div class="demo-label">Accent / interactive</div>
+    <div class="swatch-grid">
+      <div class="swatch"><div class="chip" style="background:var(--metro-accent)"></div><div class="meta"><div class="name">Accent</div><div class="hex">#0078D7</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--metro-accent-d)"></div><div class="meta"><div class="name">Accent press</div><div class="hex">#005A9E</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--metro-blue)"></div><div class="meta"><div class="name">Blue</div><div class="hex">#2D8BFC</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--metro-teal)"></div><div class="meta"><div class="name">Teal</div><div class="hex">#00B7C3</div></div></div>
+    </div>
+
+    <div class="demo-label mt-6">Tile palette — warm + cool</div>
+    <div class="swatch-grid">
+      <div class="swatch"><div class="chip" style="background:var(--metro-emerald)"></div><div class="meta"><div class="name">Emerald</div><div class="hex">#00A300</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--metro-lime)"></div><div class="meta"><div class="name">Lime</div><div class="hex">#A4C400</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--metro-amber)"></div><div class="meta"><div class="name">Amber</div><div class="hex">#F0A30A</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--metro-orange)"></div><div class="meta"><div class="name">Orange</div><div class="hex">#FA6800</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--metro-magenta)"></div><div class="meta"><div class="name">Magenta</div><div class="hex">#B91D47</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--metro-pink)"></div><div class="meta"><div class="name">Pink</div><div class="hex">#E3008C</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--metro-purple)"></div><div class="meta"><div class="name">Purple</div><div class="hex">#5C2D91</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--metro-violet)"></div><div class="meta"><div class="name">Violet</div><div class="hex">#8C0095</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--metro-red)"></div><div class="meta"><div class="name">Red</div><div class="hex">#E81123</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--metro-crimson)"></div><div class="meta"><div class="name">Crimson</div><div class="hex">#A50E0E</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--metro-steel)"></div><div class="meta"><div class="name">Steel</div><div class="hex">#525E6F</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--metro-graphite)"></div><div class="meta"><div class="name">Graphite</div><div class="hex">#4A4A4A</div></div></div>
+    </div>
+
+    <div class="demo-label mt-6">Semantic status</div>
+    <div class="swatch-grid" style="grid-template-columns:repeat(auto-fill,minmax(160px,1fr))">
+      <div class="swatch"><div class="chip" style="background:var(--metro-success)"></div><div class="meta"><div class="name">Success</div><div class="hex">#107C10</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--metro-warning)"></div><div class="meta"><div class="name">Warning</div><div class="hex">#FFB900</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--metro-error)"></div><div class="meta"><div class="name">Error</div><div class="hex">#E81123</div></div></div>
+    </div>
+
+    <div class="demo-label mt-6">Same-scheme challenge</div>
+    <p class="muted mb-4" style="font-size:var(--metro-fs-small);max-width:60ch">The article notes that within a single color family “every detail becomes even more important” and that <strong>background color</strong> is the differentiation tool. Below, one hue, three depths — differentiation comes from value, not hue.</p>
+    <div class="swatch-grid" style="grid-template-columns:repeat(auto-fill,minmax(160px,1fr))">
+      <div class="swatch"><div class="chip" style="background:#0b3d91"></div><div class="meta"><div class="name">Deep</div><div class="hex">#0B3D91</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#2d8bfc"></div><div class="meta"><div class="name">Mid</div><div class="hex">#2D8BFC</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#7db6ff"></div><div class="meta"><div class="name">Soft</div><div class="hex">#7DB6FF</div></div></div>
+    </div>
+  </section>
+
+  <!-- =================================================================
+       TYPOGRAPHY
+       ================================================================= -->
+  <section class="section" id="sec-type" data-section>
+    <div class="section-eyebrow">Phase 1 · Wireframe</div>
+    <h2 class="section-title">Typography</h2>
+    <p class="section-lead">Metro’s signature is light-weight headings and tight tracking — content, not chrome. The hierarchy carries weight that skeuomorphic chrome used to. Segoe UI is canonical; the stack degrades gracefully.</p>
+
+    <div class="demo-pane">
+      <div class="specimen"><div class="label">Display · 72 / Light 200</div><div style="font-size:var(--metro-fs-display);font-weight:var(--metro-fw-light);line-height:1;letter-spacing:var(--metro-tracking-tight)">Start</div></div>
+      <div class="specimen"><div class="label">Hero · 42 / Light 200</div><div style="font-size:var(--metro-fs-hero);font-weight:var(--metro-fw-light);letter-spacing:var(--metro-tracking-tight)">The quick brown fox</div></div>
+      <div class="specimen"><div class="label">Section · 34 / Light 200</div><div style="font-size:var(--metro-fs-section);font-weight:var(--metro-fw-light);letter-spacing:var(--metro-tracking-tight)">Section heading</div></div>
+      <div class="specimen"><div class="label">Subtitle · 20 / SemiLight 300</div><div style="font-size:var(--metro-fs-subtitle);font-weight:var(--metro-fw-semilight)">Subtitle — supporting line of copy</div></div>
+      <div class="specimen"><div class="label">Base · 15 / Regular 400</div><div style="font-size:var(--metro-fs-base)">Body text. The default reading size; comfortable at 1.35 line height on a 4-pixel rhythm.</div></div>
+      <div class="specimen"><div class="label">Small · 13 / Regular</div><div style="font-size:var(--metro-fs-small)" class="muted">Secondary text, metadata, and captions.</div></div>
+      <div class="specimen"><div class="label">Caption · 11 / SemiBold, wide tracking, uppercase</div><div class="upper" style="font-size:var(--metro-fs-caption);font-weight:var(--metro-fw-semibold)">Group header / eyebrow</div></div>
+      <div class="specimen"><div class="label">Micro · 10</div><div style="font-size:var(--metro-fs-micro)" class="muted-2">Microcopy and tertiary labels.</div></div>
+    </div>
+
+    <div class="demo-label mt-6">Weight axis</div>
+    <div class="demo-pane">
+      <div class="row" style="gap:var(--metro-space-6);font-size:var(--metro-fs-subtitle)">
+        <span style="font-weight:var(--metro-fw-light)">Light 200</span>
+        <span style="font-weight:var(--metro-fw-semilight)">SemiLight 300</span>
+        <span style="font-weight:var(--metro-fw-regular)">Regular 400</span>
+        <span style="font-weight:var(--metro-fw-semibold)">SemiBold 600</span>
+        <span style="font-weight:var(--metro-fw-bold)">Bold 700</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================================================================
+       LIVE TILES — the component gallery
+       ================================================================= -->
+  <section class="section section--alt" id="sec-tiles" data-section>
+    <div class="section-eyebrow">Component</div>
+    <h2 class="section-title">Live tiles</h2>
+    <p class="section-lead">The atom of Metro. Sizes snap to a unit grid so block volume expresses hierarchy. Live tiles flip to surface fresh content; badges and status dots carry state without chrome.</p>
+
+    <div class="demo-label">Sizes</div>
+    <div class="tile-group is-animated" style="grid-template-columns:repeat(10,var(--metro-tile-unit))">
+      <button class="tile tile-sm bg-steel"><div class="tile-face tile-brand"><span class="tile-glyph"><svg class="glyph"><use href="#i-settings"/></svg></span></div></button>
+      <button class="tile tile-sm bg-graphite"><div class="tile-face tile-brand"><span class="tile-glyph"><svg class="glyph"><use href="#i-wifi"/></svg></span></div></button>
+      <button class="tile tile-md bg-blue live">
+        <div class="tile-faces">
+          <div class="tile-face tile-brand tile-face--front"><span class="tile-glyph"><svg class="glyph"><use href="#i-mail"/></svg></span><div class="tile-title">Medium 2×2</div></div>
+          <div class="tile-face tile-face--back"><div class="tile-readout" style="font-size:34px">12</div><div class="tile-caption">new</div></div>
+        </div>
+      </button>
+      <button class="tile tile-wide bg-emerald live">
+        <div class="tile-faces">
+          <div class="tile-face tile-brand tile-face--front"><span class="tile-glyph"><svg class="glyph"><use href="#i-people"/></svg></span><div class="tile-title">Wide 4×2</div></div>
+          <div class="tile-face tile-face--back"><div class="tile-readout" style="font-size:38px">1,284</div><div class="tile-caption">active today</div></div>
+        </div>
+      </button>
+      <button class="tile tile-lg bg-accent live">
+        <div class="tile-faces">
+          <div class="tile-face tile-brand tile-face--front"><span class="tile-glyph"><svg class="glyph"><use href="#i-photos"/></svg></span><div class="tile-title">Large 4×4</div></div>
+          <div class="tile-face tile-face--back"><div class="tile-readout" data-counter="12840">0</div><div class="tile-caption">photos this year</div></div>
+        </div>
+      </button>
+    </div>
+    <div class="muted mt-4" style="font-size:var(--metro-fs-small)">↑ Small 1×1 · Medium 2×2 · Wide 4×2 · Large 4×4 (the Large tile’s counter animates on load).</div>
+
+    <div class="demo-label mt-6">Live content variants</div>
+    <div class="tile-group is-animated" style="grid-template-columns:repeat(10,var(--metro-tile-unit))">
+      <!-- Flip live tile (manual) -->
+      <button class="tile tile-md bg-magenta live" onclick="this.classList.toggle('is-flipped')">
+        <div class="tile-faces">
+          <div class="tile-face tile-brand tile-face--front"><span class="tile-glyph"><svg class="glyph"><use href="#i-heart"/></svg></span><div class="tile-title">Tap to flip</div></div>
+          <div class="tile-face tile-face--back"><div class="tile-readout" style="font-size:40px">♥ 99+</div><div class="tile-caption">favorites</div></div>
+        </div>
+      </button>
+      <!-- Peek / slide live tile -->
+      <button class="tile tile-md bg-orange peek live">
+        <div class="tile-faces">
+          <div class="tile-face tile-face--front"><span class="tile-glyph" style="margin-top:auto"><svg class="glyph"><use href="#i-store"/></svg></span><div class="tile-title">Store</div></div>
+          <div class="tile-face tile-face--back"><div class="tile-caption" style="margin-top:auto"><strong>Top app</strong><br><span class="muted">Metro Paint — 4.9 ★</span></div></div>
+        </div>
+      </button>
+      <!-- Ticker live tile -->
+      <button class="tile tile-wide bg-purple live">
+        <div class="tile-faces">
+          <div class="tile-face tile-brand tile-face--front"><span class="tile-glyph"><svg class="glyph"><use href="#i-globe"/></svg></span><div class="tile-title">News</div></div>
+          <div class="tile-face tile-face--back"><div class="tile-caption" style="margin-top:auto;font-size:var(--metro-fs-base)"><span data-ticker data-ticker-items="Design week opens today|New tile APIs ship v2|Bauhaus exhibit tours Asia|Metro wins design award">Design week opens today</span></div></div>
+        </div>
+      </button>
+      <!-- Image tile -->
+      <button class="tile tile-md bg-steel has-img">
+        <span class="tile-img" style="background-image:url('https://images.unsplash.com/photo-1519681393784-d120267933ba?w=320&q=60')"></span>
+        <div class="tile-face tile-brand"><span class="tile-glyph"><svg class="glyph"><use href="#i-photos"/></svg></span><div class="tile-title">Gallery</div></div>
+      </button>
+      <button class="tile tile-sm bg-emerald"><div class="tile-face tile-brand"><span class="tile-glyph"><svg class="glyph"><use href="#i-phone"/></svg></span></div><span class="tile-status"></span></button>
+      <button class="tile tile-sm bg-amber"><div class="tile-face tile-brand"><span class="tile-glyph"><svg class="glyph"><use href="#i-wifi"/></svg></span></div><span class="tile-status away"></span></button>
+    </div>
+    <div class="muted mt-4" style="font-size:var(--metro-fs-small)">↑ Tap the magenta tile to flip it manually · the orange tile uses the slide/peek animation · the purple tile cycles a live ticker · small tiles show status dots (online / away / offline).</div>
+
+    <div class="demo-label mt-6">States &amp; decorations</div>
+    <div class="tile-group is-animated" style="grid-template-columns:repeat(10,var(--metro-tile-unit))">
+      <button class="tile tile-md bg-accent"><div class="tile-face tile-brand"><span class="tile-glyph"><svg class="glyph"><use href="#i-mail"/></svg></span><div class="tile-title">Badge</div></div><span class="tile-badge">7</span></button>
+      <button class="tile tile-md bg-steel"><div class="tile-face tile-brand"><span class="tile-glyph"><svg class="glyph"><use href="#i-phone"/></svg></span><div class="tile-title">Online</div></div><span class="tile-status"></span></button>
+      <button class="tile tile-md bg-graphite"><div class="tile-face tile-brand"><span class="tile-glyph"><svg class="glyph"><use href="#i-phone"/></svg></span><div class="tile-title">Away</div></div><span class="tile-status away"></span></button>
+      <button class="tile tile-md bg-violet"><div class="tile-face tile-brand"><span class="tile-glyph"><svg class="glyph"><use href="#i-phone"/></svg></span><div class="tile-title">Offline</div></div><span class="tile-status off"></span></button>
+      <button class="tile tile-md secondary"><div class="tile-face tile-brand"><span class="tile-glyph" style="color:var(--metro-fg)"><svg class="glyph"><use href="#i-settings"/></svg></span><div class="tile-title" style="color:var(--metro-fg)">Secondary</div></div></button>
+    </div>
+    <div class="muted mt-4" style="font-size:var(--metro-fs-small)">↑ Notification badge · online / away / offline status dots · a secondary (outline) tile for non-color-block content.</div>
+
+    <div class="demo-label mt-6">Usage</div>
+<pre class="codeblock"><span class="c-com">&lt;!-- A large live tile that flips to show a live count --&gt;</span>
+&lt;<span class="c-tag">button</span> <span class="c-attr">class</span>=<span class="c-val">"tile tile-lg bg-accent live"</span>&gt;
+  &lt;<span class="c-tag">div</span> <span class="c-attr">class</span>=<span class="c-val">"tile-faces"</span>&gt;
+    &lt;<span class="c-tag">div</span> <span class="c-attr">class</span>=<span class="c-val">"tile-face tile-face--front tile-brand"</span>&gt;…&lt;/<span class="c-tag">div</span>&gt;
+    &lt;<span class="c-tag">div</span> <span class="c-attr">class</span>=<span class="c-val">"tile-face tile-face--back"</span>&gt;
+      &lt;<span class="c-tag">div</span> <span class="c-attr">class</span>=<span class="c-val">"tile-readout"</span> <span class="c-attr">data-counter</span>=<span class="c-val">"12840"</span>&gt;0&lt;/<span class="c-tag">div</span>&gt;
+    &lt;/<span class="c-tag">div</span>&gt;
+  &lt;/<span class="c-tag">div</span>&gt;
+&lt;/<span class="c-tag">button</span>&gt;</pre>
+  </section>
+
+  <!-- =================================================================
+       BUTTONS
+       ================================================================= -->
+  <section class="section" id="sec-buttons" data-section>
+    <div class="section-eyebrow">Component</div>
+    <h2 class="section-title">Buttons</h2>
+    <p class="section-lead">Flat, square-edged, accent by default. A thin border and a solid fill on hover/press — no rounded corners, no glow. Press sinks slightly for tactility.</p>
+
+    <div class="demo">
+      <div class="demo-label">Variants</div>
+      <div class="demo-pane">
+        <div class="row">
+          <button class="btn btn--primary"><svg class="glyph"><use href="#i-check"/></svg>Primary</button>
+          <button class="btn">Default</button>
+          <button class="btn btn--ghost">Ghost</button>
+          <button class="btn btn--danger"><svg class="glyph"><use href="#i-trash"/></svg>Delete</button>
+          <button class="btn btn--success"><svg class="glyph"><use href="#i-check"/></svg>Save</button>
+          <button class="btn" disabled style="opacity:.4;cursor:not-allowed">Disabled</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo">
+      <div class="demo-label">Sizes &amp; block</div>
+      <div class="demo-pane">
+        <div class="row mb-4">
+          <button class="btn btn--sm btn--primary">Small</button>
+          <button class="btn btn--primary">Default</button>
+          <button class="btn btn--lg btn--primary">Large</button>
+        </div>
+        <div class="maxw-sm"><button class="btn btn--primary btn--block">Full-width block button</button></div>
+      </div>
+    </div>
+
+    <div class="demo">
+      <div class="demo-label">Icon buttons &amp; tooltips</div>
+      <div class="demo-pane">
+        <div class="row">
+          <button class="icon-btn tooltip" data-tip="Add"><svg class="glyph"><use href="#i-plus"/></svg></button>
+          <button class="icon-btn tooltip" data-tip="Edit"><svg class="glyph"><use href="#i-edit"/></svg></button>
+          <button class="icon-btn tooltip" data-tip="Share"><svg class="glyph"><use href="#i-share"/></svg></button>
+          <button class="icon-btn tooltip" data-tip="Download"><svg class="glyph"><use href="#i-download"/></svg></button>
+          <button class="icon-btn tooltip" data-tip="Delete"><svg class="glyph"><use href="#i-trash"/></svg></button>
+          <button class="icon-btn tooltip" data-tip="Filter"><svg class="glyph"><use href="#i-filter"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================================================================
+       INPUTS & FORMS — ENHANCED
+       ================================================================= -->
+  <section class="section section--alt" id="sec-inputs" data-section>
+    <div class="section-eyebrow">Component</div>
+    <h2 class="section-title">Inputs &amp; forms</h2>
+    <p class="section-lead">Enhanced input fields with focus glow, validation states, floating labels, and character counters. Selects get custom arrows and hover feedback. Toggles and check/radio are crisp, animated.</p>
+
+    <div class="demo-grid">
+      <div class="demo-pane">
+        <div class="demo-label">Text fields — with focus glow &amp; validation</div>
+        <div class="field">
+          <label for="f-name">Full name</label>
+          <input class="input" id="f-name" type="text" placeholder="Jane Doe" />
+        </div>
+        <div class="field success">
+          <label for="f-email-ok">Email</label>
+          <input class="input" id="f-email-ok" type="email" value="jane@example.com" />
+          <span class="hint">✓ Valid email address</span>
+        </div>
+        <div class="field error">
+          <label for="f-email-bad">Email (invalid)</label>
+          <input class="input" id="f-email-bad" type="email" value="jane@" />
+          <span class="hint">Please enter a valid email</span>
+        </div>
+        <div class="field">
+          <label for="f-bio">Bio</label>
+          <textarea class="textarea textarea-with-counter" id="f-bio" placeholder="Tell us about yourself…" maxlength="200"></textarea>
+          <span class="char-count"><span id="bio-count">0</span>/200</span>
+        </div>
+      </div>
+
+      <div class="demo-pane">
+        <div class="demo-label">Inputs with leading icon</div>
+        <div class="field">
+          <label for="f-email2">Email</label>
+          <div class="input-with-icon">
+            <svg class="icon"><use href="#i-mail"/></svg>
+            <input class="input" id="f-email2" type="email" placeholder="you@example.com" />
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-phone">Phone</label>
+          <div class="input-with-icon">
+            <svg class="icon"><use href="#i-phone"/></svg>
+            <input class="input" id="f-phone" type="tel" placeholder="+1 (555) 000-0000" />
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-pass">Password</label>
+          <div class="input-with-icon">
+            <svg class="icon"><use href="#i-lock"/></svg>
+            <input class="input" id="f-pass" type="password" placeholder="••••••••" />
+          </div>
+          <span class="hint">At least 8 characters</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo mt-6">
+      <div class="demo-label">Search — enhanced</div>
+      <div class="demo-pane maxw-md">
+        <div class="search">
+          <svg class="glyph"><use href="#i-search"/></svg>
+          <input type="text" placeholder="Search apps, settings, files, people" aria-label="Search" />
+          <button class="icon-btn clear" aria-label="Clear"><svg class="glyph"><use href="#i-error"/></svg></button>
+        </div>
+        <div class="muted mt-2" style="font-size:var(--metro-fs-small)">Type to see the clear button appear · focus triggers the accent glow</div>
+      </div>
+    </div>
+
+    <div class="demo">
+      <div class="demo-label">Number input</div>
+      <div class="demo-pane maxw-md">
+        <div class="row" style="gap:var(--metro-space-5)">
+          <div class="number-input">
+            <button type="button" aria-label="Decrease"><svg class="glyph sm"><use href="#i-chevron-left"/></svg></button>
+            <input type="number" value="5" min="0" max="20" />
+            <button type="button" aria-label="Increase"><svg class="glyph sm"><use href="#i-chevron-right"/></svg></button>
+          </div>
+          <span class="muted" style="font-size:var(--metro-fs-small)">Quantity</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================================================================
+       SELECT / DROPDOWNS — NEW SECTION
+       ================================================================= -->
+  <section class="section" id="sec-select" data-section>
+    <div class="section-eyebrow">Component</div>
+    <h2 class="section-title">Select &amp; dropdowns</h2>
+    <p class="section-lead">Native selects get custom arrows and focus glow. Dropdown menus are animated, keyboard-aware, and support search and multi-select.</p>
+
+    <div class="demo-grid">
+      <div class="demo-pane">
+        <div class="demo-label">Custom single select</div>
+        <div class="field">
+          <label>Country</label>
+          <div class="metro-select" data-metro-select>
+            <div class="metro-select-trigger">
+              <span class="placeholder">Choose a country</span>
+              <svg class="metro-select-arrow"><use href="#i-chevron-down"/></svg>
+            </div>
+            <div class="metro-select-panel">
+              <div class="metro-option" data-value="us">
+                <svg class="glyph sm"><use href="#i-globe"/></svg>
+                United States
+              </div>
+              <div class="metro-option" data-value="uk">
+                <svg class="glyph sm"><use href="#i-globe"/></svg>
+                United Kingdom
+              </div>
+              <div class="metro-option" data-value="ca">
+                <svg class="glyph sm"><use href="#i-globe"/></svg>
+                Canada
+              </div>
+              <div class="metro-option" data-value="jp">
+                <svg class="glyph sm"><use href="#i-globe"/></svg>
+                Japan
+              </div>
+              <div class="metro-option" data-value="de">
+                <svg class="glyph sm"><use href="#i-globe"/></svg>
+                Germany
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Language</label>
+          <div class="metro-select" data-metro-select>
+            <div class="metro-select-trigger">
+              <svg class="lead-icon glyph"><use href="#i-globe"/></svg>
+              <span class="placeholder">Choose a language</span>
+              <svg class="metro-select-arrow"><use href="#i-chevron-down"/></svg>
+            </div>
+            <div class="metro-select-panel">
+              <div class="metro-select-search">
+                <input type="text" placeholder="Search languages..." />
+              </div>
+              <div class="metro-option" data-value="en">
+                <svg class="glyph sm"><use href="#i-globe"/></svg>
+                English
+              </div>
+              <div class="metro-option" data-value="zh">
+                <svg class="glyph sm"><use href="#i-globe"/></svg>
+                中文
+              </div>
+              <div class="metro-option" data-value="ja">
+                <svg class="glyph sm"><use href="#i-globe"/></svg>
+                日本語
+              </div>
+              <div class="metro-option" data-value="de">
+                <svg class="glyph sm"><use href="#i-globe"/></svg>
+                Deutsch
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Size</label>
+          <div class="metro-select" data-metro-select>
+            <div class="metro-select-trigger">
+              <span class="placeholder">Choose a size</span>
+              <svg class="metro-select-arrow"><use href="#i-chevron-down"/></svg>
+            </div>
+            <div class="metro-select-panel">
+              <div class="metro-option-group">Standard</div>
+              <div class="metro-option" data-value="s">Small</div>
+              <div class="metro-option" data-value="m">Medium</div>
+              <div class="metro-option-group">Extended</div>
+              <div class="metro-option" data-value="l">Large</div>
+              <div class="metro-option" data-value="xl">X-Large</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-pane">
+        <div class="demo-label">Dropdown menu</div>
+        <div class="dropdown" id="demo-dropdown">
+          <button class="btn dropdown-trigger">
+            <svg class="glyph sm"><use href="#i-more"/></svg>
+            Options
+            <svg class="glyph sm"><use href="#i-chevron-down"/></svg>
+          </button>
+          <div class="dropdown-menu">
+            <div class="dropdown-header">Actions</div>
+            <div class="dropdown-item"><svg class="glyph sm"><use href="#i-edit"/></svg>Edit</div>
+            <div class="dropdown-item"><svg class="glyph sm"><use href="#i-share"/></svg>Share</div>
+            <div class="dropdown-item"><svg class="glyph sm"><use href="#i-download"/></svg>Download</div>
+            <div class="dropdown-divider"></div>
+            <div class="dropdown-item" style="color:var(--metro-error)"><svg class="glyph sm"><use href="#i-trash"/></svg>Delete</div>
+          </div>
+        </div>
+
+        <div class="demo-label mt-6">Dropdown with search</div>
+        <div class="dropdown dropdown-with-search" id="demo-dropdown-search">
+          <button class="btn dropdown-trigger">
+            <svg class="glyph sm"><use href="#i-search"/></svg>
+            Choose user
+            <svg class="glyph sm"><use href="#i-chevron-down"/></svg>
+          </button>
+          <div class="dropdown-menu" style="min-width:260px">
+            <div class="dropdown-search">
+              <input type="text" placeholder="Filter…" />
+            </div>
+            <div class="dropdown-item is-active"><svg class="glyph sm"><use href="#i-people"/></svg>Alice Chen</div>
+            <div class="dropdown-item"><svg class="glyph sm"><use href="#i-people"/></svg>Bob Martinez</div>
+            <div class="dropdown-item"><svg class="glyph sm"><use href="#i-people"/></svg>Carol Davis</div>
+            <div class="dropdown-item"><svg class="glyph sm"><use href="#i-people"/></svg>David Kim</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-grid mt-6">
+      <div class="demo-pane">
+        <div class="demo-label">Multi-select</div>
+        <div class="field">
+          <label>Select skills</label>
+          <div class="metro-select metro-select-multi" data-metro-multi>
+            <div class="metro-select-trigger">
+              <div class="selected-tags"></div>
+              <svg class="metro-select-arrow"><use href="#i-chevron-down"/></svg>
+            </div>
+            <div class="metro-select-panel">
+              <div class="metro-select-search">
+                <input type="text" placeholder="Search skills..." />
+              </div>
+              <div class="metro-option" data-value="js">
+                <span class="check-box"></span>
+                <svg class="glyph sm"><use href="#i-edit"/></svg>
+                JavaScript
+              </div>
+              <div class="metro-option" data-value="py">
+                <span class="check-box"></span>
+                <svg class="glyph sm"><use href="#i-edit"/></svg>
+                Python
+              </div>
+              <div class="metro-option" data-value="rs">
+                <span class="check-box"></span>
+                <svg class="glyph sm"><use href="#i-edit"/></svg>
+                Rust
+              </div>
+              <div class="metro-option" data-value="go">
+                <span class="check-box"></span>
+                <svg class="glyph sm"><use href="#i-edit"/></svg>
+                Go
+              </div>
+              <div class="metro-option" data-value="cpp">
+                <span class="check-box"></span>
+                <svg class="glyph sm"><use href="#i-edit"/></svg>
+                C++
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-pane">
+        <div class="demo-label">Cascading select</div>
+        <div class="field">
+          <label>Select region</label>
+          <div class="metro-cascade">
+            <div class="metro-select" data-metro-select data-cascade="country">
+              <div class="metro-select-trigger">
+                <span class="placeholder">Country</span>
+                <svg class="metro-select-arrow"><use href="#i-chevron-down"/></svg>
+              </div>
+              <div class="metro-select-panel">
+                <div class="metro-option" data-value="us" data-cascade="US">United States</div>
+                <div class="metro-option" data-value="cn" data-cascade="CN">China</div>
+                <div class="metro-option" data-value="jp" data-cascade="JP">Japan</div>
+              </div>
+            </div>
+            <div class="cascade-arrow">
+              <svg class="glyph"><use href="#i-chevron-right"/></svg>
+            </div>
+            <div class="metro-select" data-metro-select data-cascade="city" data-cascade-parent="country">
+              <div class="metro-select-trigger">
+                <span class="placeholder">City</span>
+                <svg class="metro-select-arrow"><use href="#i-chevron-down"/></svg>
+              </div>
+              <div class="metro-select-panel">
+                <div class="metro-select-empty">Select a country first</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================================================================
+       CONTROLS — toggles, checks, sliders, rating
+       ================================================================= -->
+  <section class="section section--alt" id="sec-controls" data-section>
+    <div class="section-eyebrow">Component</div>
+    <h2 class="section-title">Controls</h2>
+    <p class="section-lead">Toggles with rounded tracks, check/radio with animated feedback, sliders with value display, and a star rating component.</p>
+
+    <div class="demo-grid">
+      <div class="demo-pane">
+        <div class="demo-label">Toggles</div>
+        <div class="col" style="gap:var(--metro-space-4)">
+          <label class="toggle"><input type="checkbox" checked /><span class="track"><span class="knob"></span></span><span class="label">Wi-Fi</span></label>
+          <label class="toggle"><input type="checkbox" /><span class="track"><span class="knob"></span></span><span class="label">Bluetooth</span></label>
+          <label class="toggle lg"><input type="checkbox" checked /><span class="track"><span class="knob"></span></span><span class="label">Notifications (large)</span></label>
+        </div>
+
+        <div class="demo-label mt-6">Checkboxes</div>
+        <div class="row mb-4">
+          <label class="check"><input type="checkbox" checked /><span class="box"></span><span>Subscribe</span></label>
+          <label class="check"><input type="checkbox" /><span class="box"></span><span>Marketing</span></label>
+          <label class="check"><input type="checkbox" indeterminate /><span class="box"></span><span>Indeterminate</span></label>
+        </div>
+
+        <div class="demo-label mt-6">Radio</div>
+        <div class="col" style="gap:var(--metro-space-3)">
+          <label class="radio"><input type="radio" name="r1" checked /><span class="dot"></span><span class="label">Light theme</span></label>
+          <label class="radio"><input type="radio" name="r1" /><span class="dot"></span><span class="label">Dark theme</span></label>
+          <label class="radio"><input type="radio" name="r1" /><span class="dot"></span><span class="label">System</span></label>
+        </div>
+      </div>
+
+      <div class="demo-pane">
+        <div class="demo-label">Sliders — with value display</div>
+        <div class="demo-stack" style="gap:var(--metro-space-6)">
+          <div class="slider">
+            <span class="slider-label">Volume</span>
+            <input type="range" min="0" max="100" value="60" oninput="this.parentNode.querySelector(‘.slider-value’).textContent=this.value" />
+            <span class="slider-value">60</span>
+          </div>
+          <div class="slider">
+            <span class="slider-label">Brightness</span>
+            <input type="range" min="0" max="100" value="80" oninput="this.parentNode.querySelector(‘.slider-value’).textContent=this.value" />
+            <span class="slider-value">80</span>
+          </div>
+        </div>
+
+        <div class="demo-label mt-6">Slider with marks</div>
+        <div class="slider-with-marks">
+          <input type="range" min="0" max="100" value="50" step="25" />
+          <div class="slider-marks">
+            <span class="slider-mark">0</span>
+            <span class="slider-mark">25</span>
+            <span class="slider-mark">50</span>
+            <span class="slider-mark">75</span>
+            <span class="slider-mark">100</span>
+          </div>
+        </div>
+
+        <div class="demo-label mt-6">Rating</div>
+        <div class="rating" id="rating-demo">
+          <span class="rating-star is-filled">★</span>
+          <span class="rating-star is-filled">★</span>
+          <span class="rating-star is-filled">★</span>
+          <span class="rating-star is-filled">★</span>
+          <span class="rating-star">★</span>
+        </div>
+        <div class="muted mt-2" style="font-size:var(--metro-fs-small)">Click a star to rate</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================================================================
+       DISPLAY COMPONENTS — avatars, tags, breadcrumbs, pagination, stepper
+       ================================================================= -->
+  <section class="section" id="sec-display" data-section>
+    <div class="section-eyebrow">Component</div>
+    <h2 class="section-title">Display &amp; navigation</h2>
+    <p class="section-lead">Avatars with status indicators, tags/chips, breadcrumbs, pagination, and step indicators for multi-step flows.</p>
+
+    <div class="demo">
+      <div class="demo-label">Avatars</div>
+      <div class="demo-pane">
+        <div class="row" style="gap:var(--metro-space-5)">
+          <div class="avatar avatar--sm">JD</div>
+          <div class="avatar">AB</div>
+          <div class="avatar avatar--lg">CK<span class="status-dot"></span></div>
+          <div class="avatar avatar--xl" style="background:var(--metro-emerald)">DM<span class="status-dot away"></span></div>
+          <div class="avatar" style="background:var(--metro-magenta)">EF<span class="status-dot busy"></span></div>
+          <div class="avatar" style="background:var(--metro-orange)">GH<span class="status-dot offline"></span></div>
+        </div>
+
+        <div class="demo-label mt-6">Avatar group</div>
+        <div class="avatar-group">
+          <div class="avatar" style="background:var(--metro-accent)">JD</div>
+          <div class="avatar" style="background:var(--metro-emerald)">AB</div>
+          <div class="avatar" style="background:var(--metro-magenta)">CK</div>
+          <div class="avatar" style="background:var(--metro-orange)">DM</div>
+          <div class="avatar avatar-more">+12</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo">
+      <div class="demo-label">Tags &amp; chips</div>
+      <div class="demo-pane">
+        <div class="tags">
+          <span class="tag">Design <button class="tag-remove"><svg class="glyph sm"><use href="#i-error"/></svg></button></span>
+          <span class="tag tag--accent">Metro <button class="tag-remove"><svg class="glyph sm"><use href="#i-error"/></svg></button></span>
+          <span class="tag tag--success">Published <button class="tag-remove"><svg class="glyph sm"><use href="#i-error"/></svg></button></span>
+          <span class="tag tag--warning">Draft <button class="tag-remove"><svg class="glyph sm"><use href="#i-error"/></svg></button></span>
+          <span class="tag tag--error">Error <button class="tag-remove"><svg class="glyph sm"><use href="#i-error"/></svg></button></span>
+        </div>
+        <div class="demo-label mt-4">Tag input (add by pressing Enter)</div>
+        <div class="tag-input" id="tag-input-demo">
+          <span class="tag tag--accent">metro <button class="tag-remove"><svg class="glyph sm"><use href="#i-error"/></svg></button></span>
+          <span class="tag">ui <button class="tag-remove"><svg class="glyph sm"><use href="#i-error"/></svg></button></span>
+          <input type="text" placeholder="Type & press Enter" />
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-grid">
+      <div class="demo-pane">
+        <div class="demo-label">Breadcrumb</div>
+        <nav class="breadcrumb">
+          <div class="breadcrumb-item"><a href="#"><svg class="glyph sm"><use href="#i-home"/></svg>Home</a></div>
+          <div class="breadcrumb-item"><a href="#">Design</a></div>
+          <div class="breadcrumb-item"><a href="#">Components</a></div>
+          <div class="breadcrumb-item current">Breadcrumb</div>
+        </nav>
+
+        <div class="demo-label mt-6">Pagination</div>
+        <div class="pagination">
+          <button class="pagination-item is-disabled"><svg class="glyph sm"><use href="#i-chevron-left"/></svg></button>
+          <button class="pagination-item is-active">1</button>
+          <button class="pagination-item">2</button>
+          <button class="pagination-item">3</button>
+          <span class="pagination-ellipsis">…</span>
+          <button class="pagination-item">12</button>
+          <button class="pagination-item"><svg class="glyph sm"><use href="#i-chevron-right"/></svg></button>
+        </div>
+      </div>
+
+      <div class="demo-pane">
+        <div class="demo-label">Stepper — horizontal</div>
+        <div class="stepper">
+          <div class="stepper-item is-completed">
+            <div class="stepper-circle">✓</div>
+            <span class="stepper-label">Account</span>
+          </div>
+          <div class="stepper-item is-completed">
+            <div class="stepper-circle">✓</div>
+            <span class="stepper-label">Profile</span>
+          </div>
+          <div class="stepper-item is-active">
+            <div class="stepper-circle">3</div>
+            <span class="stepper-label">Review</span>
+          </div>
+          <div class="stepper-item">
+            <div class="stepper-circle">4</div>
+            <span class="stepper-label">Done</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo">
+      <div class="demo-label">File upload — drag &amp; drop</div>
+      <div class="demo-pane maxw-md">
+        <div class="file-upload" id="file-upload-demo">
+          <svg class="glyph"><use href="#i-download"/></svg>
+          <div class="file-upload-title">Drop files here or click to browse</div>
+          <div class="file-upload-hint">PNG, JPG, GIF up to 10MB</div>
+          <input type="file" />
+        </div>
+      </div>
+    </div>
+
+    <div class="demo">
+      <div class="demo-label">Empty state</div>
+      <div class="demo-pane">
+        <div class="empty-state">
+          <svg class="glyph"><use href="#i-photos"/></svg>
+          <div class="empty-state-title">No photos yet</div>
+          <div class="empty-state-message">Upload your first photo to see it appear here. Your gallery will grow over time.</div>
+          <button class="btn btn--primary"><svg class="glyph"><use href="#i-plus"/></svg>Upload photo</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo">
+      <div class="demo-label">Skeleton loading</div>
+      <div class="demo-pane maxw-md">
+        <div style="display:flex;gap:var(--metro-space-3);align-items:center;margin-bottom:var(--metro-space-4)">
+          <div class="skeleton skeleton--avatar"></div>
+          <div style="flex:1">
+            <div class="skeleton skeleton--text" style="width:30%"></div>
+            <div class="skeleton skeleton--text" style="width:20%"></div>
+          </div>
+        </div>
+        <div class="skeleton skeleton--title"></div>
+        <div class="skeleton skeleton--text"></div>
+        <div class="skeleton skeleton--text"></div>
+        <div class="skeleton skeleton--text" style="width:70%"></div>
+        <div style="margin-top:var(--metro-space-4)"><div class="skeleton skeleton--button"></div></div>
+      </div>
+    </div>
+
+    <div class="demo">
+      <div class="demo-label">Color picker</div>
+      <div class="demo-pane maxw-md">
+        <div class="color-picker" id="color-picker-demo">
+          <div class="color-swatch is-selected" style="background:var(--metro-accent)"></div>
+          <div class="color-swatch" style="background:var(--metro-emerald)"></div>
+          <div class="color-swatch" style="background:var(--metro-magenta)"></div>
+          <div class="color-swatch" style="background:var(--metro-orange)"></div>
+          <div class="color-swatch" style="background:var(--metro-purple)"></div>
+          <div class="color-swatch" style="background:var(--metro-teal)"></div>
+          <div class="color-swatch" style="background:var(--metro-amber)"></div>
+          <div class="color-swatch" style="background:var(--metro-red)"></div>
+          <div class="color-swatch" style="background:var(--metro-lime)"></div>
+          <div class="color-swatch" style="background:var(--metro-pink)"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================================================================
+       PROGRESS & STATUS
+       ================================================================= -->
+  <section class="section" id="sec-progress" data-section>
+    <div class="section-eyebrow">Component</div>
+    <h2 class="section-title">Progress &amp; status</h2>
+    <p class="section-lead">Indeterminate “marching” bars, determinate fills, and square ring spinners. Badges and alerts carry semantic state in flat blocks.</p>
+
+    <div class="demo-grid">
+      <div class="demo-pane">
+        <div class="demo-label">Progress bars</div>
+        <div class="demo-stack">
+          <div>
+            <div class="muted mb-2" style="font-size:var(--metro-fs-small)">Indeterminate</div>
+            <div class="progress indeterminate"><div class="bar"></div></div>
+          </div>
+          <div>
+            <div class="muted mb-2" style="font-size:var(--metro-fs-small)">Determinate 60%</div>
+            <div class="progress determinate" id="prog-demo"><div class="bar"></div></div>
+          </div>
+          <div class="row">
+            <button class="btn btn--sm" data-progress-run="prog-demo">Run to 100%</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-pane">
+        <div class="demo-label">Ring spinner</div>
+        <div class="row" style="gap:var(--metro-space-6)">
+          <div class="center col" style="gap:8px"><div class="ring"></div><span class="muted" style="font-size:var(--metro-fs-small)">Loading…</span></div>
+          <div class="center col" style="gap:8px"><div class="ring lg"></div><span class="muted" style="font-size:var(--metro-fs-small)">Working</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo mt-6">
+      <div class="demo-label">Badges</div>
+      <div class="demo-pane">
+        <div class="row">
+          <span class="badge">Default</span>
+          <span class="badge badge--accent">Accent</span>
+          <span class="badge badge--red">3 new</span>
+          <span class="badge badge--green">Active</span>
+          <span class="badge badge--amber">Pending</span>
+          <span class="badge badge--outline">Outline</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo">
+      <div class="demo-label">Alerts</div>
+      <div class="demo-stack">
+        <div class="alert alert--info"><svg class="glyph lg" style="flex:none"><use href="#i-info"/></svg><div><div class="title">Information</div><div class="body">A neutral message with an accent left edge.</div></div></div>
+        <div class="alert alert--success"><svg class="glyph lg" style="flex:none"><use href="#i-success"/></svg><div><div class="title">Saved</div><div class="body">Your changes were saved successfully.</div></div></div>
+        <div class="alert alert--warning"><svg class="glyph lg" style="flex:none"><use href="#i-warning"/></svg><div><div class="title">Heads up</div><div class="body">This action cannot be undone.</div></div></div>
+        <div class="alert alert--error"><svg class="glyph lg" style="flex:none"><use href="#i-error"/></svg><div><div class="title">Something went wrong</div><div class="body">Check your connection and try again.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================================================================
+       LIST VIEW
+       ================================================================= -->
+  <section class="section section--alt" id="sec-list" data-section>
+    <div class="section-eyebrow">Component</div>
+    <h2 class="section-title">List view</h2>
+    <p class="section-lead">Grouped lists with accent group headers and a hover indent — the classic Metro mail/people pattern. Selection fills with the accent tint.</p>
+
+    <div class="demo-pane maxw-md">
+      <div class="list-group-header">Today</div>
+      <div class="list">
+        <div class="list-item selected">
+          <span class="tile-glyph" style="font-size:22px;color:var(--metro-accent)"><svg class="glyph"><use href="#i-mail"/></svg></span>
+          <div class="primary"><div class="title">Design review at 4pm</div><div class="desc">From: Mei Lin — agenda attached</div></div>
+          <div class="meta">9:12</div>
+        </div>
+        <div class="list-item">
+          <span class="tile-glyph" style="font-size:22px;color:var(--metro-emerald)"><svg class="glyph"><use href="#i-chat"/></svg></span>
+          <div class="primary"><div class="title">Re: tile spacing</div><div class="desc">From: Tomás — looks good, ship it</div></div>
+          <div class="meta">8:40</div>
+        </div>
+        <div class="list-item">
+          <span class="tile-glyph" style="font-size:22px;color:var(--metro-orange)"><svg class="glyph"><use href="#i-people"/></svg></span>
+          <div class="primary"><div class="title">New follower</div><div class="desc">Anya started following you</div></div>
+          <div class="meta">7:20</div>
+        </div>
+      </div>
+      <div class="list-group-header">Earlier this week</div>
+      <div class="list">
+        <div class="list-item">
+          <span class="tile-glyph" style="font-size:22px;color:var(--metro-purple)"><svg class="glyph"><use href="#i-music"/></svg></span>
+          <div class="primary"><div class="title">Your weekly mix is ready</div><div class="desc">From: Music</div></div>
+          <div class="meta">Mon</div>
+        </div>
+        <div class="list-item">
+          <span class="tile-glyph" style="font-size:22px;color:var(--metro-steel)"><svg class="glyph"><use href="#i-settings"/></svg></span>
+          <div class="primary"><div class="title">Update available</div><div class="desc">Version 2.4.0 is ready to install</div></div>
+          <div class="meta">Sun</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================================================================
+       PIVOT
+       ================================================================= -->
+  <section class="section" id="sec-pivot" data-section>
+    <div class="section-eyebrow">Component</div>
+    <h2 class="section-title">Pivot</h2>
+    <p class="section-lead">The signature horizontal pivot — typography as navigation. An accent underline tracks the active header; panels crossfade. No buttons, no boxes.</p>
+
+    <div class="demo-pane maxw-md">
+      <div class="pivot">
+        <div class="pivot-headers">
+          <button class="pivot-header is-active">All</button>
+          <button class="pivot-header">Unread</button>
+          <button class="pivot-header">Flagged</button>
+        </div>
+        <div class="pivot-panels">
+          <div class="pivot-panel is-active"><p class="muted">Everything in one stream — 42 items.</p></div>
+          <div class="pivot-panel"><p class="muted">3 unread items waiting for your attention.</p></div>
+          <div class="pivot-panel"><p class="muted">7 flagged for follow-up.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================================================================
+       FLYOUTS & DIALOGS
+       ================================================================= -->
+  <section class="section section--alt" id="sec-overlays" data-section>
+    <div class="section-eyebrow">Component</div>
+    <h2 class="section-title">Flyouts &amp; dialogs</h2>
+    <p class="section-lead">Flat panels with a scrim. Flyouts anchor contextually; dialogs center for blocking confirmations. Esc closes either.</p>
+
+    <div class="demo-pane">
+      <div class="row">
+        <button class="btn btn--primary" data-open="flyout-1"><svg class="glyph"><use href="#i-settings"/></svg>Open flyout</button>
+        <button class="btn" data-open="dialog-1"><svg class="glyph"><use href="#i-trash"/></svg>Open dialog</button>
+      </div>
+    </div>
+
+    <!-- Flyout -->
+    <div class="flyout" id="flyout-1" style="top:96px;right:24px" role="dialog" aria-label="Quick settings">
+      <div class="flyout-body">
+        <div class="group-header" style="margin:0 0 var(--metro-space-4)">Quick settings</div>
+        <div class="col" style="gap:var(--metro-space-4)">
+          <label class="toggle"><input type="checkbox" checked /><span class="track"><span class="knob"></span></span><span class="label">Wi-Fi</span></label>
+          <label class="toggle"><input type="checkbox" /><span class="track"><span class="knob"></span></span><span class="label">Bluetooth</span></label>
+          <label class="toggle"><input type="checkbox" checked /><span class="track"><span class="knob"></span></span><span class="label">Night light</span></label>
+        </div>
+        <div class="row mt-6" style="justify-content:flex-end">
+          <button class="btn btn--sm" data-close="flyout-1">Done</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dialog -->
+    <div class="dialog" id="dialog-1" role="dialog" aria-modal="true" aria-label="Confirm delete">
+      <div class="dialog-title">Delete this item?</div>
+      <div class="dialog-body">This will permanently remove the item from your library. This action cannot be undone.</div>
+      <div class="dialog-actions">
+        <button class="btn" data-close="dialog-1">Cancel</button>
+        <button class="btn btn--danger" data-close="dialog-1"><svg class="glyph"><use href="#i-trash"/></svg>Delete</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================================================================
+       APP BAR
+       ================================================================= -->
+  <section class="section" id="sec-appbar" data-section>
+    <div class="section-eyebrow">Component</div>
+    <h2 class="section-title">App bar</h2>
+    <p class="section-lead">The bottom command bar slides up. Summon it with the button above, or <strong>right-click</strong> anywhere on the page — the classic Windows 8 gesture. Icon + label stacks; tapping the empty bar dismisses it.</p>
+    <div class="demo-pane maxw-md">
+      <div class="row">
+        <button class="btn btn--primary" data-appbar-trigger><svg class="glyph"><use href="#i-chevron-down"/></svg>Show app bar</button>
+        <span class="muted" style="font-size:var(--metro-fs-small)">or right-click anywhere</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================================================================
+       HUB — panoramic sections
+       ================================================================= -->
+  <section class="section section--alt" id="sec-hub" data-section>
+    <div class="section-eyebrow">Layout</div>
+    <h2 class="section-title">Hub</h2>
+    <p class="section-lead">The panoramic hub — a wide canvas of columns that overflow horizontally and snap. Each section has an accent header. The same proportional logic repeats for every page level (the article’s Phase 4).</p>
+
+    <div class="hub">
+      <div class="hub-section">
+        <div class="hub-section-header">Collection</div>
+        <div class="tile-group is-animated" style="grid-template-columns:repeat(2,var(--metro-tile-unit))">
+          <button class="tile tile-md bg-blue"><div class="tile-face tile-brand"><span class="tile-glyph"><svg class="glyph"><use href="#i-photos"/></svg></span><div class="tile-title">Albums</div></div></button>
+          <button class="tile tile-md bg-emerald"><div class="tile-face tile-brand"><span class="tile-glyph"><svg class="glyph"><use href="#i-people"/></svg></span><div class="tile-title">People</div></div></button>
+        </div>
+      </div>
+      <div class="hub-section">
+        <div class="hub-section-header">Recent</div>
+        <div class="list">
+          <div class="list-item"><div class="primary"><div class="title">Sunset over the bay</div><div class="desc">2 hours ago</div></div></div>
+          <div class="list-item"><div class="primary"><div class="title">Team offsite</div><div class="desc">Yesterday</div></div></div>
+          <div class="list-item"><div class="primary"><div class="title">Architecture study</div><div class="desc">2 days ago</div></div></div>
+        </div>
+      </div>
+      <div class="hub-section">
+        <div class="hub-section-header">What’s new</div>
+        <div class="demo-stack">
+          <div class="alert alert--info"><svg class="glyph" style="flex:none"><use href="#i-info"/></svg><div><div class="title">New theme</div><div class="body">Dark mode is now available.</div></div></div>
+          <div class="alert alert--success"><svg class="glyph" style="flex:none"><use href="#i-success"/></svg><div><div class="title">Sync complete</div><div class="body">All tiles up to date.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================================================================
+       FOOTER
+       ================================================================= -->
+  <footer class="section" style="border-bottom:0">
+    <div class="section-eyebrow">About</div>
+    <h2 class="section-title">Metro UI</h2>
+    <p class="section-lead maxw-md">A self-contained design system and showcase, built from the design philosophy described in <a href="https://medium.com/@sansued/metro-ui-ec65bbc3b120" target="_blank" rel="noopener">“Metro UI” on Medium</a> — proportion-first wireframes, a fixed color table, light-weight typography, and the Bauhaus lineage of Gropius and Mies van der Rohe.</p>
+    <p class="muted" style="font-size:var(--metro-fs-small)">No frameworks, no build step — plain HTML, CSS custom properties, and a sprinkle of vanilla JS. Open <code>styles/tokens.css</code> to retune the color table; everything else inherits.</p>
+  </footer>
+
+</main>
+
+<!-- =====================================================================
+     APP BAR — bottom command bar (toggled by trigger / right-click)
+     ===================================================================== -->
+<div class="appbar" id="appbar" role="toolbar" aria-label="App commands">
+  <button class="appbar-btn"><svg class="glyph"><use href="#i-chevron-left"/></svg><span>Back</span></button>
+  <button class="appbar-btn"><svg class="glyph"><use href="#i-refresh"/></svg><span>Refresh</span></button>
+  <button class="appbar-btn"><svg class="glyph"><use href="#i-share"/></svg><span>Share</span></button>
+  <div class="appbar-spacer"></div>
+  <button class="appbar-btn"><svg class="glyph"><use href="#i-plus"/></svg><span>Add</span></button>
+  <button class="appbar-btn"><svg class="glyph"><use href="#i-edit"/></svg><span>Edit</span></button>
+  <button class="appbar-btn"><svg class="glyph"><use href="#i-save"/></svg><span>Save</span></button>
+  <button class="appbar-btn"><svg class="glyph"><use href="#i-trash"/></svg><span>Delete</span></button>
+  <div class="appbar-spacer"></div>
+  <button class="appbar-btn"><svg class="glyph"><use href="#i-info"/></svg><span>Help</span></button>
+  <button class="appbar-btn" data-appbar-close><svg class="glyph"><use href="#i-check"/></svg><span>Done</span></button>
+</div>
+
+<script src="scripts/metro.js"></script>
+</body>
+</html>

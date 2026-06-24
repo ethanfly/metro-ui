@@ -1,0 +1,2130 @@
+/* =====================================================================
+   METRO UI — Components (Enhanced)
+   ===================================================================== */
+
+/* --------------------------------------------------------------------
+   ICONS — monochrome glyph set
+   -------------------------------------------------------------------- */
+.icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 24px; height: 24px;
+  font-family: "Segoe MDL2 Assets", "Segoe Fluent Icons", "Segoe UI", sans-serif;
+  font-size: 18px; line-height: 1;
+  color: currentColor;
+  flex: none;
+}
+.icon.sm { width: 18px; height: 18px; font-size: 14px; }
+.icon.lg { width: 32px; height: 32px; font-size: 26px; }
+.icon.xl { width: 48px; height: 48px; font-size: 38px; }
+.icon.fallback {
+  background: currentColor;
+  opacity: 0.85;
+  border-radius: 0;
+}
+
+.glyph {
+  width: 1em;
+  height: 1em;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  display: inline-block;
+}
+.glyph.solid { fill: currentColor; stroke: none; }
+.glyph use { width: 100%; height: 100%; }
+.glyph.sm { width: 18px; height: 18px; }
+.glyph.lg { width: 32px; height: 32px; }
+.glyph.xl { width: 48px; height: 48px; }
+
+/* --------------------------------------------------------------------
+   BUTTONS — enhanced with better borders, hover effects, press states
+   -------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--metro-space-2);
+  min-height: 34px;
+  padding: 0 var(--metro-space-4);
+  font-family: inherit;
+  font-size: var(--metro-fs-base);
+  font-weight: var(--metro-fw-semibold);
+  border: 2px solid var(--metro-line-strong);
+  background: transparent;
+  color: var(--metro-fg);
+  cursor: pointer;
+  user-select: none;
+  border-radius: 0;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--metro-dur) var(--metro-ease);
+}
+
+/* Subtle shine effect on hover */
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  transition: left 0.5s;
+}
+.btn:hover::before { left: 100%; }
+
+.btn:hover {
+  background: var(--metro-bg-alt);
+  border-color: var(--metro-accent);
+  transform: translateY(-1px);
+}
+.btn:active {
+  transform: scale(0.97) translateY(0);
+  background: var(--metro-line);
+}
+.btn .icon { color: inherit; }
+
+.btn--primary {
+  background: var(--metro-accent);
+  border-color: var(--metro-accent);
+  color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.btn--primary:hover {
+  background: var(--metro-accent-d);
+  border-color: var(--metro-accent-d);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  transform: translateY(-2px);
+}
+.btn--primary:active {
+  background: var(--metro-accent-d);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transform: scale(0.97) translateY(0);
+}
+
+.btn--ghost { border-color: transparent; }
+.btn--ghost:hover { background: var(--metro-bg-alt); border-color: var(--metro-line-strong); }
+
+.btn--block { display: flex; width: 100%; }
+
+.btn--lg { min-height: 44px; padding: 0 var(--metro-space-6); font-size: var(--metro-fs-subtitle); font-weight: var(--metro-fw-light); }
+.btn--sm { min-height: 26px; padding: 0 var(--metro-space-3); font-size: var(--metro-fs-small); }
+
+.btn--danger  { border-color: var(--metro-error); color: var(--metro-error); }
+.btn--danger:hover  { background: var(--metro-error-t); border-color: var(--metro-error); }
+.btn--success { border-color: var(--metro-success); color: var(--metro-success); }
+.btn--success:hover { background: var(--metro-emerald-t); border-color: var(--metro-success); }
+
+/* Icon button */
+.icon-btn {
+  width: 36px; height: 36px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 2px solid transparent;
+  background: transparent;
+  color: var(--metro-fg);
+  cursor: pointer;
+  border-radius: 0;
+  transition: all var(--metro-dur) var(--metro-ease);
+}
+.icon-btn:hover {
+  background: var(--metro-bg-alt);
+  border-color: var(--metro-line-strong);
+  transform: scale(1.1);
+}
+.icon-btn:active { transform: scale(0.95); }
+
+/* --------------------------------------------------------------------
+   FORM FIELDS — enhanced with floating labels, better borders, validation
+   -------------------------------------------------------------------- */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--metro-space-1);
+  margin-bottom: var(--metro-space-5);
+  position: relative;
+}
+
+.field > label {
+  font-size: var(--metro-fs-small);
+  font-weight: var(--metro-fw-semibold);
+  color: var(--metro-fg-secondary);
+  text-transform: uppercase;
+  letter-spacing: var(--metro-tracking-wide);
+  transition: color var(--metro-dur) var(--metro-ease);
+}
+
+.field:focus-within > label {
+  color: var(--metro-accent);
+}
+
+.field .hint {
+  font-size: var(--metro-fs-caption);
+  color: var(--metro-fg-tertiary);
+  margin-top: var(--metro-space-1);
+}
+
+/* Validation states */
+.field.error > label { color: var(--metro-error); }
+.field.success > label { color: var(--metro-success); }
+.field.error .input,
+.field.error .textarea,
+.field.error .select { border-color: var(--metro-error); background: var(--metro-red-t); }
+.field.success .input,
+.field.success .textarea,
+.field.success .select { border-color: var(--metro-success); background: var(--metro-emerald-t); }
+
+/* --------------------------------------------------------------------
+   TEXT INPUTS — enhanced with better borders, focus glow, character counter
+   -------------------------------------------------------------------- */
+.input, .textarea, .select {
+  width: 100%;
+  font-family: inherit;
+  font-size: var(--metro-fs-base);
+  color: var(--metro-fg);
+  background: var(--metro-bg-soft);
+  border: 2px solid var(--metro-line-strong);
+  padding: var(--metro-space-3) var(--metro-space-4);
+  outline: none;
+  border-radius: 0;
+  transition: all var(--metro-dur) var(--metro-ease);
+  position: relative;
+}
+
+.input::placeholder, .textarea::placeholder {
+  color: var(--metro-fg-tertiary);
+  transition: opacity var(--metro-dur) var(--metro-ease);
+}
+
+.input:focus::placeholder,
+.textarea:focus::placeholder {
+  opacity: 0.5;
+}
+
+.input:focus, .textarea:focus, .select:focus {
+  border-color: var(--metro-accent);
+  background: var(--metro-bg);
+  box-shadow: 0 0 0 3px var(--metro-accent-t), 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* Input with leading icon */
+.input-with-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.input-with-icon .input {
+  padding-left: var(--metro-space-9);
+  width: 100%;
+}
+.input-with-icon > .icon {
+  position: absolute;
+  left: var(--metro-space-4);
+  color: var(--metro-fg-tertiary);
+  pointer-events: none;
+  transition: color var(--metro-dur) var(--metro-ease);
+  z-index: 1;
+}
+.input-with-icon:focus-within > .icon {
+  color: var(--metro-accent);
+}
+
+/* Input with trailing icon/button */
+.input-with-trailing {
+  position: relative;
+}
+.input-with-trailing .input {
+  padding-right: var(--metro-space-9);
+}
+.input-with-trailing .icon-btn {
+  position: absolute;
+  right: var(--metro-space-2);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Character counter */
+.char-count {
+  position: absolute;
+  right: var(--metro-space-3);
+  bottom: var(--metro-space-3);
+  font-size: var(--metro-fs-caption);
+  color: var(--metro-fg-tertiary);
+  font-family: var(--metro-font-mono);
+  pointer-events: none;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 120px;
+  line-height: var(--metro-lh-base);
+}
+
+.textarea-with-counter {
+  padding-bottom: var(--metro-space-8);
+}
+
+/* --------------------------------------------------------------------
+   SELECT — fully custom dropdown (replaces native <select>)
+   The metro-select is a wrapper that triggers a custom panel.
+   -------------------------------------------------------------------- */
+
+/* Keep the native .select for backward compat, but de-emphasize */
+.select {
+  appearance: none;
+  cursor: pointer;
+  padding-right: var(--metro-space-9);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-position: calc(100% - var(--metro-space-3)) center;
+  background-size: 20px;
+  background-repeat: no-repeat;
+  transition: border-color var(--metro-dur) var(--metro-ease),
+              background-color var(--metro-dur) var(--metro-ease),
+              box-shadow var(--metro-dur) var(--metro-ease);
+}
+.select:hover { border-color: var(--metro-accent); background-color: var(--metro-bg); }
+
+.select-with-icon { position: relative; }
+.select-with-icon .select { padding-left: var(--metro-space-9); }
+.select-with-icon > .icon,
+.select-with-icon > .glyph {
+  position: absolute; left: var(--metro-space-4); top: 50%;
+  transform: translateY(-50%); color: var(--metro-fg-tertiary);
+  pointer-events: none; transition: color var(--metro-dur) var(--metro-ease); z-index: 1;
+}
+.select-with-icon:focus-within > .icon,
+.select-with-icon:focus-within > .glyph { color: var(--metro-accent); }
+
+/* ---- metro-select: fully custom dropdown ---- */
+.metro-select {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  user-select: none;
+}
+
+.metro-select-trigger {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 42px;
+  padding: var(--metro-space-2) var(--metro-space-9) var(--metro-space-2) var(--metro-space-4);
+  font-family: inherit;
+  font-size: var(--metro-fs-base);
+  color: var(--metro-fg);
+  background: var(--metro-bg-soft);
+  border: 2px solid var(--metro-line-strong);
+  border-radius: 0;
+  cursor: pointer;
+  position: relative;
+  transition: border-color var(--metro-dur) var(--metro-ease),
+              background-color var(--metro-dur) var(--metro-ease),
+              box-shadow var(--metro-dur) var(--metro-ease);
+}
+.metro-select-trigger:hover {
+  border-color: var(--metro-accent);
+  background: var(--metro-bg);
+}
+
+.metro-select.is-open .metro-select-trigger {
+  border-color: var(--metro-accent);
+  background: var(--metro-bg);
+  box-shadow: 0 0 0 3px var(--metro-accent-t), 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* The chevron arrow */
+.metro-select-arrow {
+  position: absolute;
+  right: var(--metro-space-3);
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+  transition: transform var(--metro-dur-slow) var(--metro-ease);
+  color: var(--metro-fg-tertiary);
+}
+.metro-select.is-open .metro-select-arrow {
+  transform: translateY(-50%) rotate(180deg);
+  color: var(--metro-accent);
+}
+.metro-select:not(.is-open) .metro-select-arrow {
+  transform: translateY(-50%) rotate(0deg);
+}
+
+/* Leading icon inside trigger */
+.metro-select-trigger .lead-icon {
+  flex: none;
+  color: var(--metro-fg-tertiary);
+  margin-right: var(--metro-space-2);
+  transition: color var(--metro-dur) var(--metro-ease);
+}
+.metro-select.is-open .metro-select-trigger .lead-icon {
+  color: var(--metro-accent);
+}
+
+/* Placeholder text */
+.metro-select-trigger .placeholder {
+  color: var(--metro-fg-tertiary);
+}
+
+/* The dropdown panel */
+.metro-select-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 4px;
+  background: var(--metro-bg);
+  border: 2px solid var(--metro-line-strong);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.14), 0 2px 8px rgba(0,0,0,0.06);
+  z-index: 100;
+  max-height: 280px;
+  overflow-y: auto;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px) scale(0.99);
+  transform-origin: top left;
+  transition: opacity var(--metro-dur) var(--metro-ease),
+              visibility var(--metro-dur) var(--metro-ease),
+              transform var(--metro-dur) var(--metro-ease);
+}
+.metro-select.is-open .metro-select-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+/* Scrollbar */
+.metro-select-panel::-webkit-scrollbar { width: 6px; }
+.metro-select-panel::-webkit-scrollbar-thumb { background: var(--metro-line-strong); }
+.metro-select-panel::-webkit-scrollbar-thumb:hover { background: var(--metro-fg-tertiary); }
+
+/* Option item */
+.metro-option {
+  display: flex;
+  align-items: center;
+  gap: var(--metro-space-3);
+  padding: var(--metro-space-3) var(--metro-space-4);
+  cursor: pointer;
+  position: relative;
+  transition: background-color var(--metro-dur) var(--metro-ease),
+              padding-left var(--metro-dur) var(--metro-ease);
+  border-bottom: 1px solid var(--metro-line);
+  font-size: var(--metro-fs-base);
+}
+.metro-option:last-child { border-bottom: none; }
+
+.metro-option::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--metro-accent);
+  transform: scaleY(0);
+  transition: transform var(--metro-dur) var(--metro-ease);
+}
+.metro-option:hover {
+  background: var(--metro-bg-alt);
+  padding-left: var(--metro-space-5);
+}
+.metro-option:hover::before { transform: scaleY(1); }
+
+.metro-option.is-selected {
+  background: var(--metro-accent-t);
+  color: var(--metro-accent);
+  font-weight: var(--metro-fw-semibold);
+}
+.metro-option.is-selected::before { transform: scaleY(1); }
+
+.metro-option .glyph {
+  flex: none;
+  color: var(--metro-fg-tertiary);
+  transition: color var(--metro-dur) var(--metro-ease);
+}
+.metro-option:hover .glyph { color: var(--metro-fg); }
+.metro-option.is-selected .glyph { color: var(--metro-accent); }
+
+/* Option group header */
+.metro-option-group {
+  padding: var(--metro-space-2) var(--metro-space-4);
+  font-size: var(--metro-fs-caption);
+  font-weight: var(--metro-fw-semibold);
+  color: var(--metro-fg-tertiary);
+  text-transform: uppercase;
+  letter-spacing: var(--metro-tracking-wide);
+  background: var(--metro-bg-soft);
+  border-bottom: 1px solid var(--metro-line);
+}
+
+/* Disabled option */
+.metro-option.is-disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Search filter inside panel */
+.metro-select-search {
+  padding: var(--metro-space-2) var(--metro-space-3);
+  border-bottom: 2px solid var(--metro-line);
+  position: sticky;
+  top: 0;
+  background: var(--metro-bg);
+  z-index: 1;
+}
+.metro-select-search input {
+  width: 100%;
+  padding: var(--metro-space-2) var(--metro-space-3);
+  border: 2px solid var(--metro-line);
+  font-size: var(--metro-fs-small);
+  font-family: inherit;
+  outline: none;
+  background: var(--metro-bg-soft);
+  transition: border-color var(--metro-dur) var(--metro-ease);
+}
+.metro-select-search input:focus {
+  border-color: var(--metro-accent);
+}
+
+/* ---- Multi-select variant ---- */
+.metro-select-multi .metro-select-trigger {
+  flex-wrap: wrap;
+  gap: var(--metro-space-1);
+  padding: var(--metro-space-1) var(--metro-space-9) var(--metro-space-1) var(--metro-space-2);
+  min-height: 42px;
+}
+.metro-select-multi .metro-select-trigger .selected-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--metro-space-1);
+  flex: 1;
+}
+
+.metro-select-multi .metro-option {
+  padding-left: var(--metro-space-8);
+  position: relative;
+}
+/* Custom checkbox in multi-select options */
+.metro-select-multi .metro-option .check-box {
+  position: absolute;
+  left: var(--metro-space-3);
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--metro-line-strong);
+  background: var(--metro-bg-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--metro-dur) var(--metro-ease);
+  flex: none;
+}
+.metro-select-multi .metro-option .check-box::after {
+  content: '';
+  width: 8px;
+  height: 4px;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: rotate(-45deg) scale(0);
+  margin-top: -2px;
+  transition: transform var(--metro-dur) var(--metro-ease);
+}
+.metro-select-multi .metro-option.is-selected .check-box {
+  background: var(--metro-accent);
+  border-color: var(--metro-accent);
+}
+.metro-select-multi .metro-option.is-selected .check-box::after {
+  transform: rotate(-45deg) scale(1);
+}
+
+/* Tag in trigger */
+.metro-select-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  background: var(--metro-accent-t);
+  color: var(--metro-accent);
+  font-size: var(--metro-fs-small);
+  font-weight: var(--metro-fw-semibold);
+  border: 1px solid var(--metro-accent);
+}
+.metro-select-tag .tag-x {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--metro-accent);
+  padding: 0;
+  font-size: 14px;
+  line-height: 1;
+  transition: color var(--metro-dur) var(--metro-ease);
+}
+.metro-select-tag .tag-x:hover { color: var(--metro-error); }
+
+/* ---- Cascading select (side-by-side) ---- */
+.metro-cascade {
+  display: flex;
+  gap: var(--metro-space-3);
+  align-items: flex-start;
+}
+.metro-cascade .metro-select {
+  flex: 1;
+}
+.metro-cascade .cascade-arrow {
+  display: flex;
+  align-items: center;
+  padding-top: 12px;
+  color: var(--metro-fg-tertiary);
+  flex: none;
+}
+
+/* Empty state in panel */
+.metro-select-empty {
+  padding: var(--metro-space-4);
+  text-align: center;
+  color: var(--metro-fg-tertiary);
+  font-size: var(--metro-fs-small);
+}
+
+/* --------------------------------------------------------------------
+   SEARCH BOX — enhanced with better styling
+   -------------------------------------------------------------------- */
+.search {
+  display: flex;
+  align-items: center;
+  gap: var(--metro-space-2);
+  border: 2px solid var(--metro-line-strong);
+  padding: 0 var(--metro-space-4);
+  min-height: 42px;
+  background: var(--metro-bg-soft);
+  transition: all var(--metro-dur) var(--metro-ease);
+}
+
+.search:focus-within {
+  border-color: var(--metro-accent);
+  background: var(--metro-bg);
+  box-shadow: 0 0 0 3px var(--metro-accent-t);
+}
+
+.search .icon {
+  color: var(--metro-fg-tertiary);
+  flex: none;
+  transition: color var(--metro-dur) var(--metro-ease);
+}
+
+.search:focus-within .icon {
+  color: var(--metro-accent);
+}
+
+.search input {
+  flex: 1;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font-family: inherit;
+  font-size: var(--metro-fs-base);
+  color: var(--metro-fg);
+  padding: var(--metro-space-2) 0;
+}
+
+.search .clear {
+  display: none;
+  opacity: 0.6;
+}
+.search.has-value .clear {
+  display: inline-flex;
+}
+.search .clear:hover {
+  opacity: 1;
+}
+
+/* Search with filters */
+.search-with-filters {
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0;
+}
+.search-with-filters .search-header {
+  display: flex;
+  align-items: center;
+  gap: var(--metro-space-2);
+  padding: var(--metro-space-3) var(--metro-space-4);
+}
+.search-with-filters .search-filters {
+  display: flex;
+  gap: var(--metro-space-2);
+  padding: 0 var(--metro-space-4) var(--metro-space-3);
+  flex-wrap: wrap;
+}
+
+/* --------------------------------------------------------------------
+   TOGGLES — enhanced with smooth animations and better visual feedback
+   -------------------------------------------------------------------- */
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--metro-space-3);
+  cursor: pointer;
+  user-select: none;
+  padding: var(--metro-space-1) 0;
+}
+.toggle input { position: absolute; opacity: 0; pointer-events: none; }
+.toggle .track {
+  position: relative;
+  width: 48px;
+  height: 24px;
+  background: var(--metro-line-strong);
+  border-radius: 12px;
+  transition: background-color var(--metro-dur) var(--metro-ease);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+.toggle .knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  transition: all var(--metro-dur) var(--metro-ease);
+}
+.toggle input:checked + .track {
+  background: var(--metro-accent);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.15), 0 0 0 2px var(--metro-accent-t);
+}
+.toggle input:checked + .track .knob {
+  transform: translateX(24px);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+}
+.toggle:hover .track {
+  background: var(--metro-fg-tertiary);
+}
+.toggle:hover input:checked + .track {
+  background: var(--metro-accent-d);
+}
+.toggle input:focus-visible + .track {
+  outline: 3px solid var(--metro-accent);
+  outline-offset: 2px;
+}
+.toggle .label {
+  font-size: var(--metro-fs-base);
+  color: var(--metro-fg);
+}
+
+/* Large toggle variant */
+.toggle.lg .track {
+  width: 56px;
+  height: 28px;
+  border-radius: 14px;
+}
+.toggle.lg .knob {
+  width: 22px;
+  height: 22px;
+}
+.toggle.lg input:checked + .track .knob {
+  transform: translateX(28px);
+}
+
+/* --------------------------------------------------------------------
+   CHECKBOXES — enhanced with better animations and states
+   -------------------------------------------------------------------- */
+.check {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--metro-space-2);
+  cursor: pointer;
+  user-select: none;
+  padding: var(--metro-space-1) 0;
+  position: relative;
+}
+.check input { position: absolute; opacity: 0; pointer-events: none; }
+.check .box {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--metro-line-strong);
+  background: var(--metro-bg-soft);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--metro-dur) var(--metro-ease);
+  position: relative;
+}
+.check:hover .box {
+  border-color: var(--metro-accent);
+  background: var(--metro-bg);
+}
+.check .box::after {
+  content: "";
+  width: 10px;
+  height: 5px;
+  border-left: 2.5px solid #fff;
+  border-bottom: 2.5px solid #fff;
+  transform: rotate(-45deg) scale(0);
+  margin-top: -2px;
+  transition: transform var(--metro-dur) var(--metro-ease);
+}
+.check input:checked + .box {
+  background: var(--metro-accent);
+  border-color: var(--metro-accent);
+  box-shadow: 0 0 0 2px var(--metro-accent-t);
+}
+.check input:checked + .box::after {
+  transform: rotate(-45deg) scale(1);
+}
+.check input:focus-visible + .box {
+  outline: 3px solid var(--metro-accent);
+  outline-offset: 2px;
+}
+
+/* Indeterminate state */
+.check input:indeterminate + .box {
+  background: var(--metro-fg-tertiary);
+  border-color: var(--metro-fg-tertiary);
+}
+.check input:indeterminate + .box::after {
+  width: 8px;
+  height: 0;
+  border-left: none;
+  border-bottom: 2.5px solid #fff;
+  margin-top: 0;
+  transform: rotate(0deg) scale(1);
+}
+
+/* Checkbox label */
+.check .label {
+  font-size: var(--metro-fs-base);
+  color: var(--metro-fg);
+}
+
+/* --------------------------------------------------------------------
+   RADIOS — enhanced with better animations
+   -------------------------------------------------------------------- */
+.radio {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--metro-space-2);
+  cursor: pointer;
+  user-select: none;
+  padding: var(--metro-space-1) 0;
+  position: relative;
+}
+.radio input { position: absolute; opacity: 0; pointer-events: none; }
+.radio .dot {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--metro-line-strong);
+  background: var(--metro-bg-soft);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--metro-dur) var(--metro-ease);
+  position: relative;
+}
+.radio:hover .dot {
+  border-color: var(--metro-accent);
+  background: var(--metro-bg);
+}
+.radio .dot::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--metro-accent);
+  transform: scale(0);
+  transition: transform var(--metro-dur) var(--metro-ease);
+}
+.radio input:checked + .dot {
+  border-color: var(--metro-accent);
+  box-shadow: 0 0 0 2px var(--metro-accent-t);
+}
+.radio input:checked + .dot::after {
+  transform: scale(1);
+}
+.radio input:focus-visible + .dot {
+  outline: 3px solid var(--metro-accent);
+  outline-offset: 2px;
+}
+
+/* Radio label */
+.radio .label {
+  font-size: var(--metro-fs-base);
+  color: var(--metro-fg);
+}
+
+/* Radio group with card-style selection */
+.radio-cards {
+  display: flex;
+  gap: var(--metro-space-3);
+  flex-wrap: wrap;
+}
+.radio-cards .radio {
+  flex: 1;
+  min-width: 140px;
+  padding: var(--metro-space-4);
+  border: 2px solid var(--metro-line);
+  background: var(--metro-bg);
+  transition: all var(--metro-dur) var(--metro-ease);
+}
+.radio-cards .radio:hover {
+  border-color: var(--metro-accent);
+  background: var(--metro-bg-alt);
+}
+.radio-cards .radio input:checked ~ .dot {
+  border-color: var(--metro-accent);
+  background: var(--metro-accent);
+}
+.radio-cards .radio input:checked ~ .label {
+  color: var(--metro-accent);
+  font-weight: var(--metro-fw-semibold);
+}
+.radio-cards .radio .radio-content {
+  margin-top: var(--metro-space-2);
+  font-size: var(--metro-fs-small);
+  color: var(--metro-fg-secondary);
+}
+
+/* --------------------------------------------------------------------
+   PROGRESS — indeterminate "marching" dots + determinate bar + ring.
+   -------------------------------------------------------------------- */
+.progress { position: relative; width: 100%; height: 4px; background: var(--metro-line); overflow: hidden; }
+.progress .bar { position: absolute; left: 0; top: 0; bottom: 0; width: 0%; background: var(--metro-accent); transition: width var(--metro-dur-slow) var(--metro-ease); }
+.progress.determinate .bar { width: var(--pct, 60%); }
+
+.progress.indeterminate .bar {
+  width: 40%;
+  animation: metro-progress-march 1.4s var(--metro-ease-soft) infinite;
+}
+@keyframes metro-progress-march {
+  0%   { left: -40%; }
+  100% { left: 100%; }
+}
+
+/* Ring spinner. */
+.ring {
+  width: 32px; height: 32px;
+  border: 4px solid var(--metro-line);
+  border-top-color: var(--metro-accent);
+  animation: metro-spin 0.9s linear infinite;
+}
+.ring.lg { width: 56px; height: 56px; border-width: 5px; }
+@keyframes metro-spin { to { transform: rotate(360deg); } }
+
+/* --------------------------------------------------------------------
+   BADGES / PILLS — flat square tags in accent colors.
+   -------------------------------------------------------------------- */
+.badge {
+  display: inline-flex; align-items: center;
+  min-height: 18px; padding: 0 var(--metro-space-2);
+  font-size: var(--metro-fs-small); font-weight: var(--metro-fw-semibold);
+  background: var(--metro-bg-alt);
+  color: var(--metro-fg-secondary);
+  border-radius: 0;
+}
+.badge--accent { background: var(--metro-accent); color: #fff; }
+.badge--red    { background: var(--metro-red); color: #fff; }
+.badge--green  { background: var(--metro-emerald); color: #fff; }
+.badge--amber  { background: var(--metro-amber); color: #2a1c00; }
+.badge--outline { background: transparent; border: 1px solid var(--metro-line-strong); }
+
+/* --------------------------------------------------------------------
+   LIST VIEW — grouped, with sticky group headers (the Metro list pattern).
+   -------------------------------------------------------------------- */
+.list { border-top: 1px solid var(--metro-line); }
+.list-item {
+  display: flex; align-items: center; gap: var(--metro-space-3);
+  padding: var(--metro-space-3) var(--metro-space-4);
+  border-bottom: 1px solid var(--metro-line);
+  background: var(--metro-bg);
+  cursor: pointer;
+  transition: background-color var(--metro-dur) var(--metro-ease), padding-left var(--metro-dur) var(--metro-ease);
+}
+.list-item:hover { background: var(--metro-bg-alt); padding-left: var(--metro-space-6); }
+.list-item .primary { flex: 1; min-width: 0; }
+.list-item .title { font-weight: var(--metro-fw-semibold); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.list-item .desc { font-size: var(--metro-fs-small); color: var(--metro-fg-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.list-item .meta { color: var(--metro-fg-tertiary); font-size: var(--metro-fs-small); flex: none; }
+.list-item.selected { background: var(--metro-accent-t); padding-left: var(--metro-space-6); }
+.list-group-header {
+  font-size: var(--metro-fs-subtitle);
+  font-weight: var(--metro-fw-light);
+  letter-spacing: var(--metro-tracking-tight);
+  padding: var(--metro-space-5) var(--metro-space-4) var(--metro-space-2);
+  color: var(--metro-accent);
+}
+
+/* --------------------------------------------------------------------
+   PIVOT / TABS — the signature Metro horizontal pivot. Underline tracks
+   the active header; content crossfades. No buttons, no boxes — typography.
+   -------------------------------------------------------------------- */
+.pivot { }
+.pivot-headers {
+  display: flex; flex-wrap: wrap; gap: var(--metro-space-7);
+  border-bottom: 1px solid var(--metro-line);
+  position: relative;
+}
+.pivot-header {
+  position: relative;
+  padding: var(--metro-space-3) 0;
+  font-size: var(--metro-fs-subtitle);
+  font-weight: var(--metro-fw-light);
+  letter-spacing: var(--metro-tracking-tight);
+  color: var(--metro-fg-secondary);
+  background: none; border: 0; cursor: pointer;
+  font-family: inherit;
+  transition: color var(--metro-dur) var(--metro-ease);
+}
+.pivot-header:hover { color: var(--metro-fg); }
+.pivot-header.is-active { color: var(--metro-fg); }
+.pivot-indicator {
+  position: absolute; bottom: -1px; height: 3px;
+  background: var(--metro-accent);
+  transition: left var(--metro-dur-slow) var(--metro-ease), width var(--metro-dur-slow) var(--metro-ease);
+}
+.pivot-panels { padding-top: var(--metro-space-6); }
+.pivot-panel { display: none; animation: metro-fade-up var(--metro-dur-slow) var(--metro-ease); }
+.pivot-panel.is-active { display: block; }
+@keyframes metro-fade-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+/* --------------------------------------------------------------------
+   FLYOUT / DIALOG — flat panel, square corners, scrim overlay.
+   -------------------------------------------------------------------- */
+.scrim {
+  position: fixed; inset: 0;
+  background: var(--metro-overlay);
+  opacity: 0; pointer-events: none;
+  transition: opacity var(--metro-dur-slow) var(--metro-ease);
+  z-index: 80;
+}
+.scrim.is-open { opacity: 1; pointer-events: auto; }
+
+.flyout {
+  position: fixed;
+  background: var(--metro-bg);
+  color: var(--metro-fg);
+  border: 1px solid var(--metro-line-strong);
+  box-shadow: var(--metro-tile-shadow);
+  min-width: 280px;
+  z-index: 90;
+  opacity: 0; transform: translateY(-8px) scale(0.98);
+  pointer-events: none;
+  transition: opacity var(--metro-dur) var(--metro-ease), transform var(--metro-dur) var(--metro-ease);
+}
+.flyout.is-open { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+.flyout-body { padding: var(--metro-space-5) var(--metro-space-6); }
+
+.dialog {
+  position: fixed; top: 50%; left: 50%;
+  transform: translate(-50%, -50%) scale(0.96);
+  background: var(--metro-bg);
+  color: var(--metro-fg);
+  border: 1px solid var(--metro-line-strong);
+  box-shadow: var(--metro-tile-shadow);
+  width: min(440px, 92vw);
+  z-index: 100;
+  opacity: 0; pointer-events: none;
+  transition: opacity var(--metro-dur) var(--metro-ease), transform var(--metro-dur) var(--metro-ease);
+}
+.dialog.is-open { opacity: 1; pointer-events: auto; transform: translate(-50%, -50%) scale(1); }
+.dialog-title { padding: var(--metro-space-6) var(--metro-space-6) var(--metro-space-3); font-size: var(--metro-fs-subtitle); font-weight: var(--metro-fw-semilight); }
+.dialog-body  { padding: 0 var(--metro-space-6) var(--metro-space-5); color: var(--metro-fg-secondary); }
+.dialog-actions { display: flex; justify-content: flex-end; gap: var(--metro-space-2); padding: 0 var(--metro-space-6) var(--metro-space-6); }
+
+/* --------------------------------------------------------------------
+   SLIDER — enhanced with better track, thumb, and value display
+   -------------------------------------------------------------------- */
+.slider {
+  position: relative;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  gap: var(--metro-space-3);
+}
+.slider input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  background: var(--metro-line);
+  outline: none;
+  border-radius: 3px;
+  margin: 0;
+  position: relative;
+}
+.slider input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: var(--metro-accent);
+  border: 3px solid #fff;
+  cursor: pointer;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  transition: all var(--metro-dur) var(--metro-ease);
+}
+.slider input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+.slider input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: var(--metro-accent);
+  border: 3px solid #fff;
+  cursor: pointer;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  transition: all var(--metro-dur) var(--metro-ease);
+}
+.slider input[type="range"]::-moz-range-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+.slider input[type="range"]::-moz-range-track {
+  background: var(--metro-line);
+  height: 6px;
+  border-radius: 3px;
+}
+.slider .slider-value {
+  min-width: 40px;
+  text-align: center;
+  font-size: var(--metro-fs-small);
+  font-weight: var(--metro-fw-semibold);
+  color: var(--metro-accent);
+  font-family: var(--metro-font-mono);
+}
+.slider .slider-label {
+  font-size: var(--metro-fs-small);
+  color: var(--metro-fg-secondary);
+}
+
+/* Slider with marks */
+.slider-with-marks {
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--metro-space-2);
+}
+.slider-with-marks .slider-marks {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 var(--metro-space-2);
+}
+.slider-with-marks .slider-mark {
+  font-size: var(--metro-fs-caption);
+  color: var(--metro-fg-tertiary);
+  font-family: var(--metro-font-mono);
+}
+
+/* Range slider (dual thumb) */
+.slider-range {
+  position: relative;
+  height: 40px;
+}
+.slider-range input[type="range"] {
+  position: absolute;
+  width: 100%;
+  pointer-events: none;
+}
+.slider-range input[type="range"]::-webkit-slider-thumb {
+  pointer-events: all;
+}
+.slider-range input[type="range"]::-moz-range-thumb {
+  pointer-events: all;
+}
+
+/* --------------------------------------------------------------------
+   DROPDOWN MENU — custom dropdown with smooth animations
+   -------------------------------------------------------------------- */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-trigger {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--metro-space-2);
+}
+/* Only rotate the LAST glyph (the trailing chevron) — not the leading icon */
+.dropdown-trigger > .glyph:last-of-type,
+.dropdown-trigger .dropdown-arrow {
+  transition: transform var(--metro-dur-slow) var(--metro-ease);
+  transform-origin: center;
+}
+.dropdown.is-open .dropdown-trigger > .glyph:last-of-type,
+.dropdown.is-open .dropdown-trigger .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+/* Leading icon must NOT rotate */
+.dropdown-trigger > .glyph:first-child {
+  transform: none !important;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 200px;
+  background: var(--metro-bg);
+  border: 2px solid var(--metro-line-strong);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.16), 0 2px 8px rgba(0,0,0,0.08);
+  margin-top: 4px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px) scale(0.98);
+  transform-origin: top left;
+  transition: opacity var(--metro-dur) var(--metro-ease),
+              visibility var(--metro-dur) var(--metro-ease),
+              transform var(--metro-dur) var(--metro-ease);
+  z-index: 100;
+  max-height: 320px;
+  overflow-y: auto;
+}
+.dropdown.is-open .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+.dropdown-menu::-webkit-scrollbar {
+  width: 6px;
+}
+.dropdown-menu::-webkit-scrollbar-thumb {
+  background: var(--metro-line-strong);
+}
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: var(--metro-space-3);
+  padding: var(--metro-space-3) var(--metro-space-4);
+  cursor: pointer;
+  transition: background-color var(--metro-dur) var(--metro-ease),
+              padding-left var(--metro-dur) var(--metro-ease),
+              color var(--metro-dur) var(--metro-ease);
+  border-bottom: 1px solid var(--metro-line);
+  position: relative;
+  overflow: hidden;
+}
+/* Left accent bar on hover */
+.dropdown-item::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--metro-accent);
+  transform: scaleY(0);
+  transition: transform var(--metro-dur) var(--metro-ease);
+}
+.dropdown-item:hover::before {
+  transform: scaleY(1);
+}
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+.dropdown-item:hover {
+  background: var(--metro-bg-alt);
+  padding-left: var(--metro-space-5);
+}
+.dropdown-item.is-active {
+  background: var(--metro-accent-t);
+  color: var(--metro-accent);
+  font-weight: var(--metro-fw-semibold);
+}
+.dropdown-item.is-active::before {
+  transform: scaleY(1);
+}
+.dropdown-item .glyph {
+  flex: none;
+  color: var(--metro-fg-tertiary);
+  transition: color var(--metro-dur) var(--metro-ease);
+}
+.dropdown-item:hover .glyph {
+  color: var(--metro-fg);
+}
+.dropdown-item.is-active .glyph {
+  color: var(--metro-accent);
+}
+.dropdown-divider {
+  height: 1px;
+  background: var(--metro-line);
+  margin: var(--metro-space-1) 0;
+}
+.dropdown-header {
+  padding: var(--metro-space-3) var(--metro-space-4);
+  font-size: var(--metro-fs-caption);
+  font-weight: var(--metro-fw-semibold);
+  color: var(--metro-fg-tertiary);
+  text-transform: uppercase;
+  letter-spacing: var(--metro-tracking-wide);
+}
+
+/* Dropdown with search */
+.dropdown-with-search .dropdown-search {
+  padding: var(--metro-space-3);
+  border-bottom: 2px solid var(--metro-line);
+}
+.dropdown-with-search .dropdown-search input {
+  width: 100%;
+  padding: var(--metro-space-2) var(--metro-space-3);
+  border: 2px solid var(--metro-line);
+  font-size: var(--metro-fs-small);
+  outline: none;
+  transition: border-color var(--metro-dur) var(--metro-ease);
+}
+.dropdown-with-search .dropdown-search input:focus {
+  border-color: var(--metro-accent);
+}
+
+/* Multi-select dropdown */
+.dropdown-multi .dropdown-item {
+  padding-left: var(--metro-space-7);
+  position: relative;
+}
+.dropdown-multi .dropdown-item::before {
+  content: "";
+  position: absolute;
+  left: var(--metro-space-3);
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--metro-line-strong);
+  background: var(--metro-bg-soft);
+}
+.dropdown-multi .dropdown-item.is-selected::before {
+  background: var(--metro-accent);
+  border-color: var(--metro-accent);
+}
+.dropdown-multi .dropdown-item.is-selected::after {
+  content: "";
+  position: absolute;
+  left: calc(var(--metro-space-3) + 4px);
+  width: 8px;
+  height: 4px;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: rotate(-45deg);
+}
+
+/* --------------------------------------------------------------------
+   DATE PICKER — calendar-style date selection
+   -------------------------------------------------------------------- */
+.datepicker {
+  position: relative;
+}
+.datepicker-trigger {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--metro-space-2);
+}
+.datepicker-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 320px;
+  background: var(--metro-bg);
+  border: 2px solid var(--metro-line-strong);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  margin-top: var(--metro-space-1);
+  padding: var(--metro-space-4);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: all var(--metro-dur) var(--metro-ease);
+  z-index: 100;
+}
+.datepicker.is-open .datepicker-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.datepicker-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--metro-space-4);
+}
+.datepicker-title {
+  font-size: var(--metro-fs-subtitle);
+  font-weight: var(--metro-fw-semibold);
+}
+.datepicker-nav {
+  display: flex;
+  gap: var(--metro-space-1);
+}
+.datepicker-nav button {
+  width: 32px;
+  height: 32px;
+  border: 2px solid var(--metro-line);
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--metro-dur) var(--metro-ease);
+}
+.datepicker-nav button:hover {
+  border-color: var(--metro-accent);
+  background: var(--metro-accent-t);
+}
+.datepicker-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--metro-space-1);
+  margin-bottom: var(--metro-space-2);
+}
+.datepicker-weekday {
+  text-align: center;
+  font-size: var(--metro-fs-caption);
+  font-weight: var(--metro-fw-semibold);
+  color: var(--metro-fg-tertiary);
+  padding: var(--metro-space-1);
+}
+.datepicker-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--metro-space-1);
+}
+.datepicker-day {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all var(--metro-dur) var(--metro-ease);
+  font-size: var(--metro-fs-small);
+}
+.datepicker-day:hover {
+  background: var(--metro-bg-alt);
+  border-color: var(--metro-accent);
+}
+.datepicker-day.is-selected {
+  background: var(--metro-accent);
+  color: #fff;
+  font-weight: var(--metro-fw-semibold);
+}
+.datepicker-day.is-today {
+  border-color: var(--metro-accent);
+  font-weight: var(--metro-fw-semibold);
+}
+.datepicker-day.is-disabled {
+  color: var(--metro-fg-disabled);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------
+   FILE UPLOAD — drag-and-drop with preview
+   -------------------------------------------------------------------- */
+.file-upload {
+  border: 2px dashed var(--metro-line-strong);
+  padding: var(--metro-space-6);
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--metro-dur) var(--metro-ease);
+  background: var(--metro-bg-soft);
+}
+.file-upload:hover,
+.file-upload.is-dragover {
+  border-color: var(--metro-accent);
+  background: var(--metro-accent-t);
+}
+.file-upload .glyph {
+  font-size: 48px;
+  color: var(--metro-fg-tertiary);
+  margin-bottom: var(--metro-space-3);
+}
+.file-upload.is-dragover .glyph,
+.file-upload:hover .glyph {
+  color: var(--metro-accent);
+}
+.file-upload-title {
+  font-size: var(--metro-fs-base);
+  font-weight: var(--metro-fw-semibold);
+  margin-bottom: var(--metro-space-1);
+}
+.file-upload-hint {
+  font-size: var(--metro-fs-small);
+  color: var(--metro-fg-secondary);
+}
+.file-upload input[type="file"] {
+  display: none;
+}
+
+/* File upload with preview */
+.file-upload-with-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--metro-space-3);
+}
+.file-upload-with-preview .file-preview {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border: 2px solid var(--metro-line);
+  overflow: hidden;
+}
+.file-upload-with-preview .file-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.file-upload-with-preview .file-preview .file-remove {
+  position: absolute;
+  top: var(--metro-space-1);
+  right: var(--metro-space-1);
+  width: 20px;
+  height: 20px;
+  background: var(--metro-error);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+/* --------------------------------------------------------------------
+   TAGS / CHIPS — removable tags with animations
+   -------------------------------------------------------------------- */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--metro-space-2);
+}
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--metro-space-1);
+  padding: var(--metro-space-1) var(--metro-space-3);
+  background: var(--metro-bg-alt);
+  border: 2px solid var(--metro-line);
+  font-size: var(--metro-fs-small);
+  transition: all var(--metro-dur) var(--metro-ease);
+}
+.tag:hover {
+  border-color: var(--metro-accent);
+}
+.tag .tag-remove {
+  width: 16px;
+  height: 16px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--metro-fg-tertiary);
+  transition: all var(--metro-dur) var(--metro-ease);
+}
+.tag .tag-remove:hover {
+  color: var(--metro-error);
+}
+
+/* Tag colors */
+.tag--accent { background: var(--metro-accent); color: #fff; border-color: var(--metro-accent); }
+.tag--success { background: var(--metro-success); color: #fff; border-color: var(--metro-success); }
+.tag--warning { background: var(--metro-warning); color: #fff; border-color: var(--metro-warning); }
+.tag--error { background: var(--metro-error); color: #fff; border-color: var(--metro-error); }
+
+/* Tag input */
+.tag-input {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--metro-space-2);
+  padding: var(--metro-space-2);
+  border: 2px solid var(--metro-line-strong);
+  background: var(--metro-bg-soft);
+  min-height: 42px;
+  transition: all var(--metro-dur) var(--metro-ease);
+}
+.tag-input:focus-within {
+  border-color: var(--metro-accent);
+  background: var(--metro-bg);
+  box-shadow: 0 0 0 3px var(--metro-accent-t);
+}
+.tag-input input {
+  flex: 1;
+  min-width: 120px;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: var(--metro-fs-base);
+  padding: var(--metro-space-1) var(--metro-space-2);
+}
+
+/* --------------------------------------------------------------------
+   AVATAR — user profile images with status indicators
+   -------------------------------------------------------------------- */
+.avatar {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--metro-accent);
+  color: #fff;
+  font-weight: var(--metro-fw-semibold);
+  font-size: var(--metro-fs-base);
+  overflow: hidden;
+  border: 2px solid var(--metro-bg);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.avatar--sm {
+  width: 32px;
+  height: 32px;
+  font-size: var(--metro-fs-small);
+}
+.avatar--lg {
+  width: 56px;
+  height: 56px;
+  font-size: var(--metro-fs-subtitle);
+}
+.avatar--xl {
+  width: 80px;
+  height: 80px;
+  font-size: var(--metro-fs-section);
+}
+
+/* Avatar status indicator */
+.avatar .status-dot {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--metro-bg);
+  background: var(--metro-success);
+}
+.avatar .status-dot.away { background: var(--metro-warning); }
+.avatar .status-dot.busy { background: var(--metro-error); }
+.avatar .status-dot.offline { background: var(--metro-fg-disabled); }
+
+/* Avatar group */
+.avatar-group {
+  display: flex;
+  align-items: center;
+}
+.avatar-group .avatar {
+  margin-left: -12px;
+  border: 3px solid var(--metro-bg);
+  transition: transform var(--metro-dur) var(--metro-ease);
+}
+.avatar-group .avatar:first-child {
+  margin-left: 0;
+}
+.avatar-group .avatar:hover {
+  transform: translateY(-4px);
+  z-index: 1;
+}
+.avatar-group .avatar-more {
+  background: var(--metro-fg-tertiary);
+  font-size: var(--metro-fs-small);
+  font-weight: var(--metro-fw-semibold);
+}
+
+/* --------------------------------------------------------------------
+   BREADCRUMB — navigation path
+   -------------------------------------------------------------------- */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: var(--metro-space-2);
+  font-size: var(--metro-fs-small);
+  color: var(--metro-fg-secondary);
+}
+.breadcrumb-item {
+  display: flex;
+  align-items: center;
+  gap: var(--metro-space-2);
+}
+.breadcrumb-item:not(:last-child)::after {
+  content: "/";
+  color: var(--metro-fg-tertiary);
+}
+.breadcrumb-item a {
+  color: var(--metro-accent);
+  text-decoration: none;
+  transition: color var(--metro-dur) var(--metro-ease);
+}
+.breadcrumb-item a:hover {
+  color: var(--metro-accent-d);
+  text-decoration: underline;
+}
+.breadcrumb-item.current {
+  color: var(--metro-fg);
+  font-weight: var(--metro-fw-semibold);
+}
+.breadcrumb-item .glyph {
+  color: var(--metro-fg-tertiary);
+}
+
+/* --------------------------------------------------------------------
+   PAGINATION — page navigation
+   -------------------------------------------------------------------- */
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: var(--metro-space-1);
+}
+.pagination-item {
+  min-width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--metro-line);
+  background: transparent;
+  cursor: pointer;
+  font-size: var(--metro-fs-small);
+  font-weight: var(--metro-fw-semibold);
+  transition: all var(--metro-dur) var(--metro-ease);
+}
+.pagination-item:hover {
+  border-color: var(--metro-accent);
+  background: var(--metro-bg-alt);
+}
+.pagination-item.is-active {
+  background: var(--metro-accent);
+  border-color: var(--metro-accent);
+  color: #fff;
+}
+.pagination-item.is-disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.pagination-item .glyph {
+  width: 16px;
+  height: 16px;
+}
+.pagination-ellipsis {
+  padding: 0 var(--metro-space-2);
+  color: var(--metro-fg-tertiary);
+}
+
+/* --------------------------------------------------------------------
+   STEPPER — multi-step process indicator
+   -------------------------------------------------------------------- */
+.stepper {
+  display: flex;
+  align-items: center;
+  gap: var(--metro-space-4);
+}
+.stepper-item {
+  display: flex;
+  align-items: center;
+  gap: var(--metro-space-2);
+  flex: 1;
+  position: relative;
+}
+.stepper-item:not(:last-child)::after {
+  content: "";
+  flex: 1;
+  height: 2px;
+  background: var(--metro-line);
+  margin-left: var(--metro-space-2);
+}
+.stepper-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--metro-line-strong);
+  background: var(--metro-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--metro-fw-semibold);
+  transition: all var(--metro-dur) var(--metro-ease);
+}
+.stepper-label {
+  font-size: var(--metro-fs-small);
+  font-weight: var(--metro-fw-semibold);
+  color: var(--metro-fg-secondary);
+}
+.stepper-item.is-active .stepper-circle {
+  background: var(--metro-accent);
+  border-color: var(--metro-accent);
+  color: #fff;
+}
+.stepper-item.is-active .stepper-label {
+  color: var(--metro-accent);
+}
+.stepper-item.is-completed .stepper-circle {
+  background: var(--metro-success);
+  border-color: var(--metro-success);
+  color: #fff;
+}
+.stepper-item.is-completed::after {
+  background: var(--metro-success);
+}
+.stepper-item.is-completed .stepper-label {
+  color: var(--metro-fg);
+}
+
+/* Stepper vertical */
+.stepper--vertical {
+  flex-direction: column;
+  align-items: stretch;
+}
+.stepper--vertical .stepper-item {
+  flex-direction: column;
+  align-items: flex-start;
+}
+.stepper--vertical .stepper-item:not(:last-child)::after {
+  position: absolute;
+  left: 17px;
+  top: 36px;
+  width: 2px;
+  height: calc(100% - 36px);
+  margin-left: 0;
+}
+
+/* --------------------------------------------------------------------
+   TOAST / NOTIFICATION — feedback messages
+   -------------------------------------------------------------------- */
+.toast-container {
+  position: fixed;
+  top: var(--metro-space-6);
+  right: var(--metro-space-6);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: var(--metro-space-3);
+  max-width: 400px;
+}
+.toast {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--metro-space-3);
+  padding: var(--metro-space-4);
+  background: var(--metro-bg);
+  border: 2px solid var(--metro-line-strong);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  animation: toast-in var(--metro-dur-slow) var(--metro-ease);
+}
+.toast.is-closing {
+  animation: toast-out var(--metro-dur) var(--metro-ease) forwards;
+}
+.toast .glyph {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  color: var(--metro-accent);
+}
+.toast-content {
+  flex: 1;
+}
+.toast-title {
+  font-weight: var(--metro-fw-semibold);
+  margin-bottom: var(--metro-space-1);
+}
+.toast-message {
+  font-size: var(--metro-fs-small);
+  color: var(--metro-fg-secondary);
+}
+.toast-close {
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--metro-fg-tertiary);
+  transition: color var(--metro-dur) var(--metro-ease);
+}
+.toast-close:hover {
+  color: var(--metro-fg);
+}
+
+/* Toast variants */
+.toast--success { border-color: var(--metro-success); }
+.toast--success .glyph { color: var(--metro-success); }
+.toast--warning { border-color: var(--metro-warning); }
+.toast--warning .glyph { color: var(--metro-warning); }
+.toast--error { border-color: var(--metro-error); }
+.toast--error .glyph { color: var(--metro-error); }
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes toast-out {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+/* --------------------------------------------------------------------
+   SKELETON LOADING — placeholder content while loading
+   -------------------------------------------------------------------- */
+.skeleton {
+  background: linear-gradient(90deg, var(--metro-bg-alt) 25%, var(--metro-bg-soft) 50%, var(--metro-bg-alt) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+  border-radius: 2px;
+}
+.skeleton--text {
+  height: 16px;
+  margin-bottom: var(--metro-space-2);
+}
+.skeleton--text:last-child {
+  width: 60%;
+}
+.skeleton--title {
+  height: 24px;
+  width: 40%;
+  margin-bottom: var(--metro-space-3);
+}
+.skeleton--avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.skeleton--button {
+  height: 36px;
+  width: 100px;
+}
+.skeleton--image {
+  width: 100%;
+  height: 200px;
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* --------------------------------------------------------------------
+   EMPTY STATE — placeholder for empty content
+   -------------------------------------------------------------------- */
+.empty-state {
+  text-align: center;
+  padding: var(--metro-space-9) var(--metro-space-6);
+}
+.empty-state .glyph {
+  font-size: 64px;
+  color: var(--metro-fg-disabled);
+  margin-bottom: var(--metro-space-4);
+}
+.empty-state-title {
+  font-size: var(--metro-fs-subtitle);
+  font-weight: var(--metro-fw-semibold);
+  margin-bottom: var(--metro-space-2);
+}
+.empty-state-message {
+  color: var(--metro-fg-secondary);
+  margin-bottom: var(--metro-space-5);
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* --------------------------------------------------------------------
+   NUMBER INPUT — with increment/decrement buttons
+   -------------------------------------------------------------------- */
+.number-input {
+  display: inline-flex;
+  align-items: center;
+  border: 2px solid var(--metro-line-strong);
+  background: var(--metro-bg-soft);
+  transition: all var(--metro-dur) var(--metro-ease);
+}
+.number-input:focus-within {
+  border-color: var(--metro-accent);
+  background: var(--metro-bg);
+  box-shadow: 0 0 0 3px var(--metro-accent-t);
+}
+.number-input input {
+  width: 60px;
+  height: 36px;
+  border: none;
+  outline: none;
+  background: transparent;
+  text-align: center;
+  font-size: var(--metro-fs-base);
+  font-weight: var(--metro-fw-semibold);
+  line-height: 36px;
+  padding: 0;
+  -moz-appearance: textfield;
+}
+.number-input input::-webkit-outer-spin-button,
+.number-input input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.number-input button {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--metro-fg-secondary);
+  transition: all var(--metro-dur) var(--metro-ease);
+}
+.number-input button:hover {
+  background: var(--metro-bg-alt);
+  color: var(--metro-accent);
+}
+.number-input button:active {
+  background: var(--metro-line);
+}
+.number-input button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* --------------------------------------------------------------------
+   COLOR PICKER — simple color selection
+   -------------------------------------------------------------------- */
+.color-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--metro-space-2);
+  padding: var(--metro-space-3);
+  border: 2px solid var(--metro-line);
+  background: var(--metro-bg);
+}
+.color-swatch {
+  width: 32px;
+  height: 32px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all var(--metro-dur) var(--metro-ease);
+}
+.color-swatch:hover {
+  transform: scale(1.1);
+  border-color: var(--metro-fg);
+}
+.color-swatch.is-selected {
+  border-color: var(--metro-accent);
+  box-shadow: 0 0 0 2px var(--metro-accent-t);
+}
+
+/* --------------------------------------------------------------------
+   RATING — star rating input
+   -------------------------------------------------------------------- */
+.rating {
+  display: inline-flex;
+  gap: var(--metro-space-1);
+}
+.rating-star {
+  font-size: 24px;
+  color: var(--metro-fg-disabled);
+  cursor: pointer;
+  transition: all var(--metro-dur) var(--metro-ease);
+  user-select: none;
+}
+.rating-star:hover,
+.rating-star:hover ~ .rating-star {
+  color: var(--metro-warning);
+}
+.rating-star.is-filled {
+  color: var(--metro-warning);
+}
+.rating-star:hover {
+  transform: scale(1.2);
+}
+.rating--readonly .rating-star {
+  cursor: default;
+}
+.rating--readonly .rating-star:hover {
+  transform: none;
+}
+
+/* --------------------------------------------------------------------
+   APP BAR — the bottom command bar. Slides up. Icon + label stack.
+   -------------------------------------------------------------------- */
+.appbar {
+  position: fixed; left: 0; right: 0; bottom: 0;
+  height: var(--metro-appbar-h);
+  background: var(--metro-accent);
+  color: #fff;
+  display: flex; align-items: stretch;
+  transform: translateY(100%);
+  transition: transform var(--metro-dur-slow) var(--metro-ease);
+  z-index: 70;
+  box-shadow: 0 -4px 16px rgba(0,0,0,0.25);
+}
+.appbar.is-open { transform: translateY(0); }
+.appbar-btn {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 4px; min-width: 88px; padding: var(--metro-space-2);
+  background: transparent; border: 0; color: inherit; cursor: pointer;
+  font-family: inherit; font-size: var(--metro-fs-small);
+  transition: background-color var(--metro-dur) var(--metro-ease);
+}
+.appbar-btn:hover { background: rgba(255,255,255,0.18); }
+.appbar-btn:active { background: rgba(255,255,255,0.30); }
+.appbar-btn .icon { font-size: 22px; }
+.appbar-spacer { flex: 1; }
+
+/* --------------------------------------------------------------------
+   ALERT / CALLOUT — flat colored bar with a left icon.
+   -------------------------------------------------------------------- */
+.alert { display: flex; gap: var(--metro-space-3); padding: var(--metro-space-4); border-left: 4px solid var(--metro-accent); background: var(--metro-bg-alt); }
+.alert--info    { border-color: var(--metro-accent); }
+.alert--success { border-color: var(--metro-success); background: var(--metro-emerald-t); }
+.alert--warning { border-color: var(--metro-warning); background: var(--metro-amber-t); }
+.alert--error   { border-color: var(--metro-error); background: var(--metro-red-t); }
+.alert .title { font-weight: var(--metro-fw-semibold); margin-bottom: 2px; }
+.alert .body { font-size: var(--metro-fs-small); color: var(--metro-fg-secondary); }
+
+/* --------------------------------------------------------------------
+   HUB SECTIONS — the panoramic horizontal "hub" layout. Wide canvas,
+   columns snap to the grid; content overflows horizontally and snaps.
+   -------------------------------------------------------------------- */
+.hub {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(380px, 1fr);
+  gap: var(--metro-space-7);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: var(--metro-space-6) 0;
+  scroll-padding: 0 var(--metro-space-6);
+}
+.hub-section { scroll-snap-align: start; }
+.hub-section-header { font-size: var(--metro-fs-section); font-weight: var(--metro-fw-light); letter-spacing: var(--metro-tracking-tight); margin-bottom: var(--metro-space-4); }
+
+/* Tooltip (title-attr style) — flat dark square tag. */
+.tooltip { position: relative; }
+.tooltip[data-tip]::after {
+  content: attr(data-tip);
+  position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%) translateY(4px);
+  background: var(--metro-fg); color: var(--metro-bg);
+  padding: 4px 8px; font-size: var(--metro-fs-small); white-space: nowrap;
+  opacity: 0; pointer-events: none;
+  transition: opacity var(--metro-dur) var(--metro-ease), transform var(--metro-dur) var(--metro-ease);
+  z-index: 50;
+}
+.tooltip:hover[data-tip]::after { opacity: 1; transform: translateX(-50%) translateY(0); }

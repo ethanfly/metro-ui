@@ -1,0 +1,39 @@
+/* =====================================================================
+   METRO UI — Motion utilities
+   ===================================================================== */
+
+/* Tile entrance — staggered rise on load, the Start-screen feel. */
+.tile-group.is-animated .tile {
+  animation: metro-tile-in 520ms var(--metro-ease) both;
+  animation-delay: calc(var(--i, 0) * 40ms);
+}
+@keyframes metro-tile-in {
+  from { opacity: 0; transform: translateY(18px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Section reveal as it scrolls into view. */
+.reveal { opacity: 0; transform: translateY(16px); transition: opacity var(--metro-dur-slow) var(--metro-ease), transform var(--metro-dur-slow) var(--metro-ease); }
+.reveal.is-shown { opacity: 1; transform: translateY(0); }
+
+/* Pulsing live dot — signals an updating tile. */
+.pulse { animation: metro-pulse 2.4s var(--metro-ease-soft) infinite; }
+@keyframes metro-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+/* Marquee for long tile titles that overflow (classic Metro ticker). */
+.marquee { display: inline-block; white-space: nowrap; animation: metro-marquee 9s linear infinite; }
+@keyframes metro-marquee {
+  0%   { transform: translateX(0); }
+  45%  { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+/* Number flip — used by the counter tile to roll digits. */
+.flip-num { display: inline-block; animation: metro-numflip var(--metro-tile-flip) var(--metro-ease); }
+@keyframes metro-numflip {
+  0% { transform: translateY(-60%); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}

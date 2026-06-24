@@ -1,0 +1,37 @@
+{
+  "name": "metro-ui-design-system",
+  "version": "1.0.0",
+  "description": "A comprehensive Metro design system with live tiles, form components, and modern UI patterns",
+  "main": "dist/metro-ui.js",
+  "style": "dist/metro-ui.css",
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "node build.js",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "metro",
+    "ui",
+    "design-system",
+    "components",
+    "tiles",
+    "forms",
+    "css",
+    "modern"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/metro-ui-design-system.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/metro-ui-design-system/issues"
+  },
+  "homepage": "https://github.com/yourusername/metro-ui-design-system#readme",
+  "devDependencies": {}
+}

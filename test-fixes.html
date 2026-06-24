@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>修复验证页面</title>
+  <style>
+    :root {
+      --metro-accent: #0078d4;
+      --metro-space-4: 16px;
+      --metro-space-9: 36px;
+      --metro-fg-tertiary: #8a8886;
+      --metro-fg: #323130;
+      --metro-bg: #ffffff;
+      --metro-bg-soft: #f3f2f1;
+      --metro-line-strong: #c8c6c4;
+      --metro-dur: 200ms;
+      --metro-ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --metro-accent-t: rgba(0, 120, 212, 0.1);
+      --metro-tile-shadow: 0 2px 8px rgba(0,0,0,0.12);
+      --metro-tile-shadow-hover: 0 4px 16px rgba(0,0,0,0.18);
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 40px;
+      background: #f5f5f5;
+    }
+
+    .test-section {
+      background: white;
+      padding: 30px;
+      margin-bottom: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      margin-top: 0;
+      color: var(--metro-fg);
+      border-bottom: 2px solid var(--metro-accent);
+      padding-bottom: 10px;
+    }
+
+    .description {
+      color: #666;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+
+    /* ===== 1. 磁贴测试 ===== */
+    .tile-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .tile {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      background: var(--metro-accent);
+      color: #fff;
+      overflow: hidden;
+      cursor: pointer;
+      user-select: none;
+      padding: 20px;
+      min-height: 120px;
+      /* 优化的边框样式 */
+      box-shadow: var(--metro-tile-shadow),
+                  inset 0 1px 1px rgba(255,255,255,0.12),
+                  inset 0 -1px 1px rgba(0,0,0,0.08);
+      border: 2px solid rgba(0,0,0,0.18);
+      transition: all var(--metro-dur) var(--metro-ease);
+    }
+
+    .tile:hover {
+      border-color: rgba(255,255,255,0.25);
+      box-shadow: var(--metro-tile-shadow-hover),
+                  inset 0 1px 2px rgba(255,255,255,0.15),
+                  inset 0 -1px 1px rgba(0,0,0,0.06);
+      filter: brightness(1.05);
+    }
+
+    .tile.green { background: #107c10; }
+    .tile.red { background: #e81123; }
+    .tile.purple { background: #5c2d91; }
+
+    .tile-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-top: auto;
+    }
+
+    /* ===== 2. Select 测试 ===== */
+    .select {
+      width: 100%;
+      max-width: 400px;
+      padding: 12px 40px 12px 16px;
+      font-size: 14px;
+      border: 1px solid var(--metro-line-strong);
+      border-radius: 4px;
+      background: var(--metro-bg-soft);
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23605e5c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      cursor: pointer;
+      transition: all var(--metro-dur) var(--metro-ease);
+    }
+
+    .select:focus {
+      outline: none;
+      border-color: var(--metro-accent);
+      background-color: var(--metro-bg);
+      box-shadow: 0 0 0 3px var(--metro-accent-t);
+      /* 移除蓝色箭头 - 保持默认箭头 */
+    }
+
+    .select:hover {
+      border-color: var(--metro-accent);
+    }
+
+    /* ===== 3. Input with icon 测试 ===== */
+    .field {
+      margin-bottom: 20px;
+      max-width: 400px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--metro-fg);
+      margin-bottom: 8px;
+    }
+
+    .input-with-icon {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-with-icon .input {
+      width: 100%;
+      padding: 12px 16px 12px 44px;
+      font-size: 14px;
+      border: 1px solid var(--metro-line-strong);
+      border-radius: 4px;
+      background: var(--metro-bg-soft);
+      transition: all var(--metro-dur) var(--metro-ease);
+    }
+
+    .input-with-icon .input:focus {
+      outline: none;
+      border-color: var(--metro-accent);
+      background: var(--metro-bg);
+      box-shadow: 0 0 0 3px var(--metro-accent-t);
+    }
+
+    .input-with-icon > .icon {
+      position: absolute;
+      left: var(--metro-space-4);
+      color: var(--metro-fg-tertiary);
+      pointer-events: none;
+      transition: color var(--metro-dur) var(--metro-ease);
+      font-size: 18px;
+    }
+
+    .input-with-icon:focus-within > .icon {
+      color: var(--metro-accent);
+    }
+
+    .hint {
+      margin-top: 20px;
+      padding: 12px;
+      background: #e7f3ff;
+      border-left: 4px solid var(--metro-accent);
+      font-size: 13px;
+      color: #005a9e;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔧 Metro UI 修复验证</h1>
+  <p style="color:#666; margin-bottom: 30px;">这个页面用于验证三个主要问题的修复效果</p>
+
+  <!-- 1. 磁贴边框测试 -->
+  <div class="test-section">
+    <h2>1️⃣ 磁贴边框优化</h2>
+    <p class="description">
+      <strong>修复内容:</strong> 添加了 2px 实色边框 + 多层阴影效果<br>
+      <strong>预期效果:</strong> 悬停时边框变为白色半透明,阴影增强,整体更有层次感
+    </p>
+    <div class="tile-grid">
+      <div class="tile">
+        <div class="tile-title">默认磁贴</div>
+        <small>悬停查看效果</small>
+      </div>
+      <div class="tile green">
+        <div class="tile-title">绿色磁贴</div>
+        <small>边框应该清晰可见</small>
+      </div>
+      <div class="tile red">
+        <div class="tile-title">红色磁贴</div>
+        <small>多层阴影增加深度</small>
+      </div>
+      <div class="tile purple">
+        <div class="tile-title">紫色磁贴</div>
+        <small>悬停时边框变亮</small>
+      </div>
+    </div>
+    <div class="hint">
+      ✅ <strong>验证点:</strong> 悬停磁贴时,应该看到边框从深色变为白色半透明,同时阴影增强
+    </div>
+  </div>
+
+  <!-- 2. Select 箭头测试 -->
+  <div class="test-section">
+    <h2>2️⃣ Select 下拉框箭头</h2>
+    <p class="description">
+      <strong>修复内容:</strong> 移除了聚焦时出现的蓝色箭头<br>
+      <strong>预期效果:</strong> 聚焦时只改变边框颜色和阴影,箭头保持默认的灰色
+    </p>
+    <div class="field">
+      <label for="test-select">选择语言:</label>
+      <select class="select" id="test-select">
+        <option value="">请选择...</option>
+        <option value="zh">中文</option>
+        <option value="en">English</option>
+        <option value="ja">日本語</option>
+      </select>
+    </div>
+    <div class="hint">
+      ✅ <strong>验证点:</strong> 点击下拉框获取焦点时,不应该出现蓝色的箭头图标,只有边框变为蓝色
+    </div>
+  </div>
+
+  <!-- 3. Input with icon 测试 -->
+  <div class="test-section">
+    <h2>3️⃣ Input with Leading Icon</h2>
+    <p class="description">
+      <strong>修复内容:</strong> 调整了图标选择器和定位方式<br>
+      <strong>预期效果:</strong> 图标正确显示在输入框左侧,聚焦时图标变为蓝色
+    </p>
+    <div class="field">
+      <label for="email-input">Email:</label>
+      <div class="input-with-icon">
+        <span class="icon">📧</span>
+        <input class="input" type="email" id="email-input" placeholder="you@example.com" />
+      </div>
+    </div>
+    <div class="field">
+      <label for="phone-input">Phone:</label>
+      <div class="input-with-icon">
+        <span class="icon">📱</span>
+        <input class="input" type="tel" id="phone-input" placeholder="+1 (555) 000-0000" />
+      </div>
+    </div>
+    <div class="field">
+      <label for="password-input">Password:</label>
+      <div class="input-with-icon">
+        <span class="icon">🔒</span>
+        <input class="input" type="password" id="password-input" placeholder="••••••••" />
+      </div>
+    </div>
+    <div class="hint">
+      ✅ <strong>验证点:</strong> 图标应该正确显示在输入框左侧,点击输入框获取焦点时,图标应该从灰色变为蓝色
+    </div>
+  </div>
+
+  <!-- 测试说明 -->
+  <div class="test-section" style="background: #fff4e5;">
+    <h2>📋 测试步骤</h2>
+    <ol style="line-height: 1.8;">
+      <li><strong>磁贴边框:</strong> 将鼠标悬停到每个磁贴上,观察边框和阴影的变化</li>
+      <li><strong>Select 箭头:</strong> 点击下拉框获取焦点,确认没有出现蓝色箭头</li>
+      <li><strong>Input 图标:</strong>
+        <ul>
+          <li>确认图标正确显示在输入框左侧</li>
+          <li>点击输入框获取焦点</li>
+          <li>确认图标从灰色变为蓝色</li>
+          <li>确认文字和图标没有"跑到外面"</li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+
+  <div style="text-align: center; padding: 20px; color: #888; font-size: 14px;">
+    如果所有验证点都通过,说明修复成功! 🎉
+  </div>
+</body>
+</html>
