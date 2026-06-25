@@ -6,6 +6,8 @@ Modern Metro-style UI component library inspired by Windows 8's Modern UI design
 [![License](https://img.shields.io/npm/l/metro-ui-design-system.svg)](https://github.com/ethanfly/metro-ui/blob/main/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/ethanfly/metro-ui.svg?style=social)](https://github.com/ethanfly/metro-ui)
 
+**[📚 查看完整文档](https://ethanfly.github.io/metro-ui/docs.html)** | **[🎨 在线演示](https://ethanfly.github.io/metro-ui/index.html)**
+
 ## Features
 
 - **Live Tiles** - Interactive tiles with flip, slide, and badge animations
@@ -265,3 +267,4 @@ MIT License - see [LICENSE](LICENSE) file for details.
 ---
 
 Made with ❤️ by Ethan
+
