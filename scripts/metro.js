@@ -545,7 +545,7 @@
         const wasOpen = select.classList.contains("is-open");
 
         // Close all other dropdowns
-        $$("[data-metro-select].is-open, [data-metro-multi].is-open").forEach((s) => {
+        $$("[data-metro-select].is-open, [data-metro-multi].is-open, [data-cascade].is-open").forEach((s) => {
           if (s !== select) s.classList.remove("is-open");
         });
 
@@ -630,7 +630,7 @@
 
     // Close all dropdowns on outside click
     document.addEventListener("click", () => {
-      $$("[data-metro-select].is-open, [data-metro-multi].is-open").forEach((s) => {
+      $$("[data-metro-select].is-open, [data-metro-multi].is-open, [data-cascade].is-open").forEach((s) => {
         s.classList.remove("is-open");
       });
     });
@@ -638,7 +638,7 @@
     // Close on Escape
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
-        $$("[data-metro-select].is-open, [data-metro-multi].is-open").forEach((s) => {
+        $$("[data-metro-select].is-open, [data-metro-multi].is-open, [data-cascade].is-open").forEach((s) => {
           s.classList.remove("is-open");
         });
       }
@@ -665,7 +665,7 @@
         const wasOpen = select.classList.contains("is-open");
 
         // Close all other dropdowns
-        $$("[data-metro-select].is-open, [data-metro-multi].is-open").forEach((s) => {
+        $$("[data-metro-select].is-open, [data-metro-multi].is-open, [data-cascade].is-open").forEach((s) => {
           if (s !== select) s.classList.remove("is-open");
         });
 
@@ -756,17 +756,51 @@
       ]
     };
 
+    // Bind trigger click (open/close) for ALL cascade selects
+    $$("[data-cascade]").forEach((select) => {
+      const trigger = $(".metro-select-trigger", select);
+      if (!trigger) return;
+      // Save original placeholder HTML for cascade resets
+      const phSpan = trigger.querySelector(".placeholder");
+      if (phSpan) select._placeholderHTML = phSpan.innerHTML;
+
+      trigger.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const wasOpen = select.classList.contains("is-open");
+        // Close all other dropdowns
+        $$("[data-metro-select].is-open, [data-metro-multi].is-open, [data-cascade].is-open").forEach((s) => {
+          if (s !== select) s.classList.remove("is-open");
+        });
+        select.classList.toggle("is-open", !wasOpen);
+      });
+    });
+
+    // Bind parent (country) option clicks
     $$("[data-cascade]").forEach((select) => {
       const cascadeType = select.getAttribute("data-cascade");
       const parentType = select.getAttribute("data-cascade-parent");
 
       if (cascadeType === "country") {
-        // This is the parent (country) select
         const options = $$(".metro-option", select);
 
         options.forEach((option) => {
           option.addEventListener("click", () => {
             const cascadeValue = option.getAttribute("data-cascade");
+
+            // Update selected state in parent
+            options.forEach((o) => o.classList.remove("is-selected"));
+            option.classList.add("is-selected");
+
+            // Update parent trigger text
+            const trigger = $(".metro-select-trigger", select);
+            const textSpan = trigger ? trigger.querySelector("span:not(.metro-select-arrow)") : null;
+            if (textSpan) {
+              textSpan.textContent = option.textContent.trim();
+              textSpan.classList.remove("placeholder");
+            }
+
+            // Close parent dropdown
+            select.classList.remove("is-open");
 
             // Find child (city) select
             const childSelect = document.querySelector(`[data-cascade-parent="${cascadeType}"]`);
@@ -774,6 +808,17 @@
 
             const panel = $(".metro-select-panel", childSelect);
             if (!panel) return;
+
+            // Reset child trigger text back to placeholder
+            const childTrigger = $(".metro-select-trigger", childSelect);
+            const childTextSpan = childTrigger ? childTrigger.querySelector(".placeholder, span:not(.metro-select-arrow)") : null;
+            if (childTextSpan) {
+              // Restore saved original HTML if available
+              if (childSelect._placeholderHTML) {
+                childTextSpan.innerHTML = childSelect._placeholderHTML;
+              }
+              childTextSpan.classList.add("placeholder");
+            }
 
             // Get cities for selected country
             const cities = cascadeData[cascadeValue] || [];
@@ -786,16 +831,19 @@
             // Initialize new options
             $$(".metro-option", panel).forEach((newOption) => {
               newOption.addEventListener("click", () => {
-                // Update trigger text
-                const trigger = $(".metro-select-trigger", childSelect);
-                const placeholder = $(".placeholder", trigger);
-
-                if (placeholder) {
-                  placeholder.textContent = newOption.textContent.trim();
-                  placeholder.classList.remove("placeholder");
+                // Update child trigger text
+                const childTrigger = $(".metro-select-trigger", childSelect);
+                const childTextSpan = childTrigger ? childTrigger.querySelector("span:not(.metro-select-arrow)") : null;
+                if (childTextSpan) {
+                  childTextSpan.textContent = newOption.textContent.trim();
+                  childTextSpan.classList.remove("placeholder");
                 }
 
-                // Close dropdown
+                // Update selected state
+                $$(".metro-option", panel).forEach((o) => o.classList.remove("is-selected"));
+                newOption.classList.add("is-selected");
+
+                // Close child dropdown
                 childSelect.classList.remove("is-open");
               });
             });
@@ -805,6 +853,82 @@
     });
   }
 
+
+  /* ------------------------------------------------------------------
+     25. MENU BAR — application menu with nested submenus.
+     ------------------------------------------------------------------ */
+  function initMenuBars() {
+    $$(".menubar").forEach((menubar) => {
+      const items = $$(".menubar-item", menubar);
+
+      // Hover to open/close menus
+      items.forEach((item) => {
+        let timeout;
+
+        item.addEventListener("mouseenter", () => {
+          clearTimeout(timeout);
+          // Close all other open menus in this menubar
+          items.forEach((i) => i !== item && i.classList.remove("is-active"));
+          // Open this menu
+          if ($(".menubar-menu", item)) {
+            item.classList.add("is-active");
+          }
+        });
+
+        item.addEventListener("mouseleave", () => {
+          timeout = setTimeout(() => {
+            item.classList.remove("is-active");
+          }, 100);
+        });
+
+        // Click to toggle (for touch devices)
+        item.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const isActive = item.classList.contains("is-active");
+          items.forEach((i) => i.classList.remove("is-active"));
+          if (!isActive && $(".menubar-menu", item)) {
+            item.classList.add("is-active");
+          }
+        });
+      });
+
+      // Close on click outside
+      document.addEventListener("click", (e) => {
+        if (!menubar.contains(e.target)) {
+          items.forEach((i) => i.classList.remove("is-active"));
+        }
+      });
+
+      // Close on Escape
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          items.forEach((i) => i.classList.remove("is-active"));
+        }
+      });
+    });
+  }
+
+  /* ------------------------------------------------------------------
+     26. i18n — Language switching (English/Chinese).
+     ------------------------------------------------------------------ */
+  function initI18n() {
+    // Initialize language from localStorage or default to 'en'
+    const savedLang = localStorage.getItem("metro-lang");
+    if (savedLang && (savedLang === "en" || savedLang === "zh")) {
+      document.documentElement.setAttribute("lang", savedLang);
+    }
+
+    // Bind language toggle buttons
+    $$("[data-lang-toggle]").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const currentLang = document.documentElement.getAttribute("lang") || "en";
+        const newLang = currentLang === "en" ? "zh" : "en";
+        document.documentElement.setAttribute("lang", newLang);
+        localStorage.setItem("metro-lang", newLang);
+      });
+    });
+  }
   /* ------------------------------------------------------------------
      Boot.
      ------------------------------------------------------------------ */
@@ -830,6 +954,8 @@
     initMetroSelects();
     initMetroMultiSelects();
     initCascadeSelects();
+    initMenuBars();
+    initI18n();
     startCounters();
     startLiveTicker();
     // Defer live-tile flipping so the entrance animation plays first.

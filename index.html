@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Metro UI — Design System & Showcase</title>
+  <title>Metro UI 鈥?Design System & Showcase</title>
   <meta name="description" content="A Metro design system inspired by Microsoft's Metro language and its Bauhaus lineage. Live tiles, typography, and a full component gallery." />
   <link rel="stylesheet" href="styles/tokens.css" />
   <link rel="stylesheet" href="styles/base.css" />
@@ -15,7 +15,7 @@
 <body>
 
 <!-- =====================================================================
-     ICON SPRITE — flat single-color SVG glyphs (Metro icon language)
+     ICON SPRITE 鈥?flat single-color SVG glyphs (Metro icon language)
      ===================================================================== -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <defs>
@@ -68,9 +68,21 @@
     <symbol id="i-save" viewBox="0 0 24 24"><path d="M5 4 H16 L19 7 V20 H5z"/><path d="M8 4 V9 H15 V4 M8 20 V14 H16 V20"/></symbol>
   </defs>
 </svg>
+<!-- Menu Bar -->
+<nav class="menubar" role="navigation">
+  <button class="menubar-item" data-lang-zh data-lang-en>鏂囦欢</button>
+  <button class="menubar-item" data-lang-zh data-lang-en>缂栬緫</button>
+  <button class="menubar-item" data-lang-zh data-lang-en>瑙嗗浘</button>
+  <button class="menubar-item" data-lang-zh data-lang-en>甯姪</button>
+  <div style="flex:1"></div>
+  <button class="menubar-item" id="lang-toggle" title="鍒囨崲璇█ / Switch Language">
+    馃寪 <span data-lang-zh>涓枃</span><span data-lang-en style="display:none">English</span>
+  </button>
+  <a class="menubar-item" href="docs.html" data-lang-zh data-lang-en>鏂囨。</a>
+</nav>
 
 <!-- =====================================================================
-     LEFT RAIL — section navigation
+     LEFT RAIL 鈥?section navigation
      ===================================================================== -->
 <nav class="rail" aria-label="Sections">
   <div class="brand" title="Metro UI">M</div>
@@ -91,6 +103,7 @@
   <button class="rail-link" data-nav="sec-appbar" title="App bar"><svg class="glyph"><use href="#i-more"/></svg></button>
   <button class="rail-link" data-nav="sec-hub" title="Hub"><svg class="glyph"><use href="#i-globe"/></svg></button>
   <div class="rail-spacer"></div>
+  <button class="rail-link" data-lang-toggle title="Toggle language"><svg class="glyph"><use href="#i-globe"/></svg></button>
   <button class="rail-link" data-theme-toggle title="Toggle theme"><svg class="glyph"><use href="#i-moon"/></svg></button>
 </nav>
 
@@ -100,14 +113,15 @@
        TOP BAR
        ================================================================= -->
   <header class="topbar">
-    <div class="title">Metro UI — Design System</div>
+    <div class="title">Metro UI 鈥?Design System</div>
     <div class="spacer"></div>
-    <button class="btn btn--sm" data-theme-toggle><svg class="glyph"><use href="#i-moon"/></svg>&nbsp;Theme</button>
+    <button class="btn btn--sm" data-lang-toggle><svg class="glyph"><use href="#i-globe"/></svg>&nbsp;<span class="lang-en">涓枃</span><span class="lang-zh">English</span></button>
+    <button class="btn btn--sm" data-theme-toggle><svg class="glyph"><use href="#i-moon"/></svg>&nbsp;<span class="lang-en">Theme</span><span class="lang-zh">涓婚</span></button>
     <button class="btn btn--sm btn--primary" data-appbar-trigger><svg class="glyph"><use href="#i-more"/></svg>&nbsp;App bar</button>
   </header>
 
   <!-- =================================================================
-       HERO — THE START SCREEN
+       HERO 鈥?THE START SCREEN
        The signature Metro surface: a grid of live tiles, each with its own
        block volume expressing hierarchy. Right-click anywhere to summon
        the app bar (classic Windows 8 gesture).
@@ -115,11 +129,11 @@
   <section class="section section--alt" id="sec-hero" data-section>
     <div class="section-eyebrow">The Start Screen</div>
     <h1 class="section-title">Metro UI</h1>
-    <p class="section-lead">A design language descended from Bauhaus — proportion over decoration, content over chrome, and color blocks that earn their place. <span class="muted">Not “just stacking a few color blocks.”</span></p>
+    <p class="section-lead">A design language descended from Bauhaus 鈥?proportion over decoration, content over chrome, and color blocks that earn their place. <span class="muted">Not 鈥渏ust stacking a few color blocks.鈥?/span></p>
 
     <div class="tile-group is-animated" style="grid-template-columns: repeat(10, var(--metro-tile-unit)); grid-auto-rows: var(--metro-tile-unit);">
 
-      <!-- Clock — large live tile, flips to the time -->
+      <!-- Clock 鈥?large live tile, flips to the time -->
       <button class="tile tile-lg bg-blue live" style="grid-column:1/5;grid-row:1/5" aria-label="Clock live tile">
         <div class="tile-faces">
           <div class="tile-face tile-brand tile-face--front">
@@ -128,12 +142,12 @@
           </div>
           <div class="tile-face tile-face--back">
             <div class="tile-readout" data-live-clock="time">--:--</div>
-            <div class="tile-caption" data-live-clock="date">—</div>
+            <div class="tile-caption" data-live-clock="date">鈥?/div>
           </div>
         </div>
       </button>
 
-      <!-- Weather — wide live tile -->
+      <!-- Weather 鈥?wide live tile -->
       <button class="tile tile-wide bg-teal live" style="grid-column:5/9;grid-row:1/3" aria-label="Weather live tile">
         <div class="tile-faces">
           <div class="tile-face tile-brand tile-face--front">
@@ -141,13 +155,13 @@
             <div class="tile-title">Weather</div>
           </div>
           <div class="tile-face tile-face--back">
-            <div class="tile-readout">21°<small>C</small></div>
-            <div class="tile-caption">Partly cloudy · Shanghai</div>
+            <div class="tile-readout">21掳<small>C</small></div>
+            <div class="tile-caption">Partly cloudy 路 Shanghai</div>
           </div>
         </div>
       </button>
 
-      <!-- Photos — image tile -->
+      <!-- Photos 鈥?image tile -->
       <button class="tile tile-md bg-purple has-img" style="grid-column:9/11;grid-row:1/3" aria-label="Photos">
         <span class="tile-img" style="background-image:url('https://images.unsplash.com/photo-1506744038136-46273834b590?w=320&q=60')"></span>
         <div class="tile-face tile-brand">
@@ -156,7 +170,7 @@
         </div>
       </button>
 
-      <!-- Mail — wide live tile with badge -->
+      <!-- Mail 鈥?wide live tile with badge -->
       <button class="tile tile-wide bg-magenta live" style="grid-column:5/9;grid-row:3/5" aria-label="Mail live tile">
         <div class="tile-faces">
           <div class="tile-face tile-brand tile-face--front">
@@ -167,14 +181,14 @@
           <div class="tile-face tile-face--back">
             <span class="tile-glyph"><svg class="glyph"><use href="#i-mail"/></svg></span>
             <div class="tile-caption" style="margin-top:auto">
-              <strong>Inbox</strong> · 3 unread<br>
-              <span class="muted">“Design review at 4pm —”</span>
+              <strong>Inbox</strong> 路 3 unread<br>
+              <span class="muted">鈥淒esign review at 4pm 鈥斺€?/span>
             </div>
           </div>
         </div>
       </button>
 
-      <!-- Calendar — medium live tile -->
+      <!-- Calendar 鈥?medium live tile -->
       <button class="tile tile-md bg-accent live" style="grid-column:9/11;grid-row:3/5" aria-label="Calendar live tile">
         <div class="tile-faces">
           <div class="tile-face tile-brand tile-face--front">
@@ -183,12 +197,12 @@
           </div>
           <div class="tile-face tile-face--back">
             <div class="tile-readout" style="font-size:44px">24</div>
-            <div class="tile-caption">June · Wednesday</div>
+            <div class="tile-caption">June 路 Wednesday</div>
           </div>
         </div>
       </button>
 
-      <!-- Row 5–6: five medium tiles -->
+      <!-- Row 5鈥?: five medium tiles -->
       <button class="tile tile-md bg-violet" style="grid-column:1/3;grid-row:5/7" aria-label="Music">
         <div class="tile-face tile-brand">
           <span class="tile-glyph"><svg class="glyph"><use href="#i-music"/></svg></span>
@@ -228,53 +242,53 @@
       </button>
     </div>
 
-    <p class="muted mt-4" style="font-size:var(--metro-fs-small)">↑ Live tiles flip on an interval. Right-click anywhere on the page to open the app bar. Try the theme toggle in the rail.</p>
+    <p class="muted mt-4" style="font-size:var(--metro-fs-small)">鈫?Live tiles flip on an interval. Right-click anywhere on the page to open the app bar. Try the theme toggle in the rail.</p>
   </section>
 
   <!-- =================================================================
-       PRINCIPLES — the article's philosophy
+       PRINCIPLES 鈥?the article's philosophy
        ================================================================= -->
   <section class="section" id="sec-principles" data-section>
-    <div class="section-eyebrow">Phase 0 · Philosophy</div>
+    <div class="section-eyebrow">Phase 0 路 Philosophy</div>
     <h2 class="section-title">Four principles from the source</h2>
-    <p class="section-lead">The article traces Metro to the <strong>Bauhaus</strong> of Walter Gropius and Ludwig Mies van der Rohe — “less is more,” proportion over decoration, and detail in the places you don’t feel. Metro revives that lineage for the screen.</p>
+    <p class="section-lead">The article traces Metro to the <strong>Bauhaus</strong> of Walter Gropius and Ludwig Mies van der Rohe 鈥?鈥渓ess is more,鈥?proportion over decoration, and detail in the places you don鈥檛 feel. Metro revives that lineage for the screen.</p>
 
     <div class="swatch-grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
       <div class="demo-pane">
         <span class="tile-glyph" style="font-size:34px;color:var(--metro-accent)"><svg class="glyph"><use href="#i-home"/></svg></span>
         <div class="group-header" style="margin-top:var(--metro-space-3);margin-bottom:var(--metro-space-2)">Bauhaus lineage</div>
-        <p class="muted" style="margin:0">Not arbitrary stacking. Gropius and Mies van der Rohe treated proportion, light &amp; shadow, typography and image as a carefully matched system — Metro inherits that rigor.</p>
+        <p class="muted" style="margin:0">Not arbitrary stacking. Gropius and Mies van der Rohe treated proportion, light &amp; shadow, typography and image as a carefully matched system 鈥?Metro inherits that rigor.</p>
       </div>
       <div class="demo-pane">
         <span class="tile-glyph" style="font-size:34px;color:var(--metro-teal)"><svg class="glyph"><use href="#i-grid"/></svg></span>
         <div class="group-header" style="margin-top:var(--metro-space-3);margin-bottom:var(--metro-space-2)">Proportion first</div>
-        <p class="muted" style="margin:0">Block volume, line spacing and hierarchy are calibrated in the wireframe — <em>before</em> color. Size itself carries meaning.</p>
+        <p class="muted" style="margin:0">Block volume, line spacing and hierarchy are calibrated in the wireframe 鈥?<em>before</em> color. Size itself carries meaning.</p>
       </div>
       <div class="demo-pane">
         <span class="tile-glyph" style="font-size:34px;color:var(--metro-magenta)"><svg class="glyph"><use href="#i-palette"/></svg></span>
         <div class="group-header" style="margin-top:var(--metro-space-3);margin-bottom:var(--metro-space-2)">Color table first</div>
-        <p class="muted" style="margin:0">Establish the full palette up front — dark vs. light, warm vs. cool — then fill the wireframe from it. Backgrounds differentiate, not gradients.</p>
+        <p class="muted" style="margin:0">Establish the full palette up front 鈥?dark vs. light, warm vs. cool 鈥?then fill the wireframe from it. Backgrounds differentiate, not gradients.</p>
       </div>
       <div class="demo-pane">
         <span class="tile-glyph" style="font-size:34px;color:var(--metro-emerald)"><svg class="glyph"><use href="#i-check"/></svg></span>
         <div class="group-header" style="margin-top:var(--metro-space-3);margin-bottom:var(--metro-space-2)">Zero-learning</div>
-        <p class="muted" style="margin:0">Interaction must be so intuitive that users don’t need to learn it. Animation, ergonomics, tactility and sound all serve that goal.</p>
+        <p class="muted" style="margin:0">Interaction must be so intuitive that users don鈥檛 need to learn it. Animation, ergonomics, tactility and sound all serve that goal.</p>
       </div>
     </div>
 
     <blockquote class="mt-6" style="border-left:4px solid var(--metro-accent);padding-left:var(--metro-space-6);max-width:62ch">
-      <p style="font-size:var(--metro-fs-subtitle);font-weight:var(--metro-fw-light)">“让交互变得更简单易懂却又不简陋。”</p>
-      <p class="muted">Make interaction simpler and more understandable — yet never crude.</p>
+      <p style="font-size:var(--metro-fs-subtitle);font-weight:var(--metro-fw-light)">鈥滆浜や簰鍙樺緱鏇寸畝鍗曟槗鎳傚嵈鍙堜笉绠€闄嬨€傗€?/p>
+      <p class="muted">Make interaction simpler and more understandable 鈥?yet never crude.</p>
     </blockquote>
   </section>
 
   <!-- =================================================================
-       COLOR TABLE — the 色表 the article insists on first
+       COLOR TABLE 鈥?the 鑹茶〃 the article insists on first
        ================================================================= -->
   <section class="section section--alt" id="sec-color" data-section>
-    <div class="section-eyebrow">Phase 3 · Color</div>
+    <div class="section-eyebrow">Phase 3 路 Color</div>
     <h2 class="section-title">The color table</h2>
-    <p class="section-lead">A cool-leaning primary on a light canvas, with a full dark counterpart. Tile accents are a deliberately mixed warm + cool set of jewel tones — Metro’s energy comes from saturated blocks, not gradients.</p>
+    <p class="section-lead">A cool-leaning primary on a light canvas, with a full dark counterpart. Tile accents are a deliberately mixed warm + cool set of jewel tones 鈥?Metro鈥檚 energy comes from saturated blocks, not gradients.</p>
 
     <div class="demo-label">Accent / interactive</div>
     <div class="swatch-grid">
@@ -284,7 +298,7 @@
       <div class="swatch"><div class="chip" style="background:var(--metro-teal)"></div><div class="meta"><div class="name">Teal</div><div class="hex">#00B7C3</div></div></div>
     </div>
 
-    <div class="demo-label mt-6">Tile palette — warm + cool</div>
+    <div class="demo-label mt-6">Tile palette 鈥?warm + cool</div>
     <div class="swatch-grid">
       <div class="swatch"><div class="chip" style="background:var(--metro-emerald)"></div><div class="meta"><div class="name">Emerald</div><div class="hex">#00A300</div></div></div>
       <div class="swatch"><div class="chip" style="background:var(--metro-lime)"></div><div class="meta"><div class="name">Lime</div><div class="hex">#A4C400</div></div></div>
@@ -308,7 +322,7 @@
     </div>
 
     <div class="demo-label mt-6">Same-scheme challenge</div>
-    <p class="muted mb-4" style="font-size:var(--metro-fs-small);max-width:60ch">The article notes that within a single color family “every detail becomes even more important” and that <strong>background color</strong> is the differentiation tool. Below, one hue, three depths — differentiation comes from value, not hue.</p>
+    <p class="muted mb-4" style="font-size:var(--metro-fs-small);max-width:60ch">The article notes that within a single color family 鈥渆very detail becomes even more important鈥?and that <strong>background color</strong> is the differentiation tool. Below, one hue, three depths 鈥?differentiation comes from value, not hue.</p>
     <div class="swatch-grid" style="grid-template-columns:repeat(auto-fill,minmax(160px,1fr))">
       <div class="swatch"><div class="chip" style="background:#0b3d91"></div><div class="meta"><div class="name">Deep</div><div class="hex">#0B3D91</div></div></div>
       <div class="swatch"><div class="chip" style="background:#2d8bfc"></div><div class="meta"><div class="name">Mid</div><div class="hex">#2D8BFC</div></div></div>
@@ -320,19 +334,19 @@
        TYPOGRAPHY
        ================================================================= -->
   <section class="section" id="sec-type" data-section>
-    <div class="section-eyebrow">Phase 1 · Wireframe</div>
+    <div class="section-eyebrow">Phase 1 路 Wireframe</div>
     <h2 class="section-title">Typography</h2>
-    <p class="section-lead">Metro’s signature is light-weight headings and tight tracking — content, not chrome. The hierarchy carries weight that skeuomorphic chrome used to. Segoe UI is canonical; the stack degrades gracefully.</p>
+    <p class="section-lead">Metro鈥檚 signature is light-weight headings and tight tracking 鈥?content, not chrome. The hierarchy carries weight that skeuomorphic chrome used to. Segoe UI is canonical; the stack degrades gracefully.</p>
 
     <div class="demo-pane">
-      <div class="specimen"><div class="label">Display · 72 / Light 200</div><div style="font-size:var(--metro-fs-display);font-weight:var(--metro-fw-light);line-height:1;letter-spacing:var(--metro-tracking-tight)">Start</div></div>
-      <div class="specimen"><div class="label">Hero · 42 / Light 200</div><div style="font-size:var(--metro-fs-hero);font-weight:var(--metro-fw-light);letter-spacing:var(--metro-tracking-tight)">The quick brown fox</div></div>
-      <div class="specimen"><div class="label">Section · 34 / Light 200</div><div style="font-size:var(--metro-fs-section);font-weight:var(--metro-fw-light);letter-spacing:var(--metro-tracking-tight)">Section heading</div></div>
-      <div class="specimen"><div class="label">Subtitle · 20 / SemiLight 300</div><div style="font-size:var(--metro-fs-subtitle);font-weight:var(--metro-fw-semilight)">Subtitle — supporting line of copy</div></div>
-      <div class="specimen"><div class="label">Base · 15 / Regular 400</div><div style="font-size:var(--metro-fs-base)">Body text. The default reading size; comfortable at 1.35 line height on a 4-pixel rhythm.</div></div>
-      <div class="specimen"><div class="label">Small · 13 / Regular</div><div style="font-size:var(--metro-fs-small)" class="muted">Secondary text, metadata, and captions.</div></div>
-      <div class="specimen"><div class="label">Caption · 11 / SemiBold, wide tracking, uppercase</div><div class="upper" style="font-size:var(--metro-fs-caption);font-weight:var(--metro-fw-semibold)">Group header / eyebrow</div></div>
-      <div class="specimen"><div class="label">Micro · 10</div><div style="font-size:var(--metro-fs-micro)" class="muted-2">Microcopy and tertiary labels.</div></div>
+      <div class="specimen"><div class="label">Display 路 72 / Light 200</div><div style="font-size:var(--metro-fs-display);font-weight:var(--metro-fw-light);line-height:1;letter-spacing:var(--metro-tracking-tight)">Start</div></div>
+      <div class="specimen"><div class="label">Hero 路 42 / Light 200</div><div style="font-size:var(--metro-fs-hero);font-weight:var(--metro-fw-light);letter-spacing:var(--metro-tracking-tight)">The quick brown fox</div></div>
+      <div class="specimen"><div class="label">Section 路 34 / Light 200</div><div style="font-size:var(--metro-fs-section);font-weight:var(--metro-fw-light);letter-spacing:var(--metro-tracking-tight)">Section heading</div></div>
+      <div class="specimen"><div class="label">Subtitle 路 20 / SemiLight 300</div><div style="font-size:var(--metro-fs-subtitle);font-weight:var(--metro-fw-semilight)">Subtitle 鈥?supporting line of copy</div></div>
+      <div class="specimen"><div class="label">Base 路 15 / Regular 400</div><div style="font-size:var(--metro-fs-base)">Body text. The default reading size; comfortable at 1.35 line height on a 4-pixel rhythm.</div></div>
+      <div class="specimen"><div class="label">Small 路 13 / Regular</div><div style="font-size:var(--metro-fs-small)" class="muted">Secondary text, metadata, and captions.</div></div>
+      <div class="specimen"><div class="label">Caption 路 11 / SemiBold, wide tracking, uppercase</div><div class="upper" style="font-size:var(--metro-fs-caption);font-weight:var(--metro-fw-semibold)">Group header / eyebrow</div></div>
+      <div class="specimen"><div class="label">Micro 路 10</div><div style="font-size:var(--metro-fs-micro)" class="muted-2">Microcopy and tertiary labels.</div></div>
     </div>
 
     <div class="demo-label mt-6">Weight axis</div>
@@ -348,7 +362,7 @@
   </section>
 
   <!-- =================================================================
-       LIVE TILES — the component gallery
+       LIVE TILES 鈥?the component gallery
        ================================================================= -->
   <section class="section section--alt" id="sec-tiles" data-section>
     <div class="section-eyebrow">Component</div>
@@ -361,24 +375,24 @@
       <button class="tile tile-sm bg-graphite"><div class="tile-face tile-brand"><span class="tile-glyph"><svg class="glyph"><use href="#i-wifi"/></svg></span></div></button>
       <button class="tile tile-md bg-blue live">
         <div class="tile-faces">
-          <div class="tile-face tile-brand tile-face--front"><span class="tile-glyph"><svg class="glyph"><use href="#i-mail"/></svg></span><div class="tile-title">Medium 2×2</div></div>
+          <div class="tile-face tile-brand tile-face--front"><span class="tile-glyph"><svg class="glyph"><use href="#i-mail"/></svg></span><div class="tile-title">Medium 2脳2</div></div>
           <div class="tile-face tile-face--back"><div class="tile-readout" style="font-size:34px">12</div><div class="tile-caption">new</div></div>
         </div>
       </button>
       <button class="tile tile-wide bg-emerald live">
         <div class="tile-faces">
-          <div class="tile-face tile-brand tile-face--front"><span class="tile-glyph"><svg class="glyph"><use href="#i-people"/></svg></span><div class="tile-title">Wide 4×2</div></div>
+          <div class="tile-face tile-brand tile-face--front"><span class="tile-glyph"><svg class="glyph"><use href="#i-people"/></svg></span><div class="tile-title">Wide 4脳2</div></div>
           <div class="tile-face tile-face--back"><div class="tile-readout" style="font-size:38px">1,284</div><div class="tile-caption">active today</div></div>
         </div>
       </button>
       <button class="tile tile-lg bg-accent live">
         <div class="tile-faces">
-          <div class="tile-face tile-brand tile-face--front"><span class="tile-glyph"><svg class="glyph"><use href="#i-photos"/></svg></span><div class="tile-title">Large 4×4</div></div>
+          <div class="tile-face tile-brand tile-face--front"><span class="tile-glyph"><svg class="glyph"><use href="#i-photos"/></svg></span><div class="tile-title">Large 4脳4</div></div>
           <div class="tile-face tile-face--back"><div class="tile-readout" data-counter="12840">0</div><div class="tile-caption">photos this year</div></div>
         </div>
       </button>
     </div>
-    <div class="muted mt-4" style="font-size:var(--metro-fs-small)">↑ Small 1×1 · Medium 2×2 · Wide 4×2 · Large 4×4 (the Large tile’s counter animates on load).</div>
+    <div class="muted mt-4" style="font-size:var(--metro-fs-small)">鈫?Small 1脳1 路 Medium 2脳2 路 Wide 4脳2 路 Large 4脳4 (the Large tile鈥檚 counter animates on load).</div>
 
     <div class="demo-label mt-6">Live content variants</div>
     <div class="tile-group is-animated" style="grid-template-columns:repeat(10,var(--metro-tile-unit))">
@@ -386,14 +400,14 @@
       <button class="tile tile-md bg-magenta live" onclick="this.classList.toggle('is-flipped')">
         <div class="tile-faces">
           <div class="tile-face tile-brand tile-face--front"><span class="tile-glyph"><svg class="glyph"><use href="#i-heart"/></svg></span><div class="tile-title">Tap to flip</div></div>
-          <div class="tile-face tile-face--back"><div class="tile-readout" style="font-size:40px">♥ 99+</div><div class="tile-caption">favorites</div></div>
+          <div class="tile-face tile-face--back"><div class="tile-readout" style="font-size:40px">鈾?99+</div><div class="tile-caption">favorites</div></div>
         </div>
       </button>
       <!-- Peek / slide live tile -->
       <button class="tile tile-md bg-orange peek live">
         <div class="tile-faces">
           <div class="tile-face tile-face--front"><span class="tile-glyph" style="margin-top:auto"><svg class="glyph"><use href="#i-store"/></svg></span><div class="tile-title">Store</div></div>
-          <div class="tile-face tile-face--back"><div class="tile-caption" style="margin-top:auto"><strong>Top app</strong><br><span class="muted">Metro Paint — 4.9 ★</span></div></div>
+          <div class="tile-face tile-face--back"><div class="tile-caption" style="margin-top:auto"><strong>Top app</strong><br><span class="muted">Metro Paint 鈥?4.9 鈽?/span></div></div>
         </div>
       </button>
       <!-- Ticker live tile -->
@@ -411,7 +425,7 @@
       <button class="tile tile-sm bg-emerald"><div class="tile-face tile-brand"><span class="tile-glyph"><svg class="glyph"><use href="#i-phone"/></svg></span></div><span class="tile-status"></span></button>
       <button class="tile tile-sm bg-amber"><div class="tile-face tile-brand"><span class="tile-glyph"><svg class="glyph"><use href="#i-wifi"/></svg></span></div><span class="tile-status away"></span></button>
     </div>
-    <div class="muted mt-4" style="font-size:var(--metro-fs-small)">↑ Tap the magenta tile to flip it manually · the orange tile uses the slide/peek animation · the purple tile cycles a live ticker · small tiles show status dots (online / away / offline).</div>
+    <div class="muted mt-4" style="font-size:var(--metro-fs-small)">鈫?Tap the magenta tile to flip it manually 路 the orange tile uses the slide/peek animation 路 the purple tile cycles a live ticker 路 small tiles show status dots (online / away / offline).</div>
 
     <div class="demo-label mt-6">States &amp; decorations</div>
     <div class="tile-group is-animated" style="grid-template-columns:repeat(10,var(--metro-tile-unit))">
@@ -421,13 +435,13 @@
       <button class="tile tile-md bg-violet"><div class="tile-face tile-brand"><span class="tile-glyph"><svg class="glyph"><use href="#i-phone"/></svg></span><div class="tile-title">Offline</div></div><span class="tile-status off"></span></button>
       <button class="tile tile-md secondary"><div class="tile-face tile-brand"><span class="tile-glyph" style="color:var(--metro-fg)"><svg class="glyph"><use href="#i-settings"/></svg></span><div class="tile-title" style="color:var(--metro-fg)">Secondary</div></div></button>
     </div>
-    <div class="muted mt-4" style="font-size:var(--metro-fs-small)">↑ Notification badge · online / away / offline status dots · a secondary (outline) tile for non-color-block content.</div>
+    <div class="muted mt-4" style="font-size:var(--metro-fs-small)">鈫?Notification badge 路 online / away / offline status dots 路 a secondary (outline) tile for non-color-block content.</div>
 
     <div class="demo-label mt-6">Usage</div>
 <pre class="codeblock"><span class="c-com">&lt;!-- A large live tile that flips to show a live count --&gt;</span>
 &lt;<span class="c-tag">button</span> <span class="c-attr">class</span>=<span class="c-val">"tile tile-lg bg-accent live"</span>&gt;
   &lt;<span class="c-tag">div</span> <span class="c-attr">class</span>=<span class="c-val">"tile-faces"</span>&gt;
-    &lt;<span class="c-tag">div</span> <span class="c-attr">class</span>=<span class="c-val">"tile-face tile-face--front tile-brand"</span>&gt;…&lt;/<span class="c-tag">div</span>&gt;
+    &lt;<span class="c-tag">div</span> <span class="c-attr">class</span>=<span class="c-val">"tile-face tile-face--front tile-brand"</span>&gt;鈥?lt;/<span class="c-tag">div</span>&gt;
     &lt;<span class="c-tag">div</span> <span class="c-attr">class</span>=<span class="c-val">"tile-face tile-face--back"</span>&gt;
       &lt;<span class="c-tag">div</span> <span class="c-attr">class</span>=<span class="c-val">"tile-readout"</span> <span class="c-attr">data-counter</span>=<span class="c-val">"12840"</span>&gt;0&lt;/<span class="c-tag">div</span>&gt;
     &lt;/<span class="c-tag">div</span>&gt;
@@ -441,7 +455,7 @@
   <section class="section" id="sec-buttons" data-section>
     <div class="section-eyebrow">Component</div>
     <h2 class="section-title">Buttons</h2>
-    <p class="section-lead">Flat, square-edged, accent by default. A thin border and a solid fill on hover/press — no rounded corners, no glow. Press sinks slightly for tactility.</p>
+    <p class="section-lead">Flat, square-edged, accent by default. A thin border and a solid fill on hover/press 鈥?no rounded corners, no glow. Press sinks slightly for tactility.</p>
 
     <div class="demo">
       <div class="demo-label">Variants</div>
@@ -485,7 +499,7 @@
   </section>
 
   <!-- =================================================================
-       INPUTS & FORMS — ENHANCED
+       INPUTS & FORMS 鈥?ENHANCED
        ================================================================= -->
   <section class="section section--alt" id="sec-inputs" data-section>
     <div class="section-eyebrow">Component</div>
@@ -494,7 +508,7 @@
 
     <div class="demo-grid">
       <div class="demo-pane">
-        <div class="demo-label">Text fields — with focus glow &amp; validation</div>
+        <div class="demo-label">Text fields 鈥?with focus glow &amp; validation</div>
         <div class="field">
           <label for="f-name">Full name</label>
           <input class="input" id="f-name" type="text" placeholder="Jane Doe" />
@@ -502,7 +516,7 @@
         <div class="field success">
           <label for="f-email-ok">Email</label>
           <input class="input" id="f-email-ok" type="email" value="jane@example.com" />
-          <span class="hint">✓ Valid email address</span>
+          <span class="hint">鉁?Valid email address</span>
         </div>
         <div class="field error">
           <label for="f-email-bad">Email (invalid)</label>
@@ -511,7 +525,7 @@
         </div>
         <div class="field">
           <label for="f-bio">Bio</label>
-          <textarea class="textarea textarea-with-counter" id="f-bio" placeholder="Tell us about yourself…" maxlength="200"></textarea>
+          <textarea class="textarea textarea-with-counter" id="f-bio" placeholder="Tell us about yourself鈥? maxlength="200"></textarea>
           <span class="char-count"><span id="bio-count">0</span>/200</span>
         </div>
       </div>
@@ -536,7 +550,7 @@
           <label for="f-pass">Password</label>
           <div class="input-with-icon">
             <svg class="icon"><use href="#i-lock"/></svg>
-            <input class="input" id="f-pass" type="password" placeholder="••••••••" />
+            <input class="input" id="f-pass" type="password" placeholder="鈥⑩€⑩€⑩€⑩€⑩€⑩€⑩€? />
           </div>
           <span class="hint">At least 8 characters</span>
         </div>
@@ -544,14 +558,14 @@
     </div>
 
     <div class="demo mt-6">
-      <div class="demo-label">Search — enhanced</div>
+      <div class="demo-label">Search 鈥?enhanced</div>
       <div class="demo-pane maxw-md">
         <div class="search">
           <svg class="glyph"><use href="#i-search"/></svg>
           <input type="text" placeholder="Search apps, settings, files, people" aria-label="Search" />
           <button class="icon-btn clear" aria-label="Clear"><svg class="glyph"><use href="#i-error"/></svg></button>
         </div>
-        <div class="muted mt-2" style="font-size:var(--metro-fs-small)">Type to see the clear button appear · focus triggers the accent glow</div>
+        <div class="muted mt-2" style="font-size:var(--metro-fs-small)">Type to see the clear button appear 路 focus triggers the accent glow</div>
       </div>
     </div>
 
@@ -571,7 +585,7 @@
   </section>
 
   <!-- =================================================================
-       SELECT / DROPDOWNS — NEW SECTION
+       SELECT / DROPDOWNS 鈥?NEW SECTION
        ================================================================= -->
   <section class="section" id="sec-select" data-section>
     <div class="section-eyebrow">Component</div>
@@ -630,12 +644,11 @@
               </div>
               <div class="metro-option" data-value="zh">
                 <svg class="glyph sm"><use href="#i-globe"/></svg>
-                中文
+                涓枃
               </div>
               <div class="metro-option" data-value="ja">
                 <svg class="glyph sm"><use href="#i-globe"/></svg>
-                日本語
-              </div>
+                鏃ユ湰瑾?              </div>
               <div class="metro-option" data-value="de">
                 <svg class="glyph sm"><use href="#i-globe"/></svg>
                 Deutsch
@@ -689,7 +702,7 @@
           </button>
           <div class="dropdown-menu" style="min-width:260px">
             <div class="dropdown-search">
-              <input type="text" placeholder="Filter…" />
+              <input type="text" placeholder="Filter鈥? />
             </div>
             <div class="dropdown-item is-active"><svg class="glyph sm"><use href="#i-people"/></svg>Alice Chen</div>
             <div class="dropdown-item"><svg class="glyph sm"><use href="#i-people"/></svg>Bob Martinez</div>
@@ -779,7 +792,7 @@
   </section>
 
   <!-- =================================================================
-       CONTROLS — toggles, checks, sliders, rating
+       CONTROLS 鈥?toggles, checks, sliders, rating
        ================================================================= -->
   <section class="section section--alt" id="sec-controls" data-section>
     <div class="section-eyebrow">Component</div>
@@ -811,16 +824,16 @@
       </div>
 
       <div class="demo-pane">
-        <div class="demo-label">Sliders — with value display</div>
+        <div class="demo-label">Sliders 鈥?with value display</div>
         <div class="demo-stack" style="gap:var(--metro-space-6)">
           <div class="slider">
             <span class="slider-label">Volume</span>
-            <input type="range" min="0" max="100" value="60" oninput="this.parentNode.querySelector(‘.slider-value’).textContent=this.value" />
+            <input type="range" min="0" max="100" value="60" oninput="this.parentNode.querySelector(鈥?slider-value鈥?.textContent=this.value" />
             <span class="slider-value">60</span>
           </div>
           <div class="slider">
             <span class="slider-label">Brightness</span>
-            <input type="range" min="0" max="100" value="80" oninput="this.parentNode.querySelector(‘.slider-value’).textContent=this.value" />
+            <input type="range" min="0" max="100" value="80" oninput="this.parentNode.querySelector(鈥?slider-value鈥?.textContent=this.value" />
             <span class="slider-value">80</span>
           </div>
         </div>
@@ -839,11 +852,11 @@
 
         <div class="demo-label mt-6">Rating</div>
         <div class="rating" id="rating-demo">
-          <span class="rating-star is-filled">★</span>
-          <span class="rating-star is-filled">★</span>
-          <span class="rating-star is-filled">★</span>
-          <span class="rating-star is-filled">★</span>
-          <span class="rating-star">★</span>
+          <span class="rating-star is-filled">鈽?/span>
+          <span class="rating-star is-filled">鈽?/span>
+          <span class="rating-star is-filled">鈽?/span>
+          <span class="rating-star is-filled">鈽?/span>
+          <span class="rating-star">鈽?/span>
         </div>
         <div class="muted mt-2" style="font-size:var(--metro-fs-small)">Click a star to rate</div>
       </div>
@@ -851,7 +864,7 @@
   </section>
 
   <!-- =================================================================
-       DISPLAY COMPONENTS — avatars, tags, breadcrumbs, pagination, stepper
+       DISPLAY COMPONENTS 鈥?avatars, tags, breadcrumbs, pagination, stepper
        ================================================================= -->
   <section class="section" id="sec-display" data-section>
     <div class="section-eyebrow">Component</div>
@@ -916,21 +929,21 @@
           <button class="pagination-item is-active">1</button>
           <button class="pagination-item">2</button>
           <button class="pagination-item">3</button>
-          <span class="pagination-ellipsis">…</span>
+          <span class="pagination-ellipsis">鈥?/span>
           <button class="pagination-item">12</button>
           <button class="pagination-item"><svg class="glyph sm"><use href="#i-chevron-right"/></svg></button>
         </div>
       </div>
 
       <div class="demo-pane">
-        <div class="demo-label">Stepper — horizontal</div>
+        <div class="demo-label">Stepper 鈥?horizontal</div>
         <div class="stepper">
           <div class="stepper-item is-completed">
-            <div class="stepper-circle">✓</div>
+            <div class="stepper-circle">鉁?/div>
             <span class="stepper-label">Account</span>
           </div>
           <div class="stepper-item is-completed">
-            <div class="stepper-circle">✓</div>
+            <div class="stepper-circle">鉁?/div>
             <span class="stepper-label">Profile</span>
           </div>
           <div class="stepper-item is-active">
@@ -946,7 +959,7 @@
     </div>
 
     <div class="demo">
-      <div class="demo-label">File upload — drag &amp; drop</div>
+      <div class="demo-label">File upload 鈥?drag &amp; drop</div>
       <div class="demo-pane maxw-md">
         <div class="file-upload" id="file-upload-demo">
           <svg class="glyph"><use href="#i-download"/></svg>
@@ -1012,7 +1025,7 @@
   <section class="section" id="sec-progress" data-section>
     <div class="section-eyebrow">Component</div>
     <h2 class="section-title">Progress &amp; status</h2>
-    <p class="section-lead">Indeterminate “marching” bars, determinate fills, and square ring spinners. Badges and alerts carry semantic state in flat blocks.</p>
+    <p class="section-lead">Indeterminate 鈥渕arching鈥?bars, determinate fills, and square ring spinners. Badges and alerts carry semantic state in flat blocks.</p>
 
     <div class="demo-grid">
       <div class="demo-pane">
@@ -1035,7 +1048,7 @@
       <div class="demo-pane">
         <div class="demo-label">Ring spinner</div>
         <div class="row" style="gap:var(--metro-space-6)">
-          <div class="center col" style="gap:8px"><div class="ring"></div><span class="muted" style="font-size:var(--metro-fs-small)">Loading…</span></div>
+          <div class="center col" style="gap:8px"><div class="ring"></div><span class="muted" style="font-size:var(--metro-fs-small)">Loading鈥?/span></div>
           <div class="center col" style="gap:8px"><div class="ring lg"></div><span class="muted" style="font-size:var(--metro-fs-small)">Working</span></div>
         </div>
       </div>
@@ -1072,19 +1085,19 @@
   <section class="section section--alt" id="sec-list" data-section>
     <div class="section-eyebrow">Component</div>
     <h2 class="section-title">List view</h2>
-    <p class="section-lead">Grouped lists with accent group headers and a hover indent — the classic Metro mail/people pattern. Selection fills with the accent tint.</p>
+    <p class="section-lead">Grouped lists with accent group headers and a hover indent 鈥?the classic Metro mail/people pattern. Selection fills with the accent tint.</p>
 
     <div class="demo-pane maxw-md">
       <div class="list-group-header">Today</div>
       <div class="list">
         <div class="list-item selected">
           <span class="tile-glyph" style="font-size:22px;color:var(--metro-accent)"><svg class="glyph"><use href="#i-mail"/></svg></span>
-          <div class="primary"><div class="title">Design review at 4pm</div><div class="desc">From: Mei Lin — agenda attached</div></div>
+          <div class="primary"><div class="title">Design review at 4pm</div><div class="desc">From: Mei Lin 鈥?agenda attached</div></div>
           <div class="meta">9:12</div>
         </div>
         <div class="list-item">
           <span class="tile-glyph" style="font-size:22px;color:var(--metro-emerald)"><svg class="glyph"><use href="#i-chat"/></svg></span>
-          <div class="primary"><div class="title">Re: tile spacing</div><div class="desc">From: Tomás — looks good, ship it</div></div>
+          <div class="primary"><div class="title">Re: tile spacing</div><div class="desc">From: Tom谩s 鈥?looks good, ship it</div></div>
           <div class="meta">8:40</div>
         </div>
         <div class="list-item">
@@ -1115,7 +1128,7 @@
   <section class="section" id="sec-pivot" data-section>
     <div class="section-eyebrow">Component</div>
     <h2 class="section-title">Pivot</h2>
-    <p class="section-lead">The signature horizontal pivot — typography as navigation. An accent underline tracks the active header; panels crossfade. No buttons, no boxes.</p>
+    <p class="section-lead">The signature horizontal pivot 鈥?typography as navigation. An accent underline tracks the active header; panels crossfade. No buttons, no boxes.</p>
 
     <div class="demo-pane maxw-md">
       <div class="pivot">
@@ -1125,7 +1138,7 @@
           <button class="pivot-header">Flagged</button>
         </div>
         <div class="pivot-panels">
-          <div class="pivot-panel is-active"><p class="muted">Everything in one stream — 42 items.</p></div>
+          <div class="pivot-panel is-active"><p class="muted">Everything in one stream 鈥?42 items.</p></div>
           <div class="pivot-panel"><p class="muted">3 unread items waiting for your attention.</p></div>
           <div class="pivot-panel"><p class="muted">7 flagged for follow-up.</p></div>
         </div>
@@ -1177,10 +1190,56 @@
   <!-- =================================================================
        APP BAR
        ================================================================= -->
-  <section class="section" id="sec-appbar" data-section>
+  
+  <!-- Menu Bar Demo Section -->
+  <section class="section" id="sec-menubar" data-section>
+    <div class="section-header">
+      <h2 class="section-title">菜单栏 Menu Bar</h2>
+    </div>
+    <div class="section-content">
+      <p>菜单栏组件提供传统的应用程序菜单功能，支持键盘快捷键和下拉菜单。</p>
+      
+      <div class="demo-grid">
+        <div class="demo-pane">
+          <h3 class="demo-label">基本用法</h3>
+          <nav class="menubar" role="navigation" style="margin: 20px 0;">
+            <button class="menubar-item">文件</button>
+            <button class="menubar-item">编辑</button>
+            <button class="menubar-item">视图</button>
+            <button class="menubar-item">帮助</button>
+          </nav>
+        </div>
+
+        <div class="demo-pane">
+          <h3 class="demo-label">带语言切换</h3>
+          <nav class="menubar" role="navigation" style="margin: 20px 0;">
+            <button class="menubar-item" data-lang-zh data-lang-en>文件</button>
+            <button class="menubar-item" data-lang-zh data-lang-en>编辑</button>
+            <button class="menubar-item" data-lang-zh data-lang-en>视图</button>
+            <button class="menubar-item" data-lang-zh data-lang-en>帮助</button>
+            <div style="flex:1"></div>
+            <button class="menubar-item" id="lang-toggle-demo" title="切换语言">
+              🌐 <span data-lang-zh>中文</span><span data-lang-en style="display:none">English</span>
+            </button>
+          </nav>
+        </div>
+      </div>
+
+      <div class="code-block">
+&lt;nav class="menubar" role="navigation"&gt;
+  &lt;button class="menubar-item"&gt;文件&lt;/button&gt;
+  &lt;button class="menubar-item"&gt;编辑&lt;/button&gt;
+  &lt;button class="menubar-item"&gt;视图&lt;/button&gt;
+  &lt;button class="menubar-item"&gt;帮助&lt;/button&gt;
+&lt;/nav&gt;
+      </div>
+    </div>
+  </section>
+
+<section class="section" id="sec-appbar" data-section>
     <div class="section-eyebrow">Component</div>
     <h2 class="section-title">App bar</h2>
-    <p class="section-lead">The bottom command bar slides up. Summon it with the button above, or <strong>right-click</strong> anywhere on the page — the classic Windows 8 gesture. Icon + label stacks; tapping the empty bar dismisses it.</p>
+    <p class="section-lead">The bottom command bar slides up. Summon it with the button above, or <strong>right-click</strong> anywhere on the page 鈥?the classic Windows 8 gesture. Icon + label stacks; tapping the empty bar dismisses it.</p>
     <div class="demo-pane maxw-md">
       <div class="row">
         <button class="btn btn--primary" data-appbar-trigger><svg class="glyph"><use href="#i-chevron-down"/></svg>Show app bar</button>
@@ -1190,12 +1249,12 @@
   </section>
 
   <!-- =================================================================
-       HUB — panoramic sections
+       HUB 鈥?panoramic sections
        ================================================================= -->
   <section class="section section--alt" id="sec-hub" data-section>
     <div class="section-eyebrow">Layout</div>
     <h2 class="section-title">Hub</h2>
-    <p class="section-lead">The panoramic hub — a wide canvas of columns that overflow horizontally and snap. Each section has an accent header. The same proportional logic repeats for every page level (the article’s Phase 4).</p>
+    <p class="section-lead">The panoramic hub 鈥?a wide canvas of columns that overflow horizontally and snap. Each section has an accent header. The same proportional logic repeats for every page level (the article鈥檚 Phase 4).</p>
 
     <div class="hub">
       <div class="hub-section">
@@ -1214,7 +1273,7 @@
         </div>
       </div>
       <div class="hub-section">
-        <div class="hub-section-header">What’s new</div>
+        <div class="hub-section-header">What鈥檚 new</div>
         <div class="demo-stack">
           <div class="alert alert--info"><svg class="glyph" style="flex:none"><use href="#i-info"/></svg><div><div class="title">New theme</div><div class="body">Dark mode is now available.</div></div></div>
           <div class="alert alert--success"><svg class="glyph" style="flex:none"><use href="#i-success"/></svg><div><div class="title">Sync complete</div><div class="body">All tiles up to date.</div></div></div>
@@ -1229,14 +1288,14 @@
   <footer class="section" style="border-bottom:0">
     <div class="section-eyebrow">About</div>
     <h2 class="section-title">Metro UI</h2>
-    <p class="section-lead maxw-md">A self-contained design system and showcase, built from the design philosophy described in <a href="https://medium.com/@sansued/metro-ui-ec65bbc3b120" target="_blank" rel="noopener">“Metro UI” on Medium</a> — proportion-first wireframes, a fixed color table, light-weight typography, and the Bauhaus lineage of Gropius and Mies van der Rohe.</p>
-    <p class="muted" style="font-size:var(--metro-fs-small)">No frameworks, no build step — plain HTML, CSS custom properties, and a sprinkle of vanilla JS. Open <code>styles/tokens.css</code> to retune the color table; everything else inherits.</p>
+    <p class="section-lead maxw-md">A self-contained design system and showcase, built from the design philosophy described in <a href="https://medium.com/@sansued/metro-ui-ec65bbc3b120" target="_blank" rel="noopener">鈥淢etro UI鈥?on Medium</a> 鈥?proportion-first wireframes, a fixed color table, light-weight typography, and the Bauhaus lineage of Gropius and Mies van der Rohe.</p>
+    <p class="muted" style="font-size:var(--metro-fs-small)">No frameworks, no build step 鈥?plain HTML, CSS custom properties, and a sprinkle of vanilla JS. Open <code>styles/tokens.css</code> to retune the color table; everything else inherits.</p>
   </footer>
 
 </main>
 
 <!-- =====================================================================
-     APP BAR — bottom command bar (toggled by trigger / right-click)
+     APP BAR 鈥?bottom command bar (toggled by trigger / right-click)
      ===================================================================== -->
 <div class="appbar" id="appbar" role="toolbar" aria-label="App commands">
   <button class="appbar-btn"><svg class="glyph"><use href="#i-chevron-left"/></svg><span>Back</span></button>
@@ -1253,5 +1312,38 @@
 </div>
 
 <script src="scripts/metro.js"></script>
+<script>
+  // Language switching
+  document.getElementById('lang-toggle').addEventListener('click', function() {
+    const currentLang = document.documentElement.getAttribute('data-lang') || 'zh';
+    const newLang = currentLang === 'zh' ? 'en' : 'zh';
+    document.documentElement.setAttribute('data-lang', newLang);
+    
+    // Toggle visibility of bilingual elements
+    document.querySelectorAll('[data-lang-zh], [data-lang-en]').forEach(el => {
+      if (el.hasAttribute('data-lang-' + newLang)) {
+        el.style.display = '';
+      } else {
+        el.style.display = 'none';
+      }
+    });
+    
+    // Save preference
+    localStorage.setItem('metro-lang', newLang);
+  });
+  
+  // Initialize language from localStorage
+  (function() {
+    const savedLang = localStorage.getItem('metro-lang') || 'zh';
+    document.documentElement.setAttribute('data-lang', savedLang);
+    document.querySelectorAll('[data-lang-zh], [data-lang-en]').forEach(el => {
+      if (el.hasAttribute('data-lang-' + savedLang)) {
+        el.style.display = '';
+      } else {
+        el.style.display = 'none';
+      }
+    });
+  })();
+</script>
 </body>
 </html>
