@@ -91,7 +91,7 @@ img, svg { display: block; max-width: 100%; }
   outline-offset: 2px;
 }
 /* --------------------------------------------------------------------
-   i18n ¡ª Language switching (English/Chinese)
+   i18n â€” Language switching (English/Chinese)
    -------------------------------------------------------------------- */
 html[lang="en"] .lang-zh,
 html[lang="zh"] .lang-en {

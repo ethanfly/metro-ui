@@ -2194,7 +2194,7 @@
 }
 .tooltip:hover[data-tip]::after { opacity: 1; transform: translateX(-50%) translateY(0); }
 /* --------------------------------------------------------------------
-   MENU BAR ¡ª horizontal application menu (File/Edit/View style)
+   MENU BAR â€” horizontal application menu (File/Edit/View style)
    -------------------------------------------------------------------- */
 .menubar {
   display: flex;
